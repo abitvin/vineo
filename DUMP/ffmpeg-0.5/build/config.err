@@ -1,0 +1,2490 @@
+# ../configure --disable-ffmpeg --disable-ffplay --disable-ffserver --disable-vhook --enable-w32threads --enable-memalign-hack --disable-decoders --enable-decoder=aac --enable-decoder=flv --enable-decoder=gif --enable-decoder=h264 --enable-decoder=mjpeg --enable-decoder=mp3 --enable-decoder=mpeg4 --enable-decoder=png --disable-encoders --disable-muxers --disable-demuxers --enable-demuxer=aac --enable-demuxer=flv --enable-demuxer=h264 --enable-demuxer=image2 --enable-demuxer=mjpeg --enable-demuxer=mov --enable-demuxer=mp3 --disable-parsers --enable-parser=aac --enable-parser=h264 --enable-parser=mpeg4video --disable-bsfs --disable-protocols --enable-protocol=file --enable-protocol=http --enable-protocol=tcp --disable-filters --disable-devices --arch=i686 --disable-debug
+ARCH_EXT_LIST='
+    altivec
+    amd3dnow
+    amd3dnowext
+    armv5te
+    armv6
+    armv6t2
+    armvfp
+    iwmmxt
+    mmi
+    mmx
+    mmx2
+    neon
+    ppc4xx
+    sse
+    ssse3
+    vis
+'
+ARCH_LIST='
+    alpha
+    arm
+    bfin
+    ia64
+    m68k
+    mips
+    parisc
+    ppc
+    s390
+    sh4
+    sparc
+    sparc64
+    x86
+    x86_32
+    x86_64
+'
+BASH=/bin/sh
+BASH_ARGC=([0]="38")
+BASH_ARGV=([0]="--disable-debug" [1]="--arch=i686" [2]="--disable-devices" [3]="--disable-filters" [4]="--enable-protocol=tcp" [5]="--enable-protocol=http" [6]="--enable-protocol=file" [7]="--disable-protocols" [8]="--disable-bsfs" [9]="--enable-parser=mpeg4video" [10]="--enable-parser=h264" [11]="--enable-parser=aac" [12]="--disable-parsers" [13]="--enable-demuxer=mp3" [14]="--enable-demuxer=mov" [15]="--enable-demuxer=mjpeg" [16]="--enable-demuxer=image2" [17]="--enable-demuxer=h264" [18]="--enable-demuxer=flv" [19]="--enable-demuxer=aac" [20]="--disable-demuxers" [21]="--disable-muxers" [22]="--disable-encoders" [23]="--enable-decoder=png" [24]="--enable-decoder=mpeg4" [25]="--enable-decoder=mp3" [26]="--enable-decoder=mjpeg" [27]="--enable-decoder=h264" [28]="--enable-decoder=gif" [29]="--enable-decoder=flv" [30]="--enable-decoder=aac" [31]="--disable-decoders" [32]="--enable-memalign-hack" [33]="--enable-w32threads" [34]="--disable-vhook" [35]="--disable-ffserver" [36]="--disable-ffplay" [37]="--disable-ffmpeg")
+BASH_LINENO=([0]="0")
+BASH_SOURCE=([0]="../configure")
+BASH_VERSINFO=([0]="3" [1]="2" [2]="39" [3]="1" [4]="release" [5]="x86_64-pc-linux-gnu")
+BASH_VERSION='3.2.39(1)-release'
+BSF_LIST='dump_extradata_bsf
+h264_mp4toannexb_bsf
+imx_dump_header_bsf
+mjpega_dump_header_bsf
+mp3_header_compress_bsf
+mp3_header_decompress_bsf
+mov2textsub_bsf
+noise_bsf
+remove_extradata_bsf
+text2movsub_bsf'
+CFLAGS=' -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112'
+CMDLINE_SELECT='
+    
+    altivec
+    amd3dnow
+    amd3dnowext
+    armv5te
+    armv6
+    armv6t2
+    armvfp
+    iwmmxt
+    mmi
+    mmx
+    mmx2
+    neon
+    ppc4xx
+    sse
+    ssse3
+    vis
+
+    
+    
+    bsfs
+    decoders
+    demuxers
+    encoders
+    filters
+    indevs
+    muxers
+    outdevs
+    parsers
+    protocols
+
+    aandct
+    avfilter
+    avfilter_lavf
+    avisynth
+    beos_netserver
+    bzlib
+    fastdiv
+    ffmpeg
+    ffplay
+    ffserver
+    fft
+    golomb
+    gpl
+    gprof
+    gray
+    hardcoded_tables
+    ipv6
+    libamr_nb
+    libamr_wb
+    libdc1394
+    libdirac
+    libfaac
+    libfaad
+    libfaadbin
+    libgsm
+    libmp3lame
+    libnut
+    libopenjpeg
+    libschroedinger
+    libspeex
+    libtheora
+    libvorbis
+    libx264
+    libxvid
+    mdct
+    memalign_hack
+    mlib
+    mpegaudio_hp
+    network
+    nonfree
+    postproc
+    powerpc_perf
+    rdft
+    shared
+    small
+    static
+    swscale
+    vdpau
+    vhook
+    x11grab
+    zlib
+
+    
+    beosthreads
+    os2threads
+    pthreads
+    w32threads
+
+    cross_compile
+    debug
+    extra_warnings
+    logging
+    optimizations
+    stripping
+    yasm
+'
+CMDLINE_SET='
+    
+    bindir
+    datadir
+    incdir
+    libdir
+    mandir
+    prefix
+    shlibdir
+
+    arch
+    build_suffix
+    cc
+    cpu
+    cross_prefix
+    extra_version
+    host_cc
+    host_cflags
+    host_ldflags
+    host_libs
+    logfile
+    nm
+    source_path
+    sysinclude
+    sysroot
+    target_exec
+    target_os
+    target_path
+'
+COMPONENT_LIST='
+    bsfs
+    decoders
+    demuxers
+    encoders
+    filters
+    indevs
+    muxers
+    outdevs
+    parsers
+    protocols
+'
+CONFIG_EXTRA='
+    oldscaler
+'
+CONFIG_LIST='
+    
+    bsfs
+    decoders
+    demuxers
+    encoders
+    filters
+    indevs
+    muxers
+    outdevs
+    parsers
+    protocols
+
+    aandct
+    avfilter
+    avfilter_lavf
+    avisynth
+    beos_netserver
+    bzlib
+    fastdiv
+    ffmpeg
+    ffplay
+    ffserver
+    fft
+    golomb
+    gpl
+    gprof
+    gray
+    hardcoded_tables
+    ipv6
+    libamr_nb
+    libamr_wb
+    libdc1394
+    libdirac
+    libfaac
+    libfaad
+    libfaadbin
+    libgsm
+    libmp3lame
+    libnut
+    libopenjpeg
+    libschroedinger
+    libspeex
+    libtheora
+    libvorbis
+    libx264
+    libxvid
+    mdct
+    memalign_hack
+    mlib
+    mpegaudio_hp
+    network
+    nonfree
+    postproc
+    powerpc_perf
+    rdft
+    shared
+    small
+    static
+    swscale
+    vdpau
+    vhook
+    x11grab
+    zlib
+'
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-OHp2es80DQ,guid=48414d1de9f5b8cf1a7cd4ce4b65ddf3
+DECODER_LIST='aasc_decoder
+amv_decoder
+asv1_decoder
+asv2_decoder
+avs_decoder
+bethsoftvid_decoder
+bfi_decoder
+bmp_decoder
+c93_decoder
+cavs_decoder
+cinepak_decoder
+cljr_decoder
+cscd_decoder
+cyuv_decoder
+dnxhd_decoder
+dsicinvideo_decoder
+dvvideo_decoder
+dxa_decoder
+eacmv_decoder
+eatgq_decoder
+eatgv_decoder
+eatqi_decoder
+eightbps_decoder
+eightsvx_exp_decoder
+eightsvx_fib_decoder
+escape124_decoder
+ffv1_decoder
+ffvhuff_decoder
+flashsv_decoder
+flic_decoder
+flv_decoder
+fourxm_decoder
+fraps_decoder
+gif_decoder
+h261_decoder
+h263_decoder
+h263i_decoder
+h264_decoder
+h264_vdpau_decoder
+huffyuv_decoder
+idcin_decoder
+indeo2_decoder
+indeo3_decoder
+interplay_video_decoder
+jpegls_decoder
+kmvc_decoder
+loco_decoder
+mdec_decoder
+mimic_decoder
+mjpeg_decoder
+mjpegb_decoder
+mmvideo_decoder
+motionpixels_decoder
+mpeg_xvmc_decoder
+mpeg1video_decoder
+mpeg2video_decoder
+mpeg4_decoder
+mpegvideo_decoder
+mpeg_vdpau_decoder
+mpeg1_vdpau_decoder
+msmpeg4v1_decoder
+msmpeg4v2_decoder
+msmpeg4v3_decoder
+msrle_decoder
+msvideo1_decoder
+mszh_decoder
+nuv_decoder
+pcx_decoder
+png_decoder
+ptx_decoder
+qdraw_decoder
+qpeg_decoder
+qtrle_decoder
+rawvideo_decoder
+rl2_decoder
+roq_decoder
+rpza_decoder
+rv10_decoder
+rv20_decoder
+rv30_decoder
+rv40_decoder
+sgi_decoder
+smacker_decoder
+smc_decoder
+snow_decoder
+sp5x_decoder
+sunrast_decoder
+svq1_decoder
+svq3_decoder
+targa_decoder
+theora_decoder
+thp_decoder
+tiertexseqvideo_decoder
+tiff_decoder
+truemotion1_decoder
+truemotion2_decoder
+tscc_decoder
+txd_decoder
+ulti_decoder
+vb_decoder
+vc1_decoder
+vc1_vdpau_decoder
+vcr1_decoder
+vmdvideo_decoder
+vmnc_decoder
+vp3_decoder
+vp5_decoder
+vp6_decoder
+vp6a_decoder
+vp6f_decoder
+vqa_decoder
+wmv1_decoder
+wmv2_decoder
+wmv3_decoder
+wmv3_vdpau_decoder
+wnv1_decoder
+xan_wc3_decoder
+xl_decoder
+zlib_decoder
+zmbv_decoder
+aac_decoder
+ac3_decoder
+alac_decoder
+ape_decoder
+atrac3_decoder
+cook_decoder
+dca_decoder
+dsicinaudio_decoder
+eac3_decoder
+flac_decoder
+imc_decoder
+mace3_decoder
+mace6_decoder
+mlp_decoder
+mp1_decoder
+mp2_decoder
+mp3_decoder
+mp3adu_decoder
+mp3on4_decoder
+mpc7_decoder
+mpc8_decoder
+nellymoser_decoder
+qcelp_decoder
+qdm2_decoder
+ra_144_decoder
+ra_288_decoder
+shorten_decoder
+smackaud_decoder
+sonic_decoder
+truespeech_decoder
+tta_decoder
+vmdaudio_decoder
+vorbis_decoder
+wavpack_decoder
+wmav1_decoder
+wmav2_decoder
+ws_snd1_decoder
+pcm_alaw_decoder
+pcm_dvd_decoder
+pcm_f32be_decoder
+pcm_f32le_decoder
+pcm_f64be_decoder
+pcm_f64le_decoder
+pcm_mulaw_decoder
+pcm_s8_decoder
+pcm_s16be_decoder
+pcm_s16le_decoder
+pcm_s16le_planar_decoder
+pcm_s24be_decoder
+pcm_s24daud_decoder
+pcm_s24le_decoder
+pcm_s32be_decoder
+pcm_s32le_decoder
+pcm_u8_decoder
+pcm_u16be_decoder
+pcm_u16le_decoder
+pcm_u24be_decoder
+pcm_u24le_decoder
+pcm_u32be_decoder
+pcm_u32le_decoder
+pcm_zork_decoder
+interplay_dpcm_decoder
+roq_dpcm_decoder
+sol_dpcm_decoder
+xan_dpcm_decoder
+adpcm_4xm_decoder
+adpcm_adx_decoder
+adpcm_ct_decoder
+adpcm_ea_decoder
+adpcm_ea_maxis_xa_decoder
+adpcm_ea_r1_decoder
+adpcm_ea_r2_decoder
+adpcm_ea_r3_decoder
+adpcm_ea_xas_decoder
+adpcm_g726_decoder
+adpcm_ima_amv_decoder
+adpcm_ima_dk3_decoder
+adpcm_ima_dk4_decoder
+adpcm_ima_ea_eacs_decoder
+adpcm_ima_ea_sead_decoder
+adpcm_ima_iss_decoder
+adpcm_ima_qt_decoder
+adpcm_ima_smjpeg_decoder
+adpcm_ima_wav_decoder
+adpcm_ima_ws_decoder
+adpcm_ms_decoder
+adpcm_sbpro_2_decoder
+adpcm_sbpro_3_decoder
+adpcm_sbpro_4_decoder
+adpcm_swf_decoder
+adpcm_thp_decoder
+adpcm_xa_decoder
+adpcm_yamaha_decoder
+dvbsub_decoder
+dvdsub_decoder
+xsub_decoder
+libamr_nb_decoder
+libamr_wb_decoder
+libdirac_decoder
+libfaad_decoder
+libgsm_decoder
+libgsm_ms_decoder
+libopenjpeg_decoder
+libschroedinger_decoder
+libspeex_decoder'
+DEMUXER_LIST='aac_demuxer
+ac3_demuxer
+aiff_demuxer
+amr_demuxer
+apc_demuxer
+ape_demuxer
+asf_demuxer
+ass_demuxer
+au_demuxer
+avi_demuxer
+avisynth_demuxer
+avs_demuxer
+bethsoftvid_demuxer
+bfi_demuxer
+c93_demuxer
+cavsvideo_demuxer
+daud_demuxer
+dirac_demuxer
+dnxhd_demuxer
+dsicin_demuxer
+dts_demuxer
+dv_demuxer
+dxa_demuxer
+ea_demuxer
+ea_cdata_demuxer
+eac3_demuxer
+ffm_demuxer
+flac_demuxer
+flic_demuxer
+flv_demuxer
+fourxm_demuxer
+gsm_demuxer
+gxf_demuxer
+h261_demuxer
+h263_demuxer
+h264_demuxer
+idcin_demuxer
+iff_demuxer
+image2_demuxer
+image2pipe_demuxer
+ingenient_demuxer
+ipmovie_demuxer
+iss_demuxer
+lmlm4_demuxer
+m4v_demuxer
+matroska_demuxer
+mjpeg_demuxer
+mlp_demuxer
+mm_demuxer
+mmf_demuxer
+mov_demuxer
+mp3_demuxer
+mpc_demuxer
+mpc8_demuxer
+mpegps_demuxer
+mpegts_demuxer
+mpegtsraw_demuxer
+mpegvideo_demuxer
+msnwc_tcp_demuxer
+mtv_demuxer
+mvi_demuxer
+mxf_demuxer
+nc_demuxer
+nsv_demuxer
+nut_demuxer
+nuv_demuxer
+ogg_demuxer
+oma_demuxer
+pcm_alaw_demuxer
+pcm_mulaw_demuxer
+pcm_f64be_demuxer
+pcm_f64le_demuxer
+pcm_f32be_demuxer
+pcm_f32le_demuxer
+pcm_s32be_demuxer
+pcm_s32le_demuxer
+pcm_s24be_demuxer
+pcm_s24le_demuxer
+pcm_s16be_demuxer
+pcm_s16le_demuxer
+pcm_s8_demuxer
+pcm_u32be_demuxer
+pcm_u32le_demuxer
+pcm_u24be_demuxer
+pcm_u24le_demuxer
+pcm_u16be_demuxer
+pcm_u16le_demuxer
+pcm_u8_demuxer
+pva_demuxer
+r3d_demuxer
+rawvideo_demuxer
+redir_demuxer
+rl2_demuxer
+rm_demuxer
+roq_demuxer
+rpl_demuxer
+rtsp_demuxer
+sdp_demuxer
+segafilm_demuxer
+shorten_demuxer
+siff_demuxer
+smacker_demuxer
+sol_demuxer
+str_demuxer
+swf_demuxer
+thp_demuxer
+tiertexseq_demuxer
+tta_demuxer
+txd_demuxer
+vc1_demuxer
+vc1t_demuxer
+vmd_demuxer
+voc_demuxer
+wav_demuxer
+wc3_demuxer
+wsaud_demuxer
+wsvqa_demuxer
+wv_demuxer
+xa_demuxer
+yuv4mpegpipe_demuxer
+libnut_demuxer'
+DEPEND_CMD='$(CC) $(CFLAGS) -MM $< | sed -e "/^\#.*/d" -e "s,^[[:space:]]*$(*F)\\.o,$(@D)/$(*F).o,"'
+DIRSTACK=()
+DISPLAY=:0.0
+E1=0
+E2=1
+ENCODER_LIST='asv1_encoder
+asv2_encoder
+bmp_encoder
+dnxhd_encoder
+dvvideo_encoder
+ffv1_encoder
+ffvhuff_encoder
+flashsv_encoder
+flv_encoder
+gif_encoder
+h261_encoder
+h263_encoder
+h263p_encoder
+huffyuv_encoder
+jpegls_encoder
+ljpeg_encoder
+mjpeg_encoder
+mpeg1video_encoder
+mpeg2video_encoder
+mpeg4_encoder
+msmpeg4v1_encoder
+msmpeg4v2_encoder
+msmpeg4v3_encoder
+pam_encoder
+pbm_encoder
+pgm_encoder
+pgmyuv_encoder
+png_encoder
+ppm_encoder
+qtrle_encoder
+rawvideo_encoder
+roq_encoder
+rv10_encoder
+rv20_encoder
+sgi_encoder
+snow_encoder
+svq1_encoder
+targa_encoder
+tiff_encoder
+wmv1_encoder
+wmv2_encoder
+zlib_encoder
+zmbv_encoder
+ac3_encoder
+alac_encoder
+flac_encoder
+mp2_encoder
+nellymoser_encoder
+sonic_encoder
+sonic_ls_encoder
+vorbis_encoder
+wmav1_encoder
+wmav2_encoder
+pcm_alaw_encoder
+pcm_f32be_encoder
+pcm_f32le_encoder
+pcm_f64be_encoder
+pcm_f64le_encoder
+pcm_mulaw_encoder
+pcm_s8_encoder
+pcm_s16be_encoder
+pcm_s16le_encoder
+pcm_s24be_encoder
+pcm_s24daud_encoder
+pcm_s24le_encoder
+pcm_s32be_encoder
+pcm_s32le_encoder
+pcm_u8_encoder
+pcm_u16be_encoder
+pcm_u16le_encoder
+pcm_u24be_encoder
+pcm_u24le_encoder
+pcm_u32be_encoder
+pcm_u32le_encoder
+pcm_zork_encoder
+roq_dpcm_encoder
+adpcm_adx_encoder
+adpcm_g726_encoder
+adpcm_ima_qt_encoder
+adpcm_ima_wav_encoder
+adpcm_ms_encoder
+adpcm_swf_encoder
+adpcm_yamaha_encoder
+dvbsub_encoder
+dvdsub_encoder
+libamr_nb_encoder
+libamr_wb_encoder
+libdirac_encoder
+libfaac_encoder
+libgsm_encoder
+libgsm_ms_encoder
+libmp3lame_encoder
+libschroedinger_encoder
+libtheora_encoder
+libvorbis_encoder
+libx264_encoder
+libxvid_encoder'
+EUID=1000
+FFMPEG_CONFIGURATION='--disable-ffmpeg --disable-ffplay --disable-ffserver --disable-vhook --enable-w32threads --enable-memalign-hack --disable-decoders --enable-decoder=aac --enable-decoder=flv --enable-decoder=gif --enable-decoder=h264 --enable-decoder=mjpeg --enable-decoder=mp3 --enable-decoder=mpeg4 --enable-decoder=png --disable-encoders --disable-muxers --disable-demuxers --enable-demuxer=aac --enable-demuxer=flv --enable-demuxer=h264 --enable-demuxer=image2 --enable-demuxer=mjpeg --enable-demuxer=mov --enable-demuxer=mp3 --disable-parsers --enable-parser=aac --enable-parser=h264 --enable-parser=mpeg4video --disable-bsfs --disable-protocols --enable-protocol=file --enable-protocol=http --enable-protocol=tcp --disable-filters --disable-devices --arch=i686 --disable-debug'
+FFSERVERLDFLAGS=-Wl,-E
+FILTER_LIST=crop_filter
+FULLNAME='$(NAME)$(BUILDSUF)'
+GNUSTEP_USER_ROOT=/home/vin777/GNUstep
+GROUPS=()
+HAVE_LIST='
+    
+    altivec
+    amd3dnow
+    amd3dnowext
+    armv5te
+    armv6
+    armv6t2
+    armvfp
+    iwmmxt
+    mmi
+    mmx
+    mmx2
+    neon
+    ppc4xx
+    sse
+    ssse3
+    vis
+
+    
+    beosthreads
+    os2threads
+    pthreads
+    w32threads
+
+    alsa_asoundlib_h
+    altivec_h
+    arpa_inet_h
+    bswap
+    closesocket
+    cmov
+    conio_h
+    dcbzl
+    dev_bktr_ioctl_bt848_h
+    dev_bktr_ioctl_meteor_h
+    dev_ic_bt8xx_h
+    dev_video_meteor_ioctl_meteor_h
+    dev_video_bktr_ioctl_bt848_h
+    dlfcn_h
+    dlopen
+    dos_paths
+    ebp_available
+    ebx_available
+    fast_64bit
+    fast_cmov
+    fast_unaligned
+    fork
+    freetype2
+    gethrtime
+    GetProcessTimes
+    getrusage
+    imlib2
+    inet_aton
+    inline_asm
+    libdc1394_1
+    libdc1394_2
+    llrint
+    lrint
+    lrintf
+    machine_ioctl_bt848_h
+    machine_ioctl_meteor_h
+    malloc_h
+    memalign
+    mkstemp
+    pld
+    posix_memalign
+    ppc64
+    round
+    roundf
+    sdl
+    sdl_video_size
+    setmode
+    socklen_t
+    soundcard_h
+    poll_h
+    sys_mman_h
+    sys_resource_h
+    sys_select_h
+    sys_soundcard_h
+    sys_videoio_h
+    ten_operands
+    termios_h
+    threads
+    truncf
+    winsock2_h
+    yasm
+'
+HISTCONTROL=ignoreboth
+HOME=/home/vin777
+HOSTNAME=koekie
+HOSTTYPE=x86_64
+IFS=' 	
+'
+INDEV_LIST='alsa_demuxer
+audio_beos_demuxer
+bktr_demuxer
+dv1394_demuxer
+oss_demuxer
+v4l2_demuxer
+v4l_demuxer
+vfwcap_demuxer
+x11_grab_device_demuxer
+libdc1394_demuxer'
+LANG=en_US.UTF-8
+LC_ALL=C
+LIBNAME='$(LIBPREF)$(FULLNAME)$(LIBSUF)'
+LIBPREF=lib
+LIBSUF=.a
+LIB_INSTALL_EXTRA_CMD='$(RANLIB) "$(LIBDIR)/$(LIBNAME)"'
+LOGNAME=vin777
+LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.svgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.lzma=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.dz=01;31:*.gz=01;31:*.bz2=01;31:*.bz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.rar=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:'
+MACHTYPE=x86_64-pc-linux-gnu
+MUXER_LIST='ac3_muxer
+adts_muxer
+aiff_muxer
+amr_muxer
+asf_muxer
+ass_muxer
+asf_stream_muxer
+au_muxer
+avi_muxer
+avm2_muxer
+crc_muxer
+daud_muxer
+dirac_muxer
+dnxhd_muxer
+dts_muxer
+dv_muxer
+eac3_muxer
+ffm_muxer
+flac_muxer
+flv_muxer
+framecrc_muxer
+gif_muxer
+gxf_muxer
+h261_muxer
+h263_muxer
+h264_muxer
+image2_muxer
+image2pipe_muxer
+ipod_muxer
+m4v_muxer
+matroska_muxer
+matroska_audio_muxer
+mjpeg_muxer
+mmf_muxer
+mov_muxer
+mp2_muxer
+mp3_muxer
+mp4_muxer
+mpeg1system_muxer
+mpeg1vcd_muxer
+mpeg1video_muxer
+mpeg2dvd_muxer
+mpeg2svcd_muxer
+mpeg2video_muxer
+mpeg2vob_muxer
+mpegts_muxer
+mpjpeg_muxer
+mxf_muxer
+mxf_d10_muxer
+null_muxer
+nut_muxer
+ogg_muxer
+pcm_alaw_muxer
+pcm_mulaw_muxer
+pcm_f64be_muxer
+pcm_f64le_muxer
+pcm_f32be_muxer
+pcm_f32le_muxer
+pcm_s32be_muxer
+pcm_s32le_muxer
+pcm_s24be_muxer
+pcm_s24le_muxer
+pcm_s16be_muxer
+pcm_s16le_muxer
+pcm_s8_muxer
+pcm_u32be_muxer
+pcm_u32le_muxer
+pcm_u24be_muxer
+pcm_u24le_muxer
+pcm_u16be_muxer
+pcm_u16le_muxer
+pcm_u8_muxer
+psp_muxer
+rawvideo_muxer
+rm_muxer
+roq_muxer
+rtp_muxer
+swf_muxer
+tg2_muxer
+tgp_muxer
+vc1t_muxer
+voc_muxer
+wav_muxer
+yuv4mpegpipe_muxer
+libnut_muxer'
+OPTERR=1
+OPTIND=1
+OSTYPE=linux-gnu
+OUTDEV_LIST='alsa_muxer
+audio_beos_muxer
+oss_muxer'
+PARSER_LIST='aac_parser
+ac3_parser
+cavsvideo_parser
+dca_parser
+dirac_parser
+dnxhd_parser
+dvbsub_parser
+dvdsub_parser
+h261_parser
+h263_parser
+h264_parser
+mjpeg_parser
+mlp_parser
+mpeg4video_parser
+mpegaudio_parser
+mpegvideo_parser
+pnm_parser
+vc1_parser
+vp3_parser'
+PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+PATHS_LIST='
+    bindir
+    datadir
+    incdir
+    libdir
+    mandir
+    prefix
+    shlibdir
+'
+PIPESTATUS=([0]="0")
+POSIXLY_CORRECT=y
+PPID=11585
+PROTOCOL_LIST='file_protocol
+gopher_protocol
+http_protocol
+pipe_protocol
+rtp_protocol
+tcp_protocol
+udp_protocol'
+PS4='+ '
+PWD=/home/vin777/work/vincent/development/vineo/stuff/ffmpeg/build
+SHELL=/bin/bash
+SHELLOPTS=braceexpand:hashall:interactive-comments:posix
+SHFLAGS='-shared -Wl,-soname,$$(@F)'
+SHLVL=4
+SLIBNAME='$(SLIBPREF)$(FULLNAME)$(SLIBSUF)'
+SLIBNAME_WITH_MAJOR='$(SLIBNAME).$(LIBMAJOR)'
+SLIBNAME_WITH_VERSION='$(SLIBNAME).$(LIBVERSION)'
+SLIBPREF=lib
+SLIBSUF=.so
+SSH_AGENT_PID=3201
+SSH_AUTH_SOCK=/tmp/ssh-xasGIB3169/agent.3169
+TERM=xterm
+THREADS_LIST='
+    beosthreads
+    os2threads
+    pthreads
+    w32threads
+'
+UID=1000
+USER=vin777
+VHOOKSHFLAGS='$(SHFLAGS)'
+WINDOWID=39845903
+WINDOWPATH=7
+WMAKER_BIN_NAME=/usr/lib/WindowMaker/WindowMaker
+WRASTER_COLOR_RESOLUTION0=4
+XTERM_LOCALE=en_US.UTF-8
+XTERM_SHELL=/bin/bash
+XTERM_VERSION='XTerm(235)'
+_=--disable-debug
+aac_decoder=yes
+aac_decoder_select='fft mdct'
+aac_demuxer=yes
+aac_parser=yes
+aasc_decoder=no
+ac3_decoder=no
+ac3_decoder_deps=gpl
+ac3_decoder_select='fft mdct'
+ac3_demuxer=no
+ac3_demuxer_deps=ac3_parser
+ac3_encoder=no
+ac3_muxer=no
+ac3_parser=no
+action=disable
+adpcm_4xm_decoder=no
+adpcm_adx_decoder=no
+adpcm_adx_encoder=no
+adpcm_ct_decoder=no
+adpcm_ea_decoder=no
+adpcm_ea_maxis_xa_decoder=no
+adpcm_ea_r1_decoder=no
+adpcm_ea_r2_decoder=no
+adpcm_ea_r3_decoder=no
+adpcm_ea_xas_decoder=no
+adpcm_g726_decoder=no
+adpcm_g726_encoder=no
+adpcm_ima_amv_decoder=no
+adpcm_ima_dk3_decoder=no
+adpcm_ima_dk4_decoder=no
+adpcm_ima_ea_eacs_decoder=no
+adpcm_ima_ea_sead_decoder=no
+adpcm_ima_iss_decoder=no
+adpcm_ima_qt_decoder=no
+adpcm_ima_qt_encoder=no
+adpcm_ima_smjpeg_decoder=no
+adpcm_ima_wav_decoder=no
+adpcm_ima_wav_encoder=no
+adpcm_ima_ws_decoder=no
+adpcm_ms_decoder=no
+adpcm_ms_encoder=no
+adpcm_sbpro_2_decoder=no
+adpcm_sbpro_3_decoder=no
+adpcm_sbpro_4_decoder=no
+adpcm_swf_decoder=no
+adpcm_swf_encoder=no
+adpcm_thp_decoder=no
+adpcm_xa_decoder=no
+adpcm_yamaha_decoder=no
+adpcm_yamaha_encoder=no
+adts_muxer=no
+aiff_demuxer=no
+aiff_muxer=no
+alac_decoder=no
+alac_encoder=no
+alsa_demuxer=no
+alsa_demuxer_deps='alsa_asoundlib_h snd_pcm_htimestamp'
+alsa_demuxer_extralibs=-lasound
+alsa_muxer=no
+alsa_muxer_deps=alsa_asoundlib_h
+alsa_muxer_extralibs=-lasound
+altivec=yes
+altivec_deps=ppc
+amd3dnow=yes
+amd3dnow_deps=mmx
+amd3dnowext=yes
+amd3dnowext_deps=amd3dnow
+amr_demuxer=no
+amr_muxer=no
+amv_decoder=no
+apc_demuxer=no
+ape_decoder=no
+ape_demuxer=no
+ar=ar
+arch=i686
+armv5te=yes
+armv5te_deps=arm
+armv6=yes
+armv6_deps=arm
+armv6t2=yes
+armv6t2_deps=arm
+armvfp=yes
+armvfp_deps=arm
+asf_demuxer=no
+asf_muxer=no
+asf_stream_muxer=no
+ass_demuxer=no
+ass_muxer=no
+asv1_decoder=no
+asv1_encoder=no
+asv2_decoder=no
+asv2_encoder=no
+atrac3_decoder=no
+atrac3_decoder_select='fft mdct'
+au_demuxer=no
+au_muxer=no
+audio_beos_demuxer=no
+audio_beos_demuxer_deps=audio_beos
+audio_beos_demuxer_extralibs='-lmedia -lbe'
+audio_beos_muxer=no
+audio_beos_muxer_deps=audio_beos
+audio_beos_muxer_extralibs='-lmedia -lbe'
+avi_demuxer=no
+avi_muxer=no
+avisynth_demuxer=no
+avisynth_demuxer_deps=avisynth
+avm2_muxer=no
+avs_decoder=no
+avs_demuxer=no
+bethsoftvid_decoder=no
+bethsoftvid_demuxer=no
+bfi_decoder=no
+bfi_demuxer=no
+bindir_default='${prefix}/bin'
+bktr_demuxer=no
+bktr_demuxer_deps_any='dev_bktr_ioctl_bt848_h machine_ioctl_bt848_h dev_video_bktr_ioctl_bt848_h dev_ic_bt8xx_h'
+bmp_decoder=no
+bmp_encoder=no
+c93_decoder=no
+c93_demuxer=no
+cavs_decoder=no
+cavs_decoder_select=golomb
+cavsvideo_demuxer=no
+cavsvideo_parser=no
+cc_default=gcc
+cinepak_decoder=no
+cljr_decoder=no
+cook_decoder=no
+cook_decoder_select='fft mdct'
+cpu=generic
+crc_muxer=no
+crop_filter=no
+cscd_decoder=no
+cscd_decoder_suggest=zlib
+cyuv_decoder=no
+datadir_default='${prefix}/share/ffmpeg'
+daud_demuxer=no
+daud_muxer=no
+dca_decoder=no
+dca_decoder_select='fft mdct'
+dca_parser=no
+debug=no
+dirac_demuxer=no
+dirac_demuxer_deps=dirac_parser
+dirac_muxer=no
+dirac_parser=no
+dnxhd_decoder=no
+dnxhd_demuxer=no
+dnxhd_encoder=no
+dnxhd_encoder_select=aandct
+dnxhd_muxer=no
+dnxhd_parser=no
+dsicin_demuxer=no
+dsicinaudio_decoder=no
+dsicinvideo_decoder=no
+dts_demuxer=no
+dts_muxer=no
+dump_extradata_bsf=no
+dv1394_demuxer=no
+dv1394_demuxer_deps='dv1394 dv_demuxer'
+dv_demuxer=no
+dv_muxer=no
+dvbsub_decoder=no
+dvbsub_encoder=no
+dvbsub_parser=no
+dvdsub_decoder=no
+dvdsub_encoder=no
+dvdsub_parser=no
+dvvideo_decoder=no
+dvvideo_encoder=no
+dxa_decoder=no
+dxa_decoder_select=zlib
+dxa_demuxer=no
+ea_cdata_demuxer=no
+ea_demuxer=no
+eac3_decoder=no
+eac3_decoder_deps=gpl
+eac3_decoder_select='fft mdct'
+eac3_demuxer=no
+eac3_muxer=no
+eacmv_decoder=no
+eatgq_decoder=no
+eatgq_decoder_select=aandct
+eatgv_decoder=no
+eatqi_decoder=no
+eatqi_decoder_select=aandct
+eightbps_decoder=no
+eightsvx_exp_decoder=no
+eightsvx_fib_decoder=no
+escape124_decoder=no
+ffm_demuxer=no
+ffm_muxer=no
+ffmpeg=no
+ffplay=no
+ffplay_deps=sdl
+ffserver=no
+ffserver_deps='ffm_muxer rtp_protocol rtsp_demuxer'
+ffserver_extralibs='$ldl'
+ffv1_decoder=no
+ffv1_decoder_select=golomb
+ffv1_encoder=no
+ffvhuff_decoder=no
+ffvhuff_encoder=no
+file_protocol=yes
+flac_decoder=no
+flac_decoder_select=golomb
+flac_demuxer=no
+flac_encoder=no
+flac_encoder_select=golomb
+flac_muxer=no
+flashsv_decoder=no
+flashsv_decoder_select=zlib
+flashsv_encoder=no
+flashsv_encoder_select=zlib
+flic_decoder=no
+flic_demuxer=no
+flv_decoder=yes
+flv_demuxer=yes
+flv_encoder=no
+flv_encoder_select=aandct
+flv_muxer=no
+fourxm_decoder=no
+fourxm_demuxer=no
+framecrc_muxer=no
+fraps_decoder=no
+gif_decoder=yes
+gif_encoder=no
+gif_muxer=no
+gopher_protocol=no
+gopher_protocol_deps=network
+gsm_demuxer=no
+gxf_demuxer=no
+gxf_muxer=no
+h261_decoder=no
+h261_demuxer=no
+h261_encoder=no
+h261_encoder_select=aandct
+h261_muxer=no
+h261_parser=no
+h263_decoder=no
+h263_demuxer=no
+h263_encoder=no
+h263_encoder_select=aandct
+h263_muxer=no
+h263_parser=no
+h263i_decoder=no
+h263p_encoder=no
+h263p_encoder_select=aandct
+h264_decoder=yes
+h264_decoder_select=golomb
+h264_demuxer=yes
+h264_mp4toannexb_bsf=no
+h264_muxer=no
+h264_parser=yes
+h264_vdpau_decoder=no
+h264_vdpau_decoder_deps=vdpau
+host_cc_default=gcc
+host_cflags='-O3 -g -Wall'
+host_libs=-lm
+http_protocol=yes
+http_protocol_deps=network
+huffyuv_decoder=no
+huffyuv_encoder=no
+idcin_decoder=no
+idcin_demuxer=no
+iff_demuxer=no
+image2_demuxer=yes
+image2_muxer=no
+image2pipe_demuxer=no
+image2pipe_muxer=no
+imc_decoder=no
+imc_decoder_select='fft mdct'
+imx_dump_header_bsf=no
+incdir_default='${prefix}/include'
+indeo2_decoder=no
+indeo3_decoder=no
+ingenient_demuxer=no
+interplay_dpcm_decoder=no
+interplay_video_decoder=no
+ipmovie_demuxer=no
+ipod_muxer=no
+ipv6=yes
+iss_demuxer=no
+iwmmxt=yes
+iwmmxt_deps=arm
+jpegls_decoder=no
+jpegls_decoder_select=golomb
+jpegls_encoder=no
+jpegls_encoder_select=golomb
+kmvc_decoder=no
+libamr_nb_decoder=no
+libamr_nb_decoder_deps=libamr_nb
+libamr_nb_encoder=no
+libamr_nb_encoder_deps=libamr_nb
+libamr_wb_decoder=no
+libamr_wb_decoder_deps=libamr_wb
+libamr_wb_encoder=no
+libamr_wb_encoder_deps=libamr_wb
+libdc1394_demuxer=no
+libdc1394_demuxer_deps=libdc1394
+libdir_default='${prefix}/lib'
+libdirac_decoder=no
+libdirac_decoder_deps='libdirac !libschroedinger'
+libdirac_encoder=no
+libdirac_encoder_deps=libdirac
+libfaac_encoder=no
+libfaac_encoder_deps=libfaac
+libfaad_decoder=no
+libfaad_decoder_deps=libfaad
+libfaadbin_decoder_extralibs='$ldl'
+libgsm_decoder=no
+libgsm_decoder_deps=libgsm
+libgsm_encoder=no
+libgsm_encoder_deps=libgsm
+libgsm_ms_decoder=no
+libgsm_ms_decoder_deps=libgsm
+libgsm_ms_encoder=no
+libgsm_ms_encoder_deps=libgsm
+libmp3lame_encoder=no
+libmp3lame_encoder_deps=libmp3lame
+libnut_demuxer=no
+libnut_demuxer_deps=libnut
+libnut_muxer=no
+libnut_muxer_deps=libnut
+libopenjpeg_decoder=no
+libopenjpeg_decoder_deps=libopenjpeg
+libschroedinger_decoder=no
+libschroedinger_decoder_deps=libschroedinger
+libschroedinger_encoder=no
+libschroedinger_encoder_deps=libschroedinger
+libspeex_decoder=no
+libspeex_decoder_deps=libspeex
+libtheora_encoder=no
+libtheora_encoder_deps=libtheora
+libvorbis_encoder=no
+libvorbis_encoder_deps=libvorbis
+libx264_encoder=no
+libx264_encoder_deps=libx264
+libxvid_encoder=no
+libxvid_encoder_deps=libxvid
+ljpeg_encoder=no
+ljpeg_encoder_select=aandct
+lmlm4_demuxer=no
+ln_s='ln -sf'
+loco_decoder=no
+loco_decoder_select=golomb
+logfile=config.err
+m4v_demuxer=no
+m4v_muxer=no
+mace3_decoder=no
+mace6_decoder=no
+mandir_default='${prefix}/share/man'
+matroska_audio_muxer=no
+matroska_demuxer=no
+matroska_demuxer_suggest='zlib bzlib'
+matroska_muxer=no
+mdec_decoder=no
+memalign_hack=yes
+mimic_decoder=no
+mjpeg_decoder=yes
+mjpeg_demuxer=yes
+mjpeg_encoder=no
+mjpeg_encoder_select=aandct
+mjpeg_muxer=no
+mjpeg_parser=no
+mjpega_dump_header_bsf=no
+mjpegb_decoder=no
+mlp_decoder=no
+mlp_demuxer=no
+mlp_parser=no
+mm_demuxer=no
+mmf_demuxer=no
+mmf_muxer=no
+mmi=yes
+mmi_deps=mips
+mmvideo_decoder=no
+mmx=yes
+mmx2=yes
+mmx2_deps=mmx
+mmx_deps=x86
+motionpixels_decoder=no
+mov2textsub_bsf=no
+mov_demuxer=yes
+mov_demuxer_suggest=zlib
+mov_muxer=no
+movie_filter_deps=avfilter_lavf
+mp1_decoder=no
+mp2_decoder=no
+mp2_encoder=no
+mp2_muxer=no
+mp3_decoder=yes
+mp3_demuxer=yes
+mp3_demuxer_deps=mpegaudio_parser
+mp3_header_compress_bsf=no
+mp3_header_decompress_bsf=no
+mp3_muxer=no
+mp3adu_decoder=no
+mp3on4_decoder=no
+mp4_muxer=no
+mpc7_decoder=no
+mpc8_decoder=no
+mpc8_demuxer=no
+mpc_demuxer=no
+mpeg1_vdpau_decoder=no
+mpeg1_vdpau_decoder_deps=vdpau
+mpeg1system_muxer=no
+mpeg1vcd_muxer=no
+mpeg1video_decoder=no
+mpeg1video_encoder=no
+mpeg1video_encoder_select=aandct
+mpeg1video_muxer=no
+mpeg2dvd_muxer=no
+mpeg2svcd_muxer=no
+mpeg2video_decoder=no
+mpeg2video_encoder=no
+mpeg2video_encoder_select=aandct
+mpeg2video_muxer=no
+mpeg2vob_muxer=no
+mpeg4_decoder=yes
+mpeg4_encoder=no
+mpeg4_encoder_select=aandct
+mpeg4aac_decoder_deps=libfaad
+mpeg4video_parser=yes
+mpeg_vdpau_decoder=no
+mpeg_vdpau_decoder_deps=vdpau
+mpeg_xvmc_decoder=no
+mpeg_xvmc_decoder_deps=X11_extensions_XvMClib_h
+mpegaudio_hp=yes
+mpegaudio_parser=no
+mpegps_demuxer=no
+mpegts_demuxer=no
+mpegts_muxer=no
+mpegtsraw_demuxer=no
+mpegvideo_decoder=no
+mpegvideo_demuxer=no
+mpegvideo_parser=no
+mpjpeg_muxer=no
+msmpeg4v1_decoder=no
+msmpeg4v1_encoder=no
+msmpeg4v1_encoder_select=aandct
+msmpeg4v2_decoder=no
+msmpeg4v2_encoder=no
+msmpeg4v2_encoder_select=aandct
+msmpeg4v3_decoder=no
+msmpeg4v3_encoder=no
+msmpeg4v3_encoder_select=aandct
+msnwc_tcp_demuxer=no
+msrle_decoder=no
+msvideo1_decoder=no
+mszh_decoder=no
+mtv_demuxer=no
+mvi_demuxer=no
+mxf_d10_muxer=no
+mxf_demuxer=no
+mxf_muxer=no
+name=tcp
+nc_demuxer=no
+nellymoser_decoder=no
+nellymoser_decoder_select='fft mdct'
+nellymoser_encoder=no
+nellymoser_encoder_select='fft mdct'
+neon=yes
+neon_deps=arm
+network=yes
+nm_default=nm
+noise_bsf=no
+nsv_demuxer=no
+null_muxer=no
+nut_demuxer=no
+nut_muxer=no
+nuv_decoder=no
+nuv_demuxer=no
+objformat=elf
+ogg_demuxer=no
+ogg_muxer=no
+oldscaler=yes
+oldscaler_deps='!swscale'
+oma_demuxer=no
+op==
+opt=--disable-debug
+optimizations=yes
+option=debug
+optname=arch
+optval=--disable-debug
+oss_demuxer=no
+oss_demuxer_deps_any='soundcard_h sys_soundcard_h'
+oss_muxer=no
+oss_muxer_deps_any='soundcard_h sys_soundcard_h'
+pam_encoder=no
+pbm_encoder=no
+pcm_alaw_decoder=no
+pcm_alaw_demuxer=no
+pcm_alaw_encoder=no
+pcm_alaw_muxer=no
+pcm_dvd_decoder=no
+pcm_f32be_decoder=no
+pcm_f32be_demuxer=no
+pcm_f32be_encoder=no
+pcm_f32be_muxer=no
+pcm_f32le_decoder=no
+pcm_f32le_demuxer=no
+pcm_f32le_encoder=no
+pcm_f32le_muxer=no
+pcm_f64be_decoder=no
+pcm_f64be_demuxer=no
+pcm_f64be_encoder=no
+pcm_f64be_muxer=no
+pcm_f64le_decoder=no
+pcm_f64le_demuxer=no
+pcm_f64le_encoder=no
+pcm_f64le_muxer=no
+pcm_mulaw_decoder=no
+pcm_mulaw_demuxer=no
+pcm_mulaw_encoder=no
+pcm_mulaw_muxer=no
+pcm_s16be_decoder=no
+pcm_s16be_demuxer=no
+pcm_s16be_encoder=no
+pcm_s16be_muxer=no
+pcm_s16le_decoder=no
+pcm_s16le_demuxer=no
+pcm_s16le_encoder=no
+pcm_s16le_muxer=no
+pcm_s16le_planar_decoder=no
+pcm_s24be_decoder=no
+pcm_s24be_demuxer=no
+pcm_s24be_encoder=no
+pcm_s24be_muxer=no
+pcm_s24daud_decoder=no
+pcm_s24daud_encoder=no
+pcm_s24le_decoder=no
+pcm_s24le_demuxer=no
+pcm_s24le_encoder=no
+pcm_s24le_muxer=no
+pcm_s32be_decoder=no
+pcm_s32be_demuxer=no
+pcm_s32be_encoder=no
+pcm_s32be_muxer=no
+pcm_s32le_decoder=no
+pcm_s32le_demuxer=no
+pcm_s32le_encoder=no
+pcm_s32le_muxer=no
+pcm_s8_decoder=no
+pcm_s8_demuxer=no
+pcm_s8_encoder=no
+pcm_s8_muxer=no
+pcm_u16be_decoder=no
+pcm_u16be_demuxer=no
+pcm_u16be_encoder=no
+pcm_u16be_muxer=no
+pcm_u16le_decoder=no
+pcm_u16le_demuxer=no
+pcm_u16le_encoder=no
+pcm_u16le_muxer=no
+pcm_u24be_decoder=no
+pcm_u24be_demuxer=no
+pcm_u24be_encoder=no
+pcm_u24be_muxer=no
+pcm_u24le_decoder=no
+pcm_u24le_demuxer=no
+pcm_u24le_encoder=no
+pcm_u24le_muxer=no
+pcm_u32be_decoder=no
+pcm_u32be_demuxer=no
+pcm_u32be_encoder=no
+pcm_u32be_muxer=no
+pcm_u32le_decoder=no
+pcm_u32le_demuxer=no
+pcm_u32le_encoder=no
+pcm_u32le_muxer=no
+pcm_u8_decoder=no
+pcm_u8_demuxer=no
+pcm_u8_encoder=no
+pcm_u8_muxer=no
+pcm_zork_decoder=no
+pcm_zork_encoder=no
+pcx_decoder=no
+pgm_encoder=no
+pgmyuv_encoder=no
+pipe_protocol=no
+png_decoder=yes
+png_decoder_select=zlib
+png_encoder=no
+png_encoder_select=zlib
+pnm_parser=no
+ppc4xx=yes
+ppc4xx_deps=ppc
+ppm_encoder=no
+prefix_default=/usr/local
+protocols=yes
+psp_muxer=no
+ptx_decoder=no
+pva_demuxer=no
+qcelp_decoder=no
+qdm2_decoder=no
+qdm2_decoder_select='fft mdct rdft'
+qdraw_decoder=no
+qpeg_decoder=no
+qtrle_decoder=no
+qtrle_encoder=no
+r3d_demuxer=no
+ra_144_decoder=no
+ra_288_decoder=no
+ranlib=ranlib
+rawvideo_decoder=no
+rawvideo_demuxer=no
+rawvideo_encoder=no
+rawvideo_muxer=no
+redir_demuxer=no
+redir_demuxer_deps=network
+remove_extradata_bsf=no
+rl2_decoder=no
+rl2_demuxer=no
+rm_demuxer=no
+rm_muxer=no
+roq_decoder=no
+roq_demuxer=no
+roq_dpcm_decoder=no
+roq_dpcm_encoder=no
+roq_encoder=no
+roq_muxer=no
+rpl_demuxer=no
+rpza_decoder=no
+rtp_muxer=no
+rtp_muxer_deps='network rtp_protocol'
+rtp_protocol=no
+rtp_protocol_deps=udp_protocol
+rtsp_demuxer=no
+rtsp_demuxer_deps=sdp_demuxer
+rv10_decoder=no
+rv10_encoder=no
+rv10_encoder_select=aandct
+rv20_decoder=no
+rv20_encoder=no
+rv20_encoder_select=aandct
+rv30_decoder=no
+rv30_decoder_select=golomb
+rv40_decoder=no
+rv40_decoder_select=golomb
+sdp_demuxer=no
+sdp_demuxer_deps='rtp_protocol mpegts_demuxer'
+segafilm_demuxer=no
+sgi_decoder=no
+sgi_encoder=no
+shlibdir_default='${prefix}/lib'
+shorten_decoder=no
+shorten_decoder_select=golomb
+shorten_demuxer=no
+siff_demuxer=no
+smackaud_decoder=no
+smacker_decoder=no
+smacker_demuxer=no
+smc_decoder=no
+snow_decoder=no
+snow_encoder=no
+sol_demuxer=no
+sol_dpcm_decoder=no
+sonic_decoder=no
+sonic_decoder_select=golomb
+sonic_encoder=no
+sonic_encoder_select=golomb
+sonic_ls_encoder=no
+sonic_ls_encoder_select=golomb
+source_path=/home/vin777/work/vincent/development/vineo/stuff/ffmpeg
+source_path_used=yes
+sp5x_decoder=no
+sse=yes
+sse_deps=mmx
+ssse3=yes
+ssse3_deps=sse
+static=yes
+str_demuxer=no
+strip=strip
+stripping=yes
+sunrast_decoder=no
+svq1_decoder=no
+svq1_encoder=no
+svq3_decoder=no
+svq3_decoder_select=golomb
+svq3_decoder_suggest=zlib
+swf_demuxer=no
+swf_muxer=no
+targa_decoder=no
+targa_encoder=no
+target_os=linux
+target_path=.
+tcp_protocol=yes
+tcp_protocol_deps=network
+text2movsub_bsf=no
+tg2_muxer=no
+tgp_muxer=no
+theora_decoder=no
+thing=protocol
+thp_decoder=no
+thp_demuxer=no
+tiertexseq_demuxer=no
+tiertexseqvideo_decoder=no
+tiff_decoder=no
+tiff_decoder_suggest=zlib
+tiff_encoder=no
+tiff_encoder_suggest=zlib
+truemotion1_decoder=no
+truemotion2_decoder=no
+truespeech_decoder=no
+tscc_decoder=no
+tscc_decoder_select=zlib
+tta_decoder=no
+tta_demuxer=no
+txd_decoder=no
+txd_demuxer=no
+udp_protocol=no
+udp_protocol_deps=network
+ulti_decoder=no
+v4l2_demuxer=no
+v4l2_demuxer_deps_any='linux_videodev2_h sys_videoio_h'
+v4l_demuxer=no
+v4l_demuxer_deps=linux_videodev_h
+value=no
+var=debug
+vb_decoder=no
+vc1_decoder=no
+vc1_demuxer=no
+vc1_parser=no
+vc1_vdpau_decoder=no
+vc1_vdpau_decoder_deps=vdpau
+vc1t_demuxer=no
+vc1t_muxer=no
+vcr1_decoder=no
+vdpau_deps='vdpau_vdpau_h vdpau_vdpau_x11_h'
+vfwcap_demuxer=no
+vfwcap_demuxer_deps=capCreateCaptureWindow
+vfwcap_demuxer_extralibs=-lvfw32
+vhook=no
+vhook_extralibs='$ldl'
+vis=yes
+vis_deps=sparc
+vmd_demuxer=no
+vmdaudio_decoder=no
+vmdvideo_decoder=no
+vmnc_decoder=no
+voc_demuxer=no
+voc_muxer=no
+vorbis_decoder=no
+vorbis_decoder_select='fft mdct'
+vorbis_encoder=no
+vorbis_encoder_select='fft mdct'
+vp3_decoder=no
+vp3_parser=no
+vp5_decoder=no
+vp6_decoder=no
+vp6a_decoder=no
+vp6f_decoder=no
+vqa_decoder=no
+w32threads=yes
+wav_demuxer=no
+wav_muxer=no
+wavpack_decoder=no
+wc3_demuxer=no
+wmav1_decoder=no
+wmav1_decoder_select='fft mdct'
+wmav1_encoder=no
+wmav1_encoder_select='fft mdct'
+wmav2_decoder=no
+wmav2_decoder_select='fft mdct'
+wmav2_encoder=no
+wmav2_encoder_select='fft mdct'
+wmv1_decoder=no
+wmv1_encoder=no
+wmv1_encoder_select=aandct
+wmv2_decoder=no
+wmv2_encoder=no
+wmv2_encoder_select=aandct
+wmv3_decoder=no
+wmv3_vdpau_decoder=no
+wmv3_vdpau_decoder_deps=vdpau
+wnv1_decoder=no
+ws_snd1_decoder=no
+wsaud_demuxer=no
+wsvqa_demuxer=no
+wv_demuxer=no
+x11_grab_device_demuxer=no
+x11_grab_device_demuxer_deps='x11grab XShmCreateImage'
+x11_grab_device_demuxer_extralibs='-lX11 -lXext'
+xa_demuxer=no
+xan_dpcm_decoder=no
+xan_wc3_decoder=no
+xl_decoder=no
+xsub_decoder=no
+yasmexe=yasm
+yuv4mpegpipe_demuxer=no
+yuv4mpegpipe_muxer=no
+zlib_decoder=no
+zlib_decoder_select=zlib
+zlib_encoder=no
+zlib_encoder_select=zlib
+zmbv_decoder=no
+zmbv_decoder_select=zlib
+zmbv_encoder=no
+zmbv_encoder_select=zlib
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void){ return 0; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_cflags -std=c99
+check_cc -std=c99
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cflags -fomit-frame-pointer
+check_cc -fomit-frame-pointer
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int ff_extern;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_asm inline_asm ""
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile(""); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <signal.h>
+    2	static void sighandler(int sig){
+    3	    raise(SIGTERM);
+    4	}
+    5	int main(void){
+    6	    signal(SIGILL, sighandler);
+    7	    signal(SIGFPE, sighandler);
+    8	    signal(SIGSEGV, sighandler);
+    9	#ifdef SIGBUS
+   10	    signal(SIGBUS, sighandler);
+   11	#endif
+   12	    {     volatile int i=0;
+   13	    __asm__ volatile (
+   14	        "xorl %%ebp, %%ebp"
+   15	    ::: "%ebp");
+   16	    return i; }
+   17	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_asm ebx_available "":::"%ebx"
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile("":::"%ebx"); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void) {
+    2	    int x=0;
+    3	    __asm__ volatile(
+    4	        ""
+    5	        :"+&rm"(x), "+&rm"(x), "+&rm"(x), "+&rm"(x), "+&rm"(x), "+&rm"(x)
+    6	    );
+    7	    return 0;
+    8	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_asm ssse3 "pabsw %xmm0, %xmm0"
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile("pabsw %xmm0, %xmm0"); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_asm mmx2 "movss %xmm0, %xmm0"
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile("movss %xmm0, %xmm0"); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_asm bswap "bswap %%eax" ::: "%eax"
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile("bswap %%eax" ::: "%eax"); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_yasm pabsw xmm0, xmm0
+BEGIN /tmp/ffmpeg-conf-27879-11586-18701.S
+    1	pabsw xmm0, xmm0
+END /tmp/ffmpeg-conf-27879-11586-18701.S
+yasm -f elf -DARCH_X86_32 -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-27879-11586-18701.S
+../configure: line 513: yasm: command not found
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	unsigned int endian = 'B' << 24 | 'I' << 16 | 'G' << 8 | 'E';
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_func dlopen
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int dlopen();
+    2	int main(void){ dlopen(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+/tmp/ffmpeg-conf-9160-11586-8307.o: In function `main':
+ffmpeg-conf-25075-11586-17169.c:(.text+0xa): undefined reference to `dlopen'
+collect2: ld returned 1 exit status
+check_func dlopen -ldl
+check_ld -ldl
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int dlopen();
+    2	int main(void){ dlopen(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -ldl
+check_func nanosleep
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int nanosleep();
+    2	int main(void){ nanosleep(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func fork
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int fork();
+    2	int main(void){ fork(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func gethrtime
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int gethrtime();
+    2	int main(void){ gethrtime(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+/tmp/ffmpeg-conf-9160-11586-8307.o: In function `main':
+ffmpeg-conf-25075-11586-17169.c:(.text+0xa): undefined reference to `gethrtime'
+collect2: ld returned 1 exit status
+check_func getrusage
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int getrusage();
+    2	int main(void){ getrusage(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func inet_aton
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int inet_aton();
+    2	int main(void){ inet_aton(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func memalign
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int memalign();
+    2	int main(void){ memalign(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func mkstemp
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int mkstemp();
+    2	int main(void){ mkstemp(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func posix_memalign
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int posix_memalign();
+    2	int main(void){ posix_memalign(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o
+check_func_headers io.h setmode
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <io.h>
+    3	int main(int argc, char **argv){
+    4	    (void) setmode;
+    5	    return 0;
+    6	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:2:16: error: io.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c: In function 'main':
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: 'setmode' undeclared (first use in this function)
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: (Each undeclared identifier is reported only once
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: for each function it appears in.)
+check_func_headers windows.h GetProcessTimes
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <windows.h>
+    3	int main(int argc, char **argv){
+    4	    (void) GetProcessTimes;
+    5	    return 0;
+    6	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:2:21: error: windows.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c: In function 'main':
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: 'GetProcessTimes' undeclared (first use in this function)
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: (Each undeclared identifier is reported only once
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: for each function it appears in.)
+check_header conio.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <conio.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:19: error: conio.h: No such file or directory
+check_header dlfcn.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <dlfcn.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header malloc.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <malloc.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header poll.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <poll.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header sys/mman.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/mman.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header sys/resource.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/resource.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header sys/select.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/select.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header termios.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <termios.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header vdpau/vdpau.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <vdpau/vdpau.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:25: error: vdpau/vdpau.h: No such file or directory
+check_header vdpau/vdpau_x11.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <vdpau/vdpau_x11.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:29: error: vdpau/vdpau_x11.h: No such file or directory
+check_header X11/extensions/XvMClib.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <X11/extensions/XvMClib.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:36: error: X11/extensions/XvMClib.h: No such file or directory
+check_lib zlib.h zlibVersion -lz
+check_header zlib.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <zlib.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_func zlibVersion
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int zlibVersion();
+    2	int main(void){ zlibVersion(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz
+check_lib2 bzlib.h BZ2_bzlibVersion -lbz2
+check_func_headers bzlib.h BZ2_bzlibVersion
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <bzlib.h>
+    3	int main(int argc, char **argv){
+    4	    (void) BZ2_bzlibVersion;
+    5	    return 0;
+    6	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:2:19: error: bzlib.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c: In function 'main':
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: 'BZ2_bzlibVersion' undeclared (first use in this function)
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: (Each undeclared identifier is reported only once
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: for each function it appears in.)
+check_lib math.h sin -lm
+check_header math.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_func sin
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int sin();
+    2	int main(void){ sin(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1: warning: conflicting types for built-in function 'sin'
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (llrint(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (lrint(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (lrintf(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (round(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (roundf(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <math.h>
+    2	int main(void) { return (truncf(3.999f) > 0)?0:1; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(char * restrict p);
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+imlib2-config --version
+../configure: line 513: imlib2-config: command not found
+freetype-config --version
+../configure: line 513: freetype-config: command not found
+check_type sys/types.h sys/socket.h socklen_t
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <sys/types.h>
+    3	#include <sys/socket.h>
+    4	socklen_t v;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header arpa/inet.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <arpa/inet.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_func closesocket
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	extern int closesocket();
+    2	int main(void){ closesocket(); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+/tmp/ffmpeg-conf-9160-11586-8307.o: In function `main':
+ffmpeg-conf-25075-11586-17169.c:(.text+0xa): undefined reference to `closesocket'
+collect2: ld returned 1 exit status
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/types.h>
+    2	#include <sys/socket.h>
+    3	#include <netinet/in.h>
+    4	#include <netdb.h>
+    5	int main(void) {
+    6	    struct sockaddr_storage saddr;
+    7	    struct ipv6_mreq mreq6;
+    8	    getaddrinfo(0,0,0,0);
+    9	    getnameinfo(0,0,0,0,0,0,0);
+   10	    IN6_IS_ADDR_MULTICAST((const struct in6_addr *)0);
+   11	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_header linux/videodev.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <linux/videodev.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header linux/videodev2.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <linux/videodev2.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header sys/videoio.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/videoio.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:25: error: sys/videoio.h: No such file or directory
+check_func_headers windows.h vfw.h capCreateCaptureWindow -lvfw32
+check_ld -lvfw32
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <windows.h>
+    3	#include <vfw.h>
+    4	int main(int argc, char **argv){
+    5	    (void) capCreateCaptureWindow;
+    6	    return 0;
+    7	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:2:21: error: windows.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c:3:17: error: vfw.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c: In function 'main':
+/tmp/ffmpeg-conf-25075-11586-17169.c:5: error: 'capCreateCaptureWindow' undeclared (first use in this function)
+/tmp/ffmpeg-conf-25075-11586-17169.c:5: error: (Each undeclared identifier is reported only once
+/tmp/ffmpeg-conf-25075-11586-17169.c:5: error: for each function it appears in.)
+check_header dev/bktr/ioctl_meteor.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <dev/bktr/ioctl_meteor.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:35: error: dev/bktr/ioctl_meteor.h: No such file or directory
+check_header machine/ioctl_meteor.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <machine/ioctl_meteor.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:34: error: machine/ioctl_meteor.h: No such file or directory
+check_header dev/video/meteor/ioctl_meteor.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <dev/video/meteor/ioctl_meteor.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:43: error: dev/video/meteor/ioctl_meteor.h: No such file or directory
+check_header dev/ic/bt8xx.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <dev/ic/bt8xx.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:26: error: dev/ic/bt8xx.h: No such file or directory
+check_header sys/soundcard.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <sys/soundcard.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_header soundcard.h
+check_cpp
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	#include <soundcard.h>
+    2	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -E -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:1:23: error: soundcard.h: No such file or directory
+check_lib2 alsa/asoundlib.h snd_pcm_htimestamp -lasound
+check_func_headers alsa/asoundlib.h snd_pcm_htimestamp
+check_ld
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	
+    2	#include <alsa/asoundlib.h>
+    3	int main(int argc, char **argv){
+    4	    (void) snd_pcm_htimestamp;
+    5	    return 0;
+    6	}
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c:2:28: error: alsa/asoundlib.h: No such file or directory
+/tmp/ffmpeg-conf-25075-11586-17169.c: In function 'main':
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: 'snd_pcm_htimestamp' undeclared (first use in this function)
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: (Each undeclared identifier is reported only once
+/tmp/ffmpeg-conf-25075-11586-17169.c:4: error: for each function it appears in.)
+check_cflags -Wdeclaration-after-statement
+check_cc -Wdeclaration-after-statement
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cflags -Wall
+check_cc -Wall
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cflags -Wno-switch
+check_cc -Wno-switch
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cflags -Wdisabled-optimization
+check_cc -Wdisabled-optimization
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wpointer-arith
+check_cc -Wpointer-arith
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wredundant-decls
+check_cc -Wredundant-decls
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wno-pointer-sign
+check_cc -Wno-pointer-sign
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wcast-qual
+check_cc -Wcast-qual
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wwrite-strings
+check_cc -Wwrite-strings
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wtype-limits
+check_cc -Wtype-limits
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_cflags -Wundef
+check_cc -Wundef
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+check_ldflags -Wl,--warn-common
+check_ld -Wl,--warn-common
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void){ return 0; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+gcc -Wl,--warn-common -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ldflags -Wl,--as-needed
+check_ld -Wl,--as-needed
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void){ return 0; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+gcc -Wl,--warn-common -Wl,--as-needed -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ldflags -Wl,-rpath-link,\$(BUILD_ROOT)/libpostproc -Wl,-rpath-link,\$(BUILD_ROOT)/libswscale -Wl,-rpath-link,\$(BUILD_ROOT)/libavfilter -Wl,-rpath-link,\$(BUILD_ROOT)/libavdevice -Wl,-rpath-link,\$(BUILD_ROOT)/libavformat -Wl,-rpath-link,\$(BUILD_ROOT)/libavcodec -Wl,-rpath-link,\$(BUILD_ROOT)/libavutil
+check_ld -Wl,-rpath-link,\$(BUILD_ROOT)/libpostproc -Wl,-rpath-link,\$(BUILD_ROOT)/libswscale -Wl,-rpath-link,\$(BUILD_ROOT)/libavfilter -Wl,-rpath-link,\$(BUILD_ROOT)/libavdevice -Wl,-rpath-link,\$(BUILD_ROOT)/libavformat -Wl,-rpath-link,\$(BUILD_ROOT)/libavcodec -Wl,-rpath-link,\$(BUILD_ROOT)/libavutil
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void){ return 0; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+gcc -Wl,--warn-common -Wl,--as-needed -Wl,-rpath-link,\$(BUILD_ROOT)/libpostproc -Wl,-rpath-link,\$(BUILD_ROOT)/libswscale -Wl,-rpath-link,\$(BUILD_ROOT)/libavfilter -Wl,-rpath-link,\$(BUILD_ROOT)/libavdevice -Wl,-rpath-link,\$(BUILD_ROOT)/libavformat -Wl,-rpath-link,\$(BUILD_ROOT)/libavcodec -Wl,-rpath-link,\$(BUILD_ROOT)/libavutil -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_ldflags -Wl,-Bsymbolic
+check_ld -Wl,-Bsymbolic
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int main(void){ return 0; }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+cc1: warning: -funit-at-a-time is required for inlining of functions that are only called once
+gcc -Wl,--warn-common -Wl,--as-needed -Wl,-rpath-link,$(BUILD_ROOT)/libpostproc -Wl,-rpath-link,$(BUILD_ROOT)/libswscale -Wl,-rpath-link,$(BUILD_ROOT)/libavfilter -Wl,-rpath-link,$(BUILD_ROOT)/libavdevice -Wl,-rpath-link,$(BUILD_ROOT)/libavformat -Wl,-rpath-link,$(BUILD_ROOT)/libavcodec -Wl,-rpath-link,$(BUILD_ROOT)/libavutil -Wl,-Bsymbolic -o /tmp/ffmpeg-conf-21259-11586-24656 /tmp/ffmpeg-conf-9160-11586-8307.o -lz -lm
+check_cflags -fno-math-errno
+check_cc -fno-math-errno
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -O3 -fno-math-errno -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_cflags -fno-signed-zeros
+check_cc -fno-signed-zeros
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	int x;
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -O3 -fno-math-errno -fno-signed-zeros -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+check_asm asmalign_pot ".align 3"
+check_cc
+BEGIN /tmp/ffmpeg-conf-25075-11586-17169.c
+    1	void foo(void){ __asm__ volatile(".align 3"); }
+END /tmp/ffmpeg-conf-25075-11586-17169.c
+gcc -D_ISOC99_SOURCE -D_POSIX_C_SOURCE=200112 -std=c99 -fomit-frame-pointer -Wdeclaration-after-statement -Wall -Wno-switch -Wdisabled-optimization -Wpointer-arith -Wredundant-decls -Wno-pointer-sign -Wcast-qual -Wwrite-strings -Wtype-limits -Wundef -O3 -fno-math-errno -fno-signed-zeros -c -o /tmp/ffmpeg-conf-9160-11586-8307.o /tmp/ffmpeg-conf-25075-11586-17169.c
+/tmp/ffmpeg-conf-25075-11586-17169.c: Assembler messages:
+/tmp/ffmpeg-conf-25075-11586-17169.c:1: Error: alignment not a power of 2

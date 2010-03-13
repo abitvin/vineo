@@ -1,0 +1,4 @@
+1. Install Microsoft Visual Studio 9.0 VC++
+2. Alleen de C:\Program Files\Microsoft Visual Studio 9.0\VC\bin directory is nodig.
+3. Open 'C:\msys\1.0\msys.bat'
+4. Voegtoe 'SET PATH=C:\Program Files\Microsoft Visual Studio 9.0\VC\bin;%PATH%'
