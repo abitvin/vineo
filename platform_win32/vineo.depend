@@ -863,7 +863,7 @@
 1235294526 z:\work\vincent\development\vineo\ffmpeg\inc\\libswscale\swscale.h
 	"libavutil/avutil.h"
 
-1268490765 source:z:\work\vincent\development\vineo\platform_win32\main.c
+1268492734 source:z:\work\vincent\development\vineo\platform_win32\main.c
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>
@@ -887,4 +887,80 @@
 	<OpenAL/al.h>
 	<AL/al.h>
 	<AL/alc.h>
+
+1235312870 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\mem.h
+	"common.h"
+
+1235232210 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1238529980 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1238529980 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\pixfmt.h
+
+1267264906 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1265739008 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1239613256 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libswscale\swscale.h
+	"libavutil/avutil.h"
 

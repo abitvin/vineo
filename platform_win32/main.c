@@ -161,8 +161,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    //char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/avatar-tlrf_h720p_fulco.mov";
-    char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
+    //char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/aliceinwonderland-tsr1_h720p.mov";
+    //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
     //char media[] = "http://72.26.204.18:6256#.aac";
     //char media[] = "./stuff/image.png";
     //char media[] = "./stuff/video.gif";
@@ -182,7 +182,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     vineoPlay( v );
 
 
-    Vineo *v2 = NULL;
+    //Vineo *v2 = NULL;
     //Vineo *v2 = vineoNew();
     //vineoOpen( v2, media );
     //vineoPlay( v2 );
@@ -271,7 +271,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             r += (float)( time - ptime ) / 100000.0f;
 
             vineoDecode( v );
-            vineoDecode( v2 );
+            //vineoDecode( v2 );
 
             glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
             glPushMatrix();
@@ -388,7 +388,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     */
 
     vineoClose( v );
-    vineoClose( v2 );
+    //vineoClose( v2 );
 
     disableOpenAL();
     disableOpenGL( hwnd, hDC, hRC );

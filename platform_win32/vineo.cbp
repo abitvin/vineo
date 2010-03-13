@@ -16,7 +16,7 @@
 					<Add option="-DPLATFORM_WINDOWS" />
 					<Add directory="..\openal\inc\" />
 					<Add directory="..\alut\inc\" />
-					<Add directory="..\ffmpeg\inc\" />
+					<Add directory="..\ffmpeg-0.5.1\inc\" />
 					<Add directory="..\vineo\inc" />
 				</Compiler>
 				<Linker>
@@ -33,7 +33,7 @@
 					<Add library="psapi" />
 					<Add directory="..\openal\lib\win32\" />
 					<Add directory="..\alut\lib\win32\" />
-					<Add directory="..\ffmpeg\lib\win32\" />
+					<Add directory="..\ffmpeg-0.5.1\lib\win32\" />
 				</Linker>
 			</Target>
 			<Target title="Release Windows">
