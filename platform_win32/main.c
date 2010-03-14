@@ -161,7 +161,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/aliceinwonderland-tsr1_h720p.mov";
+    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/valentinesday-tlr1_h720p_fulco.mp4";
     //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
     //char media[] = "http://72.26.204.18:6256#.aac";
     //char media[] = "./stuff/image.png";
@@ -180,6 +180,10 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     Vineo *v = vineoNew();
     vineoOpen( v, media );
     vineoPlay( v );
+
+    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
 
     //Vineo *v2 = NULL;

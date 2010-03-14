@@ -29,30 +29,9 @@
 // FIXME alle onderstaande defines moeten dynamisch zijn
 #define MAX_VIDEOQ_SIZE (10 * 256 * 1024)
 #define MAX_AUDIOQ_SIZE (10 * 16 * 1024)
-#define VID_BUFFER_SIZE 10      // aantal frames bufferen
+//#define VID_BUFFER_SIZE 10      // aantal frames bufferen
 #define BUFFER_SIZE 192000
 #define NUM_BUFFERS 6               // FIXME: andere naam
-
-
-
-
-typedef struct VineoVideoPicture {
-    int64_t pts;
-    char *data;
-    int data_size;
-    int data_size_max;
-    int width, height;
-    struct VineoVideoPicture *next;
-    struct VineoVideoPicture *prev;
-} VineoVideoPicture;
-
-
-typedef struct VineoVideoBuffer {
-    VineoVideoPicture *first;
-    VineoVideoPicture *last;
-    int max_size;
-    int size;
-} VineoVideoBuffer;
 
 
 typedef struct VineoPacketQueue {
@@ -78,7 +57,6 @@ typedef struct Vineo
 
     // Video
     GLuint tex_gl;                  // OpenGL texture index
-    VineoVideoBuffer vid_buffer;
 
     // Audio
     int aud_rate;
@@ -99,12 +77,12 @@ typedef struct Vineo
 
     // Video decoding
     struct SwsContext *sws;     // TODO desc
-    uint8_t *frame_buffer;      // TODO desc
+    unsigned char *frame_buffer;      // TODO desc
     AVFrame *frame;             // TODO desc
     AVFrame *frame_rgba;        // TODO desc
-    VineoVideoPicture *cur_vp;  // currently showing VideoPicture
 
     // Other
+    int64_t cur_pts;            // current pts time
     int64_t time;               // current player time
     int64_t time_offset;        // player time offset from av_gettime()
     int64_t start_time;         // start time offset in container file
@@ -119,7 +97,6 @@ void vineoClose( Vineo *v );
 void vineoDecode( Vineo *v );
 Vineo *vineoNew();
 void vineoOpen( Vineo *v, char *file );
-VineoVideoPicture *vineoPicture( Vineo *v );
 void vineoPlay( Vineo *v );
 void vineoVolume( Vineo *v, ALfloat vol );
 

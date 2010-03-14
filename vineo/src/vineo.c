@@ -3,7 +3,6 @@
 
 
 static void vineoFillPacketQueue( Vineo *v );
-static void vineoFreeData( Vineo *v );
 static int vineoNextDataAudio( Vineo *v, void *data, int length );
 static int vineoNextPacket( Vineo *v, int stream, AVPacket *retPkt );
 static void vineoNextPacketAudio( Vineo *v );
@@ -40,19 +39,6 @@ void vineoClose( Vineo *v )
 
         av_free_packet( &tmp->pkt );
         av_free( tmp );
-    }
-
-
-    // clear video frames
-    VineoVideoPicture *next;
-    VineoVideoPicture *cur = v->vid_buffer.first;
-
-    while( cur )
-    {
-        next = cur->next;
-        av_free( cur->data );
-        av_free( cur );
-        cur = next;
     }
 
 
@@ -119,23 +105,19 @@ void vineoDecode( Vineo *v )
 
 
     double pts = 0.0f;
-    int64_t pts64 = 0;
     AVPacket pkt;
-    int frameFinished = 0;
-    VineoVideoPicture *vp;
+    int frame_finished = 0;
 
 
-    // fill the video buffer
-    while( v->vid_buffer.size < v->vid_buffer.max_size )
+    // decode new video frame
+    while( v->time > v->cur_pts )
     {
         if( !vineoNextPacket( v, v->idx_video, &pkt ) ) {
             break;
         }
 
         //v->vid_codec_ctx->reordered_opaque = packet.pts;
-
-        avcodec_decode_video( v->vid_codec_ctx, v->frame, &frameFinished, pkt.data, pkt.size );
-
+        avcodec_decode_video( v->vid_codec_ctx, v->frame, &frame_finished, pkt.data, pkt.size );
         //printf( "pFrame->opaque: %i\n", pFrame->opaque );
 
         /* NOTE FIXME moeten we hier wat mee?
@@ -166,9 +148,9 @@ void vineoDecode( Vineo *v )
         }
 
         pts *= av_q2d( v->fmt_ctx->streams[v->idx_video]->time_base );
-        pts64 = pts * AV_TIME_BASE;
+        v->cur_pts = pts * AV_TIME_BASE;
 
-        if( frameFinished && ( pts64 >= v->time || v->vid_buffer.size == 0 ) )
+        if( frame_finished && v->cur_pts >= v->time )
         {
             sws_scale(
                 v->sws,
@@ -180,35 +162,11 @@ void vineoDecode( Vineo *v )
                 v->frame_rgba->linesize
             );
 
-            vp = av_malloc( sizeof(VineoVideoPicture) );
-
-            if( !vp )
-            {
-                printf( "Error @ av_malloc()\n" );
-                break;
-            }
-
-            vp->next = NULL;
-            vp->prev = NULL;
-            vp->pts = pts64;
-            vp->width = v->vid_codec_ctx->width;
-            vp->height = v->vid_codec_ctx->height;
-            vp->data_size = vp->width * vp->height * 4; // alleen voor RGBA
-            vp->data = av_malloc( vp->data_size );
-
-            if( !vp->data )
-            {
-                printf( "Error @ av_malloc()\n" );
-                break;
-            }
-
-            memcpy( vp->data, v->frame_rgba->data[0], vp->data_size );
-
-
-            // FIXME swap red <-> blue, waarom moeten we swappen bij PIX_FMT_RGBA32 -> GL_RGBA???
-            char *a = vp->data;
-            char *b = a + 2;
-            char *end = &vp->data[vp->data_size];
+            int w = v->vid_codec_ctx->width;
+            int h = v->vid_codec_ctx->height;
+            unsigned char *a = v->frame_rgba->data[0];
+            unsigned char *b = a + 2;
+            unsigned char *end = &v->frame_rgba->data[0][w*h*4];
 
             for( ; a < end; a += 4, b += 4 )
             {
@@ -217,45 +175,12 @@ void vineoDecode( Vineo *v )
                 *a ^= *b;
             }
 
-
-            if( !v->vid_buffer.last ) {
-                v->vid_buffer.first = vp;
-            }
-            else {
-                v->vid_buffer.last->next = vp;
-            }
-
-            v->vid_buffer.last = vp;
-            v->vid_buffer.size++;
+            glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+            glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
         }
 
         av_free_packet( &pkt );
     }
-
-
-    // update video picture
-    vp = vineoPicture( v );
-
-    if( vp != NULL && vp != v->cur_vp )
-    {
-        // NOTE is er een snellere method voor draw-too-texture, glTexSubImage2D
-        glBindTexture( GL_TEXTURE_2D, v->tex_gl );
-        glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, vp->width, vp->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, vp->data );
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-
-        v->cur_vp = vp;
-
-        // NOTE FIXME glDrawPixels werkt niet? http://www.glprogramming.com/red/chapter08.html#name6
-        /*
-        glShadeModel( GL_FLAT );
-        glRasterPos2i( 0, 0 );
-        glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-        glDrawPixels( vpp->width, vpp->height, GL_RGB, GL_UNSIGNED_BYTE, vpp->data );
-        glFlush();
-        */
-    }
-
 
 
     // fill audio buffer
@@ -374,10 +299,6 @@ void vineoDecode( Vineo *v )
             break;
         }
     }
-
-
-    // free packets A/V data that we don't need anymore
-    vineoFreeData( v );
 }
 
 
@@ -487,34 +408,6 @@ static void vineoFillPacketQueue( Vineo *v )
 }
 
 
-
-static void vineoFreeData( Vineo *v )
-{
-    VineoVideoPicture *next;
-    VineoVideoPicture *cur = v->vid_buffer.first;
-
-    while( cur )
-    {
-        if( !cur->next ) {
-            return;
-        }
-
-        if( v->time < cur->next->pts ) {
-            return;
-        }
-
-        next = cur->next;
-        av_free( cur->data );
-        av_free( cur );
-        v->vid_buffer.first = next;
-        v->vid_buffer.size--;
-
-        cur = next;
-    }
-}
-
-
-
 static int vineoNextDataAudio( Vineo *v, void *data, int length )
 {
     int dec = 0;
@@ -569,7 +462,7 @@ static int vineoNextDataAudio( Vineo *v, void *data, int length )
             // Decode some data, and check for errors
             size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
 
-            while( ( len = avcodec_decode_audio2( v->aud_codec_ctx, (int16_t*)v->dec_data, &size, (uint8_t*)v->data, insize ) ) == 0 )
+            while( ( len = avcodec_decode_audio2( v->aud_codec_ctx, (int16_t*)v->dec_data, &size, (unsigned char*)v->data, insize ) ) == 0 )
             {
                 if( size > 0 ) {
                     break;
@@ -744,7 +637,6 @@ Vineo *vineoNew()
 
     v->aud_pkt_queue.max_size = MAX_AUDIOQ_SIZE;
     v->vid_pkt_queue.max_size = MAX_VIDEOQ_SIZE;
-    v->vid_buffer.max_size = VID_BUFFER_SIZE;
 
     v->idx_audio = -1;
     v->idx_video = -1;
@@ -874,7 +766,7 @@ void vineoOpen( Vineo *v, char *file )
         }
 
         int b = avpicture_get_size( PIX_FMT_RGBA32, v->vid_codec_ctx->width, v->vid_codec_ctx->height );
-        v->frame_buffer = av_malloc( b * sizeof(uint8_t) );
+        v->frame_buffer = av_malloc( b * sizeof(unsigned char) );
 
         if( !v->frame_buffer )
         {
@@ -944,7 +836,7 @@ void vineoOpen( Vineo *v, char *file )
 }
 
 
-
+/*
 VineoVideoPicture *vineoPicture( Vineo *v )
 {
     VineoVideoPicture *vp = v->vid_buffer.first;
@@ -964,7 +856,7 @@ VineoVideoPicture *vineoPicture( Vineo *v )
 
     return NULL;
 }
-
+*/
 
 
 void vineoPlay( Vineo *v )
