@@ -161,7 +161,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    //char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/aliceinwonderland-tsr1_h720p.mov";
+    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/aliceinwonderland-tsr1_h720p.mov";
     //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
     //char media[] = "http://72.26.204.18:6256#.aac";
     //char media[] = "./stuff/image.png";
@@ -189,7 +189,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
     //int tex = v->texGL;
     int tex = 0;
-    int mediaLoaded = 0;
+    //int mediaLoaded = 0;
 
 
     int64_t count = 0;
@@ -229,7 +229,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                     v = vineoNew();
                     vineoOpen( v, media );
                     vineoPlay( v );
-                    tex = v->texGL;
+                    tex = v->tex_gl;
                     //tex = 0;
                 }
             }
@@ -240,7 +240,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 v = vineoNew();
                 vineoOpen( v, media );
                 vineoPlay( v );
-                tex = v->texGL;
+                tex = v->tex_gl;
                 //tex = 0;
             }
 
@@ -277,7 +277,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             glPushMatrix();
                 glTranslatef( 0.0f, 0.0f, -6.0f );
                 glRotatef( r, 0.0f, 1.0f, 0.0f );
-                glBindTexture( GL_TEXTURE_2D, v->texGL );
+                glBindTexture( GL_TEXTURE_2D, v->tex_gl );
                 texCube();
             glPopMatrix();
 

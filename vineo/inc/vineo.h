@@ -39,8 +39,8 @@
 typedef struct VineoVideoPicture {
     int64_t pts;
     char *data;
-    int dataSize;
-    int dataSizeMax;
+    int data_size;
+    int data_size_max;
     int width, height;
     struct VineoVideoPicture *next;
     struct VineoVideoPicture *prev;
@@ -50,7 +50,7 @@ typedef struct VineoVideoPicture {
 typedef struct VineoVideoBuffer {
     VineoVideoPicture *first;
     VineoVideoPicture *last;
-    int maxSize;
+    int max_size;
     int size;
 } VineoVideoBuffer;
 
@@ -59,59 +59,59 @@ typedef struct VineoPacketQueue {
     AVPacketList *first, *last;
     int packets;        // total number of packets in this queue
     int size;           // total size in bytes
-    int maxSize;        // maximum size in bytes
+    int max_size;        // maximum size in bytes
 } VineoPacketQueue;
 
 
 typedef struct Vineo
 {
     // FFmpeg
-    AVFormatContext *fmtCtx;    // file format context
-    AVCodecContext *audCodecCtx;  // audio codec context
-    AVCodecContext *vidCodecCtx;  // video codec context
-    AVCodec *audCodec;            // TODO desc
-    AVCodec *vidCodec;            // TODO desc
+    AVFormatContext *fmt_ctx;       // file format context
+    AVCodecContext *aud_codec_ctx;  // audio codec context
+    AVCodecContext *vid_codec_ctx;  // video codec context
+    AVCodec *aud_codec;             // TODO desc
+    AVCodec *vid_codec;             // TODO desc
 
     // Queued Packets
-    VineoPacketQueue audPktQueue;
-    VineoPacketQueue vidPktQueue;
+    VineoPacketQueue aud_pkt_queue;
+    VineoPacketQueue vid_pkt_queue;
 
     // Video
-    GLuint texGL;                 // OpenGL texture index
-    VineoVideoBuffer vidBuffer;
+    GLuint tex_gl;                  // OpenGL texture index
+    VineoVideoBuffer vid_buffer;
 
     // Audio
-    int audRate;
-    int audChannels;
-    int audBits;
-    int audFormat;
-    ALuint audSrcAL;                 // OpenAL audio source
-    ALuint audBufAL[NUM_BUFFERS];    // OpenAL audio buffers
+    int aud_rate;
+    int aud_channels;
+    int aud_bits;
+    int aud_format;
+    ALuint aud_src_al;                 // OpenAL audio source
+    ALuint aud_buf_al[NUM_BUFFERS];    // OpenAL audio buffers
 
     // Audio decoding
-    int bufferPlaying;          // current buffer playing
+    int buffer_playing;         // current buffer playing
     char *data;                 // encoded audio packet data
-    ALbyte *dataTmp;            // temp. raw encoded audio data
-    size_t dataSize;            // current written bytes in *data
-    size_t dataSizeMax;         // maximum bytes length of *data
-    char *decData;              // raw decoded data
-    size_t decDataSize;         // length decoded data
+    ALbyte *data_tmp;           // temp. raw encoded audio data
+    size_t data_size;           // current written bytes in *data
+    size_t data_size_max;       // maximum bytes length of *data
+    char *dec_data;             // raw decoded data
+    size_t dec_data_size;       // length decoded data
 
     // Video decoding
     struct SwsContext *sws;     // TODO desc
-    uint8_t *frameBuffer;       // TODO desc
+    uint8_t *frame_buffer;      // TODO desc
     AVFrame *frame;             // TODO desc
-    AVFrame *frameRGB;          // TODO desc
-    VineoVideoPicture *curVP;   // currently showing VideoPicture
+    AVFrame *frame_rgba;        // TODO desc
+    VineoVideoPicture *cur_vp;  // currently showing VideoPicture
 
     // Other
     int64_t time;               // current player time
-    int64_t timeOffset;         // player time offset from av_gettime()
-    int64_t startTime;          // start time offset in container file
-    int idxAudio;               // index audio stream
-    int idxVideo;               // index video stream
-    int isPlaying;              // is opened so we can decode?
-    char *custom;               // custom variable for u to use
+    int64_t time_offset;        // player time offset from av_gettime()
+    int64_t start_time;         // start time offset in container file
+    int idx_audio;              // index audio stream
+    int idx_video;              // index video stream
+    int is_playing;             // is opened so we can decode?
+    char *custom;               // custom variable for you too use
 } Vineo;
 
 
