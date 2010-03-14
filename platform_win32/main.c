@@ -1,23 +1,9 @@
 // FIXME applicatie crashed als je sluit soms als je met Debug afspeelt
 
-
-//#define PLATFORM_LINUX
-//#define PLATFORM_WINDOWS
-#define WINDOW_CLASS "Vineo"
-#define WINDOW_TITLE "Vineo example"
-
-#ifdef PLATFORM_WINDOWS
-    #include <windows.h>
-    #include <GL/gl.h>
-    #include <GL/glu.h>
-    #include <psapi.h>
-#else
-    #include <X11/X.h>
-    #include <X11/keysym.h>
-    #include <GL/glx.h>
-    #include <GL/gl.h>
-    #include <pthread.h>
-#endif
+#include <windows.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <psapi.h>
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
@@ -40,16 +26,10 @@ ALfloat g_sndListPos[3];
 ALfloat g_sndListOri[6];
 
 
-#ifdef PLATFORM_WINDOWS
-    void disableOpenGL( HWND, HDC, HGLRC );
-    void enableOpenGL( HWND hwnd, HDC*, HGLRC* );
-    LRESULT CALLBACK WindowProc( HWND, UINT, WPARAM, LPARAM );
-    void PrintMemoryInfo( DWORD processID );
-#else
-    void disableOpenGL();
-    void enableOpenGL();
-    void GLAPIENTRY gluPerspective( GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar );
-#endif
+void disableOpenGL( HWND, HDC, HGLRC );
+void enableOpenGL( HWND hwnd, HDC*, HGLRC* );
+LRESULT CALLBACK WindowProc( HWND, UINT, WPARAM, LPARAM );
+void PrintMemoryInfo( DWORD processID );
 void aSyncOpen( Vineo *v );
 void disableOpenAL();
 void enableOpenAL();
@@ -57,7 +37,6 @@ void resizeScene( int width, int height );
 void texCube();
 
 
-#ifdef PLATFORM_WINDOWS
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
     WNDCLASSEX wcex;
@@ -399,312 +378,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     DestroyWindow( hwnd );
     return msg.wParam;
 }
-#else
-int main(int argc, char **argv)
-{
-    static int snglBuf[] = {GLX_RGBA, GLX_DEPTH_SIZE, 16, None};
-    static int dblBuf[]  = {GLX_RGBA, GLX_DEPTH_SIZE, 16, GLX_DOUBLEBUFFER, None};
-
-    Display *dpy;
-    Window win;
-    GLboolean  doubleBuffer = GL_TRUE;
-    XVisualInfo *vi;
-    Colormap cmap;
-    XSetWindowAttributes swa;
-    GLXContext cx;
-    XEvent event;
-    GLboolean needRedraw = GL_FALSE, recalcModelView = GL_TRUE;
-    int dummy;
-
-    if( ( dpy = XOpenDisplay( NULL ) ) == NULL )
-    {
-        printf( "could not open display\n" );
-        exit( 1 );
-    }
-
-    if( !glXQueryExtension( dpy, &dummy, &dummy ) )
-    {
-        printf( "X server has no OpenGL GLX extension\n" );
-        exit( 1 );
-    }
-
-
-    if( ( vi = glXChooseVisual( dpy, DefaultScreen( dpy ), dblBuf ) ) == NULL )
-    {
-        if( ( vi = glXChooseVisual( dpy, DefaultScreen( dpy ), snglBuf ) ) == NULL )
-        {
-            printf( "no RGB visual with depth buffer\n" );
-            exit( 1 );
-        }
-
-        doubleBuffer = GL_FALSE;
-    }
-
-    if( vi->class != TrueColor )
-    {
-        printf( "TrueColor visual required for this program\n" );
-        exit( 1 );
-    }
-
-    if( ( cx = glXCreateContext( dpy, vi, None, GL_TRUE ) ) == NULL )
-    {
-        printf( "could not create rendering context\n" );
-        exit( 1 );
-    }
-
-    cmap = XCreateColormap( dpy, RootWindow( dpy, vi->screen ), vi->visual, AllocNone );
-    swa.colormap = cmap;
-    swa.border_pixel = 0;
-    swa.event_mask = KeyPressMask | KeyReleaseMask | ExposureMask | ButtonPressMask | StructureNotifyMask;
-
-    win = XCreateWindow(
-        dpy, RootWindow(dpy, vi->screen), 0, 0,
-        screen_w, screen_h, 0, vi->depth, InputOutput, vi->visual,
-        CWBorderPixel | CWColormap | CWEventMask, &swa
-    );
-
-    XSetStandardProperties( dpy, win, "main", "main", None, argv, argc, NULL );
-    glXMakeCurrent( dpy, win, cx );
-    XMapWindow( dpy, win );
-
-
-    enableOpenAL();
-    enableOpenGL();
-    resizeScene( screen_w, screen_h );
-
-    glEnable( GL_TEXTURE_2D );
-    glClearColor( 0.1f, 0.1f, 0.1f, 0.0f );
-    glClearDepth( 1.0f );
-	glEnable( GL_DEPTH_TEST );
-	glDepthFunc( GL_LEQUAL );
-    glShadeModel( GL_SMOOTH );
-    glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
-    glEnable( GL_BLEND );
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-
-
-
-
-    //char media[] = "/home/vin777/tests/avatar.mov";
-    //char media[] = "../../stuff/image.png";
-    //char media[] = "./stuff/video.gif";
-    //char media[] = "./stuff/image.jpg";
-    //char media[] = "http://84.87.38.101/IMAGE.JPG";
-    //char media[] = "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png";
-    //char media[] = "http://ccms.e-billboard.eu/webcam/?id=19#.jpg";
-    //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025#.mp3";
-    char media[] = "http://scfire-ntc-aa03.stream.aol.com:80/stream/1007";
-    //char media[] = "./stuff/music.mp3";
-
-
-
-
-    float r = 0.0f;
-    int64_t time = av_gettime();
-    int64_t ptime = time;
-
-    //Vineo *v = NULL;
-    Vineo *v = vineoNew();
-    v->custom = media;
-    //vineoOpen( v, media );
-    //vineoPlay( v );
-    //int tex = v->texGL;
-    //int tex = 0;
-
-
-    pthread_t tVineo;
-    pthread_create( &tVineo, NULL, (void*)aSyncOpen, (void*)v );
-    //pthread_join( tVineo, NULL );
-
-
-    int64_t count = 0;
-    int quit = 0;
-    KeySym key;
-
-    while( !quit )
-    {
-        while( XPending( dpy ) > 0 )
-        {
-            XNextEvent( dpy, &event );
-
-            switch( event.type )
-            {
-                case Expose:
-                {
-                    if( event.xexpose.count != 0 ) {
-                        break;
-                    }
-
-                    //drawGLScene();
-                    break;
-                }
-
-                case ConfigureNotify:
-                {
-                    glViewport( 0, 0, event.xconfigure.width, event.xconfigure.height );
-                    break;
-                }
-
-                /*case ButtonPress:
-                {
-                    done = 1;
-                    break;
-                }*/
-
-                case KeyPress:
-                {
-                    keys[XLookupKeysym( &event.xkey, 0 )] = 1;
-                    break;
-                }
-
-                case KeyRelease:
-                {
-                    keys[XLookupKeysym( &event.xkey, 0 )] = 0;
-                    break;
-                }
-
-                case ClientMessage:
-                {
-                    if( *XGetAtomName( dpy, event.xclient.message_type) == *"WM_PROTOCOLS" )
-                    {
-                        printf( "Exiting sanely...\n" );
-                        quit = 1;
-                    }
-                    break;
-                }
-
-                default:
-                {
-                    break;
-                }
-            }
-        }
-
-
-
-    /*
-        if( keys[VK_ESCAPE] ) {
-            bQuit = 1;
-        }
-
-        if( keys['C'] )
-        {
-            vineoClose( v );
-            tex = 0;
-            v = NULL;
-        }
-
-        if( keys['O'] )
-        {
-            if( !v )
-            {
-                v = vineoNew();
-                vineoOpen( v, media );
-                vineoPlay( v );
-                tex = v->texGL;
-                //tex = 0;
-            }
-        }
-
-        if( keys['R'] )
-        {
-            vineoClose( v );
-            v = vineoNew();
-            vineoOpen( v, media );
-            vineoPlay( v );
-            tex = v->texGL;
-            //tex = 0;
-        }
-*/
-
-        ptime = time;
-        time = av_gettime();
-        count += ( time - ptime );
-
-        /*
-        if( count > AV_TIME_BASE * 5 )
-        {
-            count -= AV_TIME_BASE * 5;
-
-            vineoClose( v );
-            v = vineoNew();
-            vineoOpen( v, media );
-            vineoPlay( v );
-            tex = v->texGL;
-        }
-        */
-
-
-        if( keys['q'] ) {
-            quit = 1;
-        }
-
-        if( keys['r'] ) {
-            r *= 1.05f;
-        }
-
-
-
-
-        r += (float)( time - ptime ) / 100000.0f;
-
-        if( v->isPlaying ) {
-            vineoDecode( v );
-        }
-
-        glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        glPushMatrix();
-            glTranslatef( 0.0f, 0.0f, -6.0f );
-            glRotatef( r, 0.0f, 1.0f, 0.0f );
-            //glBindTexture( GL_TEXTURE_2D, tex );
-            glBindTexture( GL_TEXTURE_2D, v->texGL );
-            texCube();
-        glPopMatrix();
-
-        if( doubleBuffer ) {
-            glXSwapBuffers( dpy, win );
-        }
-        else {
-            glFlush();
-        }
-
-
-        /*
-        MEM USAGE, van internet geplukt
-
-        FILE *f;
-        char buf[30];
-        snprintf( buf, 30, "/proc/%u/statm", (unsigned)getpid() );
-
-        if( f = fopen( buf, "r" ) )
-        {
-            unsigned size;      // total program size
-            unsigned resident;  // resident set size
-            unsigned share;     // shared pages
-            unsigned text;      // text (code)
-            unsigned lib;       // library
-            unsigned data;      // data/stack
-            unsigned dt;        // dirty pages (unused in Linux 2.6)
-            fscanf( f, "%u %u %u %u %u %u", &size, &resident, &share, &text, &lib, &data );
-            fclose( f );
-
-            printf( "\rmem used: %uMb (%u bytes)", size / 1024, size );
-        }
-        */
-    }
-
-    vineoClose( v );
-    disableOpenGL();
-    disableOpenAL();
-
-    return 0;
-}
-#endif
 
 
 void aSyncOpen( Vineo *v )
 {
-    vineoOpen( v, v->custom );
+    //vineoOpen( v, v->custom );
+    vineoOpen( v, "/home/xxx/video.mp4" );
     vineoPlay( v );
 
     // FIXME netjes uit de thread komen ipv oneindige loop

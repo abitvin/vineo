@@ -46,7 +46,7 @@ void vineoClose( Vineo *v )
     glDeleteTextures( 1, &v->tex_gl );
     alSourceStop( v->aud_src_al );                // stop the source or else the buffer won't be freed
     alSourcei( v->aud_src_al, AL_BUFFER, 0 );     // free bufferdata that still exists
-    alDeleteBuffers( NUM_BUFFERS, v->aud_buf_al );
+    alDeleteBuffers( VINEO_AUDIO_NUM_BUFFERS, v->aud_buf_al );
     alDeleteSources( 1, &v->aud_src_al );
 
 
@@ -98,10 +98,8 @@ void vineoDecode( Vineo *v )
     // fill the packet queue
     vineoFillPacketQueue( v );
 
-
     // update player time
     v->time = av_gettime() - v->time_offset + v->start_time;
-
 
 
     double pts = 0.0f;
@@ -257,7 +255,7 @@ void vineoDecode( Vineo *v )
                 printf( "Dropping audio frame\n" );
             }
 
-            count = vineoNextDataAudio( v, v->data_tmp, BUFFER_SIZE );
+            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
 
             v->buffer_playing += count;
             clock = (float)v->buffer_playing / (float)( ( v->aud_bits / 8 ) * v->aud_channels * v->aud_rate ) * AV_TIME_BASE;
@@ -635,8 +633,8 @@ Vineo *vineoNew()
 
     memset( v, 0, sizeof( Vineo ) );
 
-    v->aud_pkt_queue.max_size = MAX_AUDIOQ_SIZE;
-    v->vid_pkt_queue.max_size = MAX_VIDEOQ_SIZE;
+    v->aud_pkt_queue.max_size = VINEO_MAX_AUDIOQ_SIZE;
+    v->vid_pkt_queue.max_size = VINEO_MAX_VIDEOQ_SIZE;
 
     v->idx_audio = -1;
     v->idx_video = -1;
@@ -646,7 +644,7 @@ Vineo *vineoNew()
 
     // generate OpenAL source and buffers and set parameters so mono sources won't distance attenuate
     alGenSources( 1, &v->aud_src_al );
-    alGenBuffers( NUM_BUFFERS, v->aud_buf_al );
+    alGenBuffers( VINEO_AUDIO_NUM_BUFFERS, v->aud_buf_al );
     alSourcei( v->aud_src_al, AL_SOURCE_RELATIVE, AL_TRUE );
     alSourcei( v->aud_src_al, AL_ROLLOFF_FACTOR, 0 );
 
@@ -825,7 +823,7 @@ void vineoOpen( Vineo *v, char *file )
             return;
         }
 
-        v->data_tmp = av_malloc( BUFFER_SIZE );
+        v->data_tmp = av_malloc( VINEO_AUDIO_BUFFER_SIZE );
 
         if( !v->data_tmp )
         {
@@ -835,28 +833,6 @@ void vineoOpen( Vineo *v, char *file )
     }
 }
 
-
-/*
-VineoVideoPicture *vineoPicture( Vineo *v )
-{
-    VineoVideoPicture *vp = v->vid_buffer.first;
-
-    while( vp )
-    {
-        if( !vp->next ) {
-            return vp;
-        }
-
-        if( v->time < vp->next->pts ) {
-            return vp;
-        }
-
-        vp = vp->next;
-    }
-
-    return NULL;
-}
-*/
 
 
 void vineoPlay( Vineo *v )
@@ -873,9 +849,9 @@ void vineoPlay( Vineo *v )
     {
         int i, count = 0;
 
-        for( i = 0; i < NUM_BUFFERS; i++ )
+        for( i = 0; i < VINEO_AUDIO_NUM_BUFFERS; i++ )
         {
-            count = vineoNextDataAudio( v, v->data_tmp, BUFFER_SIZE );
+            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
 
             if( count <= 0 ) {
                 break;

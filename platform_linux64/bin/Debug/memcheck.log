@@ -1,0 +1,1091 @@
+==23263== Memcheck, a memory error detector.
+==23263== Copyright (C) 2002-2007, and GNU GPL'd, by Julian Seward et al.
+==23263== Using LibVEX rev 1854, a library for dynamic binary translation.
+==23263== Copyright (C) 2004-2007, and GNU GPL'd, by OpenWorks LLP.
+==23263== Using valgrind-3.3.1-Debian, a dynamic binary instrumentation framework.
+==23263== Copyright (C) 2000-2007, and GNU GPL'd, by Julian Seward et al.
+==23263== For more details, rerun with: -v
+==23263== 
+==23263== My PID = 23263, parent PID = 23262.  Prog and args are:
+==23263==    ./vineo
+==23263== 
+==23263== Conditional jump or move depends on uninitialised value(s)
+==23263==    at 0x80F95FA: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F3C1F: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DF0AC: _snd_pcm_plug_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 35 from 3)
+==23263== malloc/free: in use at exit: 24,826,206 bytes in 4,861 blocks.
+==23263== malloc/free: 8,152 allocs, 3,291 frees, 33,765,627 bytes allocated.
+==23263== For counts of detected errors, rerun with: -v
+==23263== searching for pointers to 4,861 not-freed blocks.
+==23263== checked 37,509,424 bytes.
+==23263== 
+==23263== 
+==23263== 4 bytes in 1 blocks are still reachable in loss record 1 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80DD92F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DA951: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E0640: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 8 bytes in 1 blocks are still reachable in loss record 2 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x55E0E48: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D98D9: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 14 bytes in 2 blocks are still reachable in loss record 3 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50D4BEE: XInitExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5142A83: XkbUseExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DAD36: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 16 bytes in 1 blocks are still reachable in loss record 4 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80A80C6: snd_config_update_r (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A83F1: snd_config_update (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3A1A: snd_ctl_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 16 bytes in 1 blocks are still reachable in loss record 5 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50F22DE: _XCBInitDisplayLock (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA71C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 16 bytes in 1 blocks are still reachable in loss record 6 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x765BEDD: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765B2D1: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x7659E8A: xcb_connect_to_fd (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765C566: xcb_connect (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50F2629: _XConnectXCB (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA44C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 21 bytes in 1 blocks are still reachable in loss record 7 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DA908: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 24 bytes in 1 blocks are still reachable in loss record 8 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x55E15D2: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55E343A: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 24 bytes in 1 blocks are still reachable in loss record 9 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x681B8ED: XextCreateExtension (in /usr/lib/libXext.so.6.4.0)
+==23263==    by 0x4E4BC5C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4C7C8: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 32 bytes in 1 blocks are still reachable in loss record 10 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80A80EA: snd_config_update_r (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A83F1: snd_config_update (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3A1A: snd_ctl_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 32 bytes in 1 blocks are still reachable in loss record 11 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x70433DF: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 32 bytes in 1 blocks are still reachable in loss record 12 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E4C99F: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 32 bytes in 1 blocks are still reachable in loss record 13 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x765AF40: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x7659AD9: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765B7EC: xcb_wait_for_reply (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765BC32: xcb_get_extension_data (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A38E: xcb_prefetch_maximum_request_length (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A41B: xcb_get_maximum_request_length (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50DAC58: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 14 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D0FC6: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 15 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D0F8B: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 16 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D0F4F: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 17 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D0E0B: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 18 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80DD7BE: _snd_pcm_rate_linear_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DAEB6: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DB28C: snd_pcm_rate_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DFFC0: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E04E1: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 19 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55E3170: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 40 bytes in 2 blocks are still reachable in loss record 20 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x400A544: (within /lib/ld-2.7.so)
+==23263==    by 0x40060B7: (within /lib/ld-2.7.so)
+==23263==    by 0x4007F1C: (within /lib/ld-2.7.so)
+==23263==    by 0x4011720: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 40 bytes in 2 blocks are still reachable in loss record 21 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4004ED1: (within /lib/ld-2.7.so)
+==23263==    by 0x4008138: (within /lib/ld-2.7.so)
+==23263==    by 0x4011720: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 40 bytes in 1 blocks are still reachable in loss record 22 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50EABBD: _XPollfdCacheInit (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA72D: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 43 bytes in 1 blocks are still reachable in loss record 23 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50F253A: _XConnectXCB (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA44C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 48 bytes in 1 blocks are still reachable in loss record 24 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513E3B1: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 48 bytes in 1 blocks are still reachable in loss record 25 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x5134A62: _XcmsAddCmapRec (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50C6D59: XCreateColormap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4082B3: main (main.c:93)
+==23263== 
+==23263== 
+==23263== 64 bytes in 1 blocks are still reachable in loss record 26 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x55D9FA2: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 64 bytes in 2 blocks are still reachable in loss record 27 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x681B93B: XextAddDisplay (in /usr/lib/libXext.so.6.4.0)
+==23263==    by 0x4E4C7C8: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 72 bytes in 1 blocks are still reachable in loss record 28 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x400BB14: (within /lib/ld-2.7.so)
+==23263==    by 0x4011780: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 72 bytes in 1 blocks are still reachable in loss record 29 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x4E4C9BB: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 72 bytes in 1 blocks are still reachable in loss record 30 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50DA7D4: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 80 bytes in 1 blocks are still reachable in loss record 31 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E49E79: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A532: glXCreateContext (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x40825C: main (main.c:87)
+==23263== 
+==23263== 
+==23263== 112 bytes in 1 blocks are still reachable in loss record 32 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DAAF4: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 112 bytes in 1 blocks are still reachable in loss record 33 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50F24C6: _XConnectXCB (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA44C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 119 bytes in 1 blocks are still reachable in loss record 34 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DAFD9: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 120 bytes in 1 blocks are still reachable in loss record 35 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x400BC05: (within /lib/ld-2.7.so)
+==23263==    by 0x4011780: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 128 bytes in 1 blocks are still reachable in loss record 36 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E4CA48: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 128 bytes in 1 blocks are still reachable in loss record 37 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50D4B05: XAddExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x681BAE9: XextAddDisplay (in /usr/lib/libXext.so.6.4.0)
+==23263==    by 0x4E6DDE8: XF86DRIQueryExtension (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E6CC5C: driCreateDisplay (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4D208: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 128 bytes in 1 blocks are still reachable in loss record 38 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DAA07: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 144 bytes in 1 blocks are still reachable in loss record 39 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x55E0AA6: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55E0E8F: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D98D9: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 152 bytes in 1 blocks are still reachable in loss record 40 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x5142BBE: XkbUseExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DAD36: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 160 bytes in 1 blocks are still reachable in loss record 41 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50C749B: XCreateGC (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DAE1B: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 168 bytes in 1 blocks are still reachable in loss record 42 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x4E651E4: __glXInitVertexArrayState (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4DD53: glXMakeContextCurrent (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4083AB: main (main.c:105)
+==23263== 
+==23263== 
+==23263== 168 bytes in 1 blocks are still reachable in loss record 43 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DA97A: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 224 bytes in 3 blocks are still reachable in loss record 44 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x55E0BFE: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55E0E8F: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D98D9: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 256 bytes in 2 blocks are still reachable in loss record 45 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50D4BC6: XInitExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5142A83: XkbUseExtension (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DAD36: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 280 bytes in 2 blocks are still reachable in loss record 46 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50DAB64: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 290 bytes in 3 blocks are still reachable in loss record 47 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E6B8C9: __glXGetStringFromServer (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4CA92: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 292 (52 direct, 240 indirect) bytes in 1 blocks are definitely lost in loss record 48 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x659951F: (within /lib/libc-2.7.so)
+==23263==    by 0x6599CF6: __nss_database_lookup (in /lib/libc-2.7.so)
+==23263==    by 0x85593DF: ???
+==23263==    by 0x855A26A: ???
+==23263==    by 0x6556BE2: getgrnam_r (in /lib/libc-2.7.so)
+==23263==    by 0x655617F: getgrnam (in /lib/libc-2.7.so)
+==23263==    by 0x80F8249: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4529: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 64 bytes in 1 blocks are still reachable in loss record 49 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50F303F: _XReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D877: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 64 bytes in 1 blocks are still reachable in loss record 50 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80DA96A: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E0640: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 72 bytes in 1 blocks are still reachable in loss record 51 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513E393: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 72 bytes in 1 blocks are still reachable in loss record 52 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x81031FC: snd_timer_hw_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x81034A7: _snd_timer_hw_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x810295B: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F8BAE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F3EBE: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 80 bytes in 2 blocks are still reachable in loss record 53 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D0F02: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 80 bytes in 1 blocks are still reachable in loss record 54 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80CDA96: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CE057: snd_pcm_hw_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CE43C: _snd_pcm_hw_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F3CB2: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 80 bytes in 5 blocks are indirectly lost in loss record 55 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x6599109: __nss_lookup_function (in /lib/libc-2.7.so)
+==23263==    by 0x85593FA: ???
+==23263==    by 0x855A26A: ???
+==23263==    by 0x6556BE2: getgrnam_r (in /lib/libc-2.7.so)
+==23263==    by 0x655617F: getgrnam (in /lib/libc-2.7.so)
+==23263==    by 0x80F8249: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4529: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 88 bytes in 1 blocks are still reachable in loss record 56 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80DEC36: snd_pcm_plug_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DF12B: _snd_pcm_plug_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FAF76: _snd_pcm_asym_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E64E9: _snd_pcm_empty_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E3187: (within /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 96 bytes in 3 blocks are still reachable in loss record 57 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80D0775: snd_pcm_mmap (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBC07: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FA0B2: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4163: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 104 bytes in 3 blocks are still reachable in loss record 58 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513D34E: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 128 bytes in 1 blocks are still reachable in loss record 59 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x55D9400: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D0FA0: alGenBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A08A: vineoNew (vineo.c:647)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 144 bytes in 6 blocks are still reachable in loss record 60 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x55D56C1: alSourceQueueBuffers (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A72C: vineoPlay (vineo.c:861)
+==23263==    by 0x408519: main (main.c:147)
+==23263== 
+==23263== 
+==23263== 160 bytes in 5 blocks are indirectly lost in loss record 61 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x6588EB3: tsearch (in /lib/libc-2.7.so)
+==23263==    by 0x65990A9: __nss_lookup_function (in /lib/libc-2.7.so)
+==23263==    by 0x85593FA: ???
+==23263==    by 0x855A26A: ???
+==23263==    by 0x6556BE2: getgrnam_r (in /lib/libc-2.7.so)
+==23263==    by 0x655617F: getgrnam (in /lib/libc-2.7.so)
+==23263==    by 0x80F8249: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4529: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 248 bytes in 1 blocks are still reachable in loss record 62 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55D829D: alGenSources (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40A075: vineoNew (vineo.c:646)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 256 bytes in 1 blocks are still reachable in loss record 63 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x514D492: XkbAllocClientMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D7D3: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 288 bytes in 1 blocks are possibly lost in loss record 64 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x401089E: _dl_allocate_tls (in /lib/ld-2.7.so)
+==23263==    by 0x6E2C6BA: pthread_create@@GLIBC_2.2.5 (in /lib/libpthread-2.7.so)
+==23263==    by 0x55E15F8: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55E343A: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 320 bytes in 1 blocks are still reachable in loss record 65 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80F3AB9: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DF0AC: _snd_pcm_plug_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 320 bytes in 8 blocks are possibly lost in loss record 66 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80AC1F0: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3522: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 332 bytes in 1 blocks are still reachable in loss record 67 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x7659FFB: xcb_connect_to_fd (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765C566: xcb_connect (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50F2629: _XConnectXCB (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA44C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 400 bytes in 1 blocks are still reachable in loss record 68 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80DB024: snd_pcm_rate_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DFFC0: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E04E1: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 416 bytes in 1 blocks are still reachable in loss record 69 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E49E4B: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A532: glXCreateContext (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x40825C: main (main.c:87)
+==23263== 
+==23263== 
+==23263== 608 bytes in 1 blocks are still reachable in loss record 70 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x409F5D: vineoNextPacketAudio (vineo.c:598)
+==23263==    by 0x409B8F: vineoNextDataAudio (vineo.c:448)
+==23263==    by 0x40942B: vineoDecode (vineo.c:258)
+==23263==    by 0x4086D2: main (main.c:293)
+==23263== 
+==23263== 
+==23263== 640 bytes in 1 blocks are still reachable in loss record 71 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50E8D87: XGetVisualInfo (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4E4A819: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 672 bytes in 3 blocks are still reachable in loss record 72 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80D0757: snd_pcm_mmap (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBC07: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FA0B2: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4163: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 688 bytes in 43 blocks are still reachable in loss record 73 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x765AEBA: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x7659AD9: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A118: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A228: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A2FB: xcb_flush (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50F3526: _XSend (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4E4BB7D: __glXFlushRenderBuffer (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E5AF2F: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E5B01F: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4092E8: vineoDecode (vineo.c:177)
+==23263==    by 0x4086D2: main (main.c:293)
+==23263== 
+==23263== 
+==23263== 696 bytes in 2 blocks are still reachable in loss record 74 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x400EFED: (within /lib/ld-2.7.so)
+==23263==    by 0x4011A13: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 880 bytes in 249 blocks are still reachable in loss record 75 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x6535D71: strdup (in /lib/libc-2.7.so)
+==23263==    by 0x55E0C3B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55E0E8F: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D98D9: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 992 bytes in 1 blocks are still reachable in loss record 76 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E654EA: __glXInitVertexArrayState (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4DD53: glXMakeContextCurrent (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4083AB: main (main.c:105)
+==23263== 
+==23263== 
+==23263== 1,000 bytes in 1 blocks are still reachable in loss record 77 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x514D5B3: XkbAllocClientMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513CE65: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 1,080 bytes in 5 blocks are still reachable in loss record 78 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E46D4A: _gl_context_modes_create (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4CC9F: __glXInitialize (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4888C: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A6FE: glXChooseVisual (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4081DF: main (main.c:70)
+==23263== 
+==23263== 
+==23263== 1,168 bytes in 1 blocks are still reachable in loss record 79 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x55DA4FE: alcCreateContext (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBE0: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 1,308 bytes in 24 blocks are still reachable in loss record 80 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513D33C: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 1,548 bytes in 43 blocks are still reachable in loss record 81 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x765AE55: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x7659AD9: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A118: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A228: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A2FB: xcb_flush (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50F3526: _XSend (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4E4BB7D: __glXFlushRenderBuffer (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E5AF2F: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E5B01F: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4092E8: vineoDecode (vineo.c:177)
+==23263==    by 0x4086D2: main (main.c:293)
+==23263== 
+==23263== 
+==23263== 1,728 bytes in 4 blocks are still reachable in loss record 82 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80C665F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F3B27: snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80F4714: _snd_pcm_dmix_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6506: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C657F: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80FD4F2: _snd_pcm_softvol_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C65BE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DF0AC: _snd_pcm_plug_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C5E93: (within /usr/lib/libasound.so.2.0.0)
+==23263== 
+==23263== 
+==23263== 1,984 bytes in 1 blocks are still reachable in loss record 83 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x4E652BF: __glXInitVertexArrayState (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4DD53: glXMakeContextCurrent (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4083AB: main (main.c:105)
+==23263== 
+==23263== 
+==23263== 1,997 bytes in 1 blocks are still reachable in loss record 84 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E4E08B: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4E42E: __glXCalculateUsableGLExtensions (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E68947: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4DD41: glXMakeContextCurrent (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4083AB: main (main.c:105)
+==23263== 
+==23263== 
+==23263== 2,048 bytes in 1 blocks are still reachable in loss record 85 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513D816: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 2,048 bytes in 1 blocks are still reachable in loss record 86 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x513D5BF: _XkbReadGetMapReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513D890: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E2FA: XkbGetUpdatedMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513E3F5: XkbGetMap (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x5139EA8: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x513B3F7: XLookupKeysym (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4085DD: main (main.c:197)
+==23263== 
+==23263== 
+==23263== 2,314 bytes in 2 blocks are still reachable in loss record 87 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x400A2CA: (within /lib/ld-2.7.so)
+==23263==    by 0x40060B7: (within /lib/ld-2.7.so)
+==23263==    by 0x4007F1C: (within /lib/ld-2.7.so)
+==23263==    by 0x4011720: (within /lib/ld-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x401111A: (within /lib/ld-2.7.so)
+==23263==    by 0x7042FBA: (within /lib/libdl-2.7.so)
+==23263==    by 0x400D385: (within /lib/ld-2.7.so)
+==23263==    by 0x704336B: (within /lib/libdl-2.7.so)
+==23263==    by 0x7042F20: dlopen (in /lib/libdl-2.7.so)
+==23263==    by 0x55E3A4C: (within /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 2,616 bytes in 1 blocks are still reachable in loss record 88 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50DA420: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 5,200 bytes in 25 blocks are still reachable in loss record 89 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x50EB579: _XEnq (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50F2E25: (within /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50F30F9: _XReply (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x4E5C583: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E5E1C2: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x40A063: vineoNew (vineo.c:643)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== 
+==23263== 7,856 bytes in 1 blocks are still reachable in loss record 90 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80DA9C0: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E0640: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 8,584 bytes in 1 blocks are still reachable in loss record 91 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E5FCC2: __glXNewIndirectAPI (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4DD64: glXMakeContextCurrent (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x4083AB: main (main.c:105)
+==23263== 
+==23263== 
+==23263== 14,001 bytes in 1,730 blocks are still reachable in loss record 92 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80A356D: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A5761: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A5D34: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A6150: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A7EF6: snd_config_update_r (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A83F1: snd_config_update (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3A1A: snd_ctl_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263== 
+==23263== 
+==23263== 16,384 bytes in 1 blocks are still reachable in loss record 93 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x50DA783: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 20,968 bytes in 1 blocks are still reachable in loss record 94 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x7659DAE: xcb_connect_to_fd (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765C566: xcb_connect (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50F2629: _XConnectXCB (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x50DA44C: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 31,176 bytes in 433 blocks are still reachable in loss record 95 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80A3AAE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A7EB5: snd_config_update_r (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A83F1: snd_config_update (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3A1A: snd_ctl_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263==    by 0x4087AD: enableOpenAL (main.c:363)
+==23263==    by 0x4083C2: main (main.c:109)
+==23263== 
+==23263== 
+==23263== 56,016 bytes in 778 blocks are possibly lost in loss record 96 of 102
+==23263==    at 0x4C203E4: calloc (vg_replace_malloc.c:397)
+==23263==    by 0x80A3AAE: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A3B9E: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A58E6: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A5EC1: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A6150: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A7EF6: snd_config_update_r (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80A83F1: snd_config_update (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80B3A1A: snd_ctl_open (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E593B: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9A11: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55D9F85: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263== 
+==23263== 
+==23263== 73,728 bytes in 2 blocks are still reachable in loss record 97 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x80D0ABA: snd_pcm_mmap (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBC07: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C8664: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80DA873: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80E0640: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80CBA21: (within /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x80C6952: snd_pcm_hw_params (in /usr/lib/libasound.so.2.0.0)
+==23263==    by 0x55E338C: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55DA0AC: alcOpenDevice (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x5B0FBCA: alutInit (in /usr/lib/libalut.so.0.1.0)
+==23263== 
+==23263== 
+==23263== 261,645 bytes in 3 blocks are still reachable in loss record 98 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x431DA8: av_fast_realloc (utils.c:78)
+==23263==    by 0x40DD02: av_add_index_entry (utils.c:1221)
+==23263==    by 0x41AB72: mov_read_trak (mov.c:1347)
+==23263==    by 0x417B6E: mov_read_default (mov.c:221)
+==23263==    by 0x4180C9: mov_read_moov (mov.c:494)
+==23263==    by 0x417B6E: mov_read_default (mov.c:221)
+==23263==    by 0x41BB0A: mov_read_header (mov.c:2010)
+==23263==    by 0x40DF80: av_open_input_stream (utils.c:441)
+==23263==    by 0x40EB57: av_open_input_file (utils.c:541)
+==23263==    by 0x40A0F6: vineoOpen (vineo.c:666)
+==23263==    by 0x408510: main (main.c:146)
+==23263== 
+==23263== 
+==23263== 262,132 bytes in 1 blocks are still reachable in loss record 99 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4E49EF4: (within /usr/lib/libGL.so.1.2)
+==23263==    by 0x4E4A532: glXCreateContext (in /usr/lib/libGL.so.1.2)
+==23263==    by 0x40825C: main (main.c:87)
+==23263== 
+==23263== 
+==23263== 384,064 bytes in 2 blocks are still reachable in loss record 100 of 102
+==23263==    at 0x4C22741: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x55CF0A8: (within /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x55CF285: alBufferData (in /usr/lib/libopenal.so.1.4.272)
+==23263==    by 0x40963A: vineoDecode (vineo.c:285)
+==23263==    by 0x4086D2: main (main.c:293)
+==23263== 
+==23263== 
+==23263== 768,402 bytes in 17 blocks are still reachable in loss record 101 of 102
+==23263==    at 0x4C2260E: malloc (vg_replace_malloc.c:207)
+==23263==    by 0x4C22797: realloc (vg_replace_malloc.c:429)
+==23263==    by 0x765BAD1: (within /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765BBE1: xcb_get_extension_data (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A38E: xcb_prefetch_maximum_request_length (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x765A41B: xcb_get_maximum_request_length (in /usr/lib/libxcb.so.1.0.0)
+==23263==    by 0x50DAC58: XOpenDisplay (in /usr/lib/libX11.so.6.2.0)
+==23263==    by 0x408179: main (main.c:57)
+==23263== 
+==23263== 
+==23263== 22,882,288 bytes in 1,377 blocks are still reachable in loss record 102 of 102
+==23263==    at 0x4C20230: memalign (vg_replace_malloc.c:460)
+==23263==    by 0x4C202EA: posix_memalign (vg_replace_malloc.c:569)
+==23263==    by 0x56E421: av_malloc (mem.c:66)
+==23263==    by 0x409FEA: vineoNew (vineo.c:626)
+==23263==    by 0x4084FC: main (main.c:144)
+==23263== 
+==23263== LEAK SUMMARY:
+==23263==    definitely lost: 52 bytes in 1 blocks.
+==23263==    indirectly lost: 240 bytes in 10 blocks.
+==23263==      possibly lost: 56,624 bytes in 787 blocks.
+==23263==    still reachable: 24,769,290 bytes in 4,063 blocks.
+==23263==         suppressed: 0 bytes in 0 blocks.

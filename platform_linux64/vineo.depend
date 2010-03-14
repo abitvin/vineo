@@ -1,0 +1,1064 @@
+# depslib dependency file v1.0
+1253834317 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\app02\main.c
+	<windows.h>
+	<gl/gl.h>
+	<gl\glu.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1268603651 e/swscale.h>
+
+1235312870 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1265739008 
+
+1235261604 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233132610 h"
+
+1233453620 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\mem.h
+	"common.h"
+
+1235232210 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1233453620 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1235722362 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\pixfmt.h
+
+1235692052 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1239613256 /avutil.h"
+
+1235925326 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1235687658 /common.h"
+
+1165591858 c:\users\vin777\documents\work\vincent\development\ffmpeg\app02\inc\al\al.h
+
+1176472968 c:\users\vin777\documents\work\vincent\development\ffmpeg\app02\inc\al\alc.h
+
+1147436956 c:\users\vin777\documents\work\vincent\development\ffmpeg\app02\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1235294526 c:\users\vin777\documents\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libswscale\swscale.h
+	"libavutil/avutil.h"
+
+1256223483 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\app05\main.c
+	<windows.h>
+	<gl/gl.h>
+	<gl\glu.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165591858 c:\users\vin777\documents\work\vincent\development\ffmpeg\app05\inc\al\al.h
+
+1176472968 c:\users\vin777\documents\work\vincent\development\ffmpeg\app05\inc\al\alc.h
+
+1147436956 c:\users\vin777\documents\work\vincent\development\ffmpeg\app05\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1256503310 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\app06\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\app06\inc\al\al.h
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\app06\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\app06\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1256569109 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\app07\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\app07\inc\al\al.h
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\app07\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\app07\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1256825215 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\app08\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\app08\inc\al\al.h
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\app08\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\app08\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1258218272 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	"vineo.h"
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\inc\al\al.h
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1258215306 c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\vineo.h
+	<al/al.h>
+	<gl/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1258218219 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test09\vineo.c
+	"vineo.h"
+
+1258218219 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\vineo.c
+	"vineo.h"
+
+1258215306 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\vineo.h
+	<al/al.h>
+	<gl/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\inc\al\al.h
+
+1258293139 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	"vineo.h"
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10b\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1258296575 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\vineo.c
+	"vineo.h"
+
+1258215306 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\vineo.h
+	<al/al.h>
+	<gl/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\inc\al\al.h
+
+1258985288 source:c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	"vineo.h"
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1176469368 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\inc\al\alc.h
+
+1147433356 c:\users\vin777\documents\work\vincent\development\ffmpeg\test10\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1258296575 source:z:\work\vincent\development\ffmpeg\test10\vineo.c
+	"vineo.h"
+
+1258215306 z:\work\vincent\development\ffmpeg\test10\vineo.h
+	<al/al.h>
+	<gl/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 z:\work\vincent\development\ffmpeg\test10\inc\al\al.h
+
+1235312870 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\mem.h
+	"common.h"
+
+1235232210 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1233453620 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1235722362 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavutil\pixfmt.h
+
+1235692052 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1235925326 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1235294526 z:\work\vincent\development\ffmpeg\stuff\ffmpeg-0.5\libswscale\swscale.h
+	"libavutil/avutil.h"
+
+1263827768 source:z:\work\vincent\development\ffmpeg\test10\main.c
+	<windows.h>
+	<al/al.h>
+	<al/alc.h>
+	<al/alut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	"vineo.h"
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1176469368 z:\work\vincent\development\ffmpeg\test10\inc\al\alc.h
+
+1147433356 z:\work\vincent\development\ffmpeg\test10\inc\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1265205166 source:z:\work\vincent\development\vineo\vineo.c
+	"vineo.h"
+
+1265323740 z:\work\vincent\development\vineo\vineo.h
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 z:\work\vincent\development\vineo\inc\\al\al.h
+
+1235312870 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\mem.h
+	"common.h"
+
+1235232210 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1233453620 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1235722362 z:\work\vincent\development\vineo\inc\ffmpeg\\libavutil\pixfmt.h
+
+1235692052 z:\work\vincent\development\vineo\inc\ffmpeg\\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1235925326 z:\work\vincent\development\vineo\inc\ffmpeg\\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 z:\work\vincent\development\vineo\inc\ffmpeg\\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1235294526 z:\work\vincent\development\vineo\inc\ffmpeg\\libswscale\swscale.h
+	"libavutil/avutil.h"
+
+1267645978 source:z:\work\vincent\development\vineo\main.c
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<psapi.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+
+1176469368 z:\work\vincent\development\vineo\inc\\al\alc.h
+
+1147433356 z:\work\vincent\development\vineo\inc\\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1265205166 source:/home/vin777/work/vincent/development/vineo/vineo.c
+	"vineo.h"
+	"vineo.h"
+	"vineo.h"
+
+1265323740 /home/vin777/work/vincent/development/vineo/vineo.h
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 /home/vin777/work/vincent/development/vineo/inc//al/al.h
+
+1235312870 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/mem.h
+	"common.h"
+	"common.h"
+	"common.h"
+
+1235232210 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1233453620 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/rational.h
+	<stdint.h>
+	"common.h"
+	<stdint.h>
+	"common.h"
+	<stdint.h>
+	"common.h"
+
+1220168388 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+	<stdint.h>
+	"common.h"
+	<stdint.h>
+	"common.h"
+
+1233184610 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/log.h
+	<stdarg.h>
+	"avutil.h"
+	<stdarg.h>
+	"avutil.h"
+	<stdarg.h>
+	"avutil.h"
+
+1235722362 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavutil/pixfmt.h
+
+1235692052 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavcodec/avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+	<errno.h>
+	"libavutil/avutil.h"
+	<errno.h>
+	"libavutil/avutil.h"
+
+1235925326 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavformat/avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libavformat/avio.h
+	<stdint.h>
+	"libavutil/common.h"
+	<stdint.h>
+	"libavutil/common.h"
+	<stdint.h>
+	"libavutil/common.h"
+
+1235294526 /home/vin777/work/vincent/development/vineo/inc/ffmpeg//libswscale/swscale.h
+	"libavutil/avutil.h"
+	"libavutil/avutil.h"
+	"libavutil/avutil.h"
+
+1265470348 source:/home/vin777/work/vincent/development/vineo/main.c
+	<windows.h>
+	<GL/gl.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<psapi.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<psapi.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+
+1268602765 source:z:\work\vincent\development\vineo\vineo\src\vineo.c
+	"vineo.h"
+
+1268603651 z:\work\vincent\development\vineo\vineo\inc\vineo.h
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1165588258 z:\work\vincent\development\vineo\openal\inc\\al\al.h
+
+1235312870 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\mem.h
+	"common.h"
+
+1235232210 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1235722362 z:\work\vincent\development\vineo\ffmpeg\inc\\libavutil\pixfmt.h
+
+1235692052 z:\work\vincent\development\vineo\ffmpeg\inc\\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1235925326 z:\work\vincent\development\vineo\ffmpeg\inc\\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 z:\work\vincent\development\vineo\ffmpeg\inc\\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1235294526 z:\work\vincent\development\vineo\ffmpeg\inc\\libswscale\swscale.h
+	"libavutil/avutil.h"
+
+1268603687 source:z:\work\vincent\development\vineo\platform_win32\main.c
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<psapi.h>
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+
+1176469368 z:\work\vincent\development\vineo\openal\inc\\al\alc.h
+
+1147433356 z:\work\vincent\development\vineo\alut\inc\\al\alut.h
+	<alc.h>
+	<al.h>
+	<OpenAL/alc.h>
+	<OpenAL/al.h>
+	<AL/al.h>
+	<AL/alc.h>
+
+1235312870 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\mem.h
+	"common.h"
+
+1235232210 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1238529980 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\rational.h
+	<stdint.h>
+	"common.h"
+
+1220164788 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\log.h
+	<stdarg.h>
+	"avutil.h"
+
+1238529980 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavutil\pixfmt.h
+
+1267264906 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavcodec\avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1265739008 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavformat\avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libavformat\avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1239613256 z:\work\vincent\development\vineo\ffmpeg-0.5.1\inc\\libswscale\swscale.h
+	"libavutil/avutil.h"
+
+1268606898 source:/home/vin777/work/vincent/development/vineo/platform_linux64/main.c
+	<X11/X.h>
+	<X11/keysym.h>
+	<GL/glx.h>
+	<GL/gl.h>
+	<pthread.h>
+	<AL/al.h>
+	<AL/alc.h>
+	<AL/alut.h>
+	"vineo.h"
+
+1268603888 /home/vin777/work/vincent/development/vineo/vineo/inc//vineo.h
+	<AL/al.h>
+	<GL/gl.h>
+	<libavutil/avutil.h>
+	<libavcodec/avcodec.h>
+	<libavformat/avformat.h>
+	<libswscale/swscale.h>
+
+1235312870 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/avutil.h
+	"common.h"
+	"mathematics.h"
+	"rational.h"
+	"intfloat_readwrite.h"
+	"log.h"
+	"pixfmt.h"
+
+1235261604 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/common.h
+	<ctype.h>
+	<errno.h>
+	<inttypes.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"mem.h"
+	"config.h"
+	"internal.h"
+
+1233453620 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/mem.h
+	"common.h"
+
+1235232210 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/internal.h
+	<limits.h>
+	<stdint.h>
+	<stddef.h>
+	<assert.h>
+	"config.h"
+	"common.h"
+	"mem.h"
+	"timer.h"
+
+1238533580 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/timer.h
+	<stdlib.h>
+	<stdint.h>
+	"config.h"
+
+1233132610 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/mathematics.h
+	<stdint.h>
+	<math.h>
+	"common.h"
+	"rational.h"
+
+1233453620 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/rational.h
+	<stdint.h>
+	"common.h"
+
+1220168388 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/intfloat_readwrite.h
+	<stdint.h>
+	"common.h"
+
+1233184610 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/log.h
+	<stdarg.h>
+	"avutil.h"
+
+1238533580 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavutil/pixfmt.h
+
+1267264906 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavcodec/avcodec.h
+	<errno.h>
+	"libavutil/avutil.h"
+
+1265739008 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavformat/avformat.h
+	<time.h>
+	<stdio.h>
+	"libavcodec/avcodec.h"
+	"avio.h"
+
+1235687658 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libavformat/avio.h
+	<stdint.h>
+	"libavutil/common.h"
+
+1239616856 /home/vin777/work/vincent/development/vineo/ffmpeg-0.5.1/inc//libswscale/swscale.h
+	"libavutil/avutil.h"
+
+1268602765 source:/home/vin777/work/vincent/development/vineo/vineo/src/vineo.c
+	"vineo.h"
+

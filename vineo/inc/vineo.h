@@ -26,19 +26,17 @@
 #include <libswscale/swscale.h>
 
 
-// FIXME alle onderstaande defines moeten dynamisch zijn
-#define MAX_VIDEOQ_SIZE (10 * 256 * 1024)
-#define MAX_AUDIOQ_SIZE (10 * 16 * 1024)
-//#define VID_BUFFER_SIZE 10      // aantal frames bufferen
-#define BUFFER_SIZE 192000
-#define NUM_BUFFERS 6               // FIXME: andere naam
+#define VINEO_MAX_VIDEOQ_SIZE (10 * 256 * 1024)
+#define VINEO_MAX_AUDIOQ_SIZE (10 * 16 * 1024)
+#define VINEO_AUDIO_BUFFER_SIZE 192000
+#define VINEO_AUDIO_NUM_BUFFERS 6
 
 
 typedef struct VineoPacketQueue {
     AVPacketList *first, *last;
     int packets;        // total number of packets in this queue
     int size;           // total size in bytes
-    int max_size;        // maximum size in bytes
+    int max_size;       // maximum size in bytes
 } VineoPacketQueue;
 
 
@@ -48,23 +46,23 @@ typedef struct Vineo
     AVFormatContext *fmt_ctx;       // file format context
     AVCodecContext *aud_codec_ctx;  // audio codec context
     AVCodecContext *vid_codec_ctx;  // video codec context
-    AVCodec *aud_codec;             // TODO desc
-    AVCodec *vid_codec;             // TODO desc
+    AVCodec *aud_codec;
+    AVCodec *vid_codec;
 
     // Queued Packets
     VineoPacketQueue aud_pkt_queue;
     VineoPacketQueue vid_pkt_queue;
 
     // Video
-    GLuint tex_gl;                  // OpenGL texture index
+    GLuint tex_gl;              // OpenGL texture index
 
     // Audio
     int aud_rate;
     int aud_channels;
     int aud_bits;
     int aud_format;
-    ALuint aud_src_al;                 // OpenAL audio source
-    ALuint aud_buf_al[NUM_BUFFERS];    // OpenAL audio buffers
+    ALuint aud_src_al;          // OpenAL audio source
+    ALuint aud_buf_al[VINEO_AUDIO_NUM_BUFFERS]; // OpenAL audio buffers
 
     // Audio decoding
     int buffer_playing;         // current buffer playing
@@ -76,10 +74,10 @@ typedef struct Vineo
     size_t dec_data_size;       // length decoded data
 
     // Video decoding
-    struct SwsContext *sws;     // TODO desc
-    unsigned char *frame_buffer;      // TODO desc
-    AVFrame *frame;             // TODO desc
-    AVFrame *frame_rgba;        // TODO desc
+    struct SwsContext *sws;         // sws context
+    unsigned char *frame_buffer;    // data buffer for frame_rgba
+    AVFrame *frame;                 // decoded frame
+    AVFrame *frame_rgba;            // converted frame to RGBA
 
     // Other
     int64_t cur_pts;            // current pts time
@@ -89,7 +87,6 @@ typedef struct Vineo
     int idx_audio;              // index audio stream
     int idx_video;              // index video stream
     int is_playing;             // is opened so we can decode?
-    char *custom;               // custom variable for you too use
 } Vineo;
 
 
