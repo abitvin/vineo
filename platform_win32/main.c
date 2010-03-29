@@ -7,13 +7,20 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
+#include <pthread.h>
 #include "vineo.h"
 
 
-
+#define WINDOW_CLASS "Vineo"
+#define WINDOW_TITLE "Vineo example"
 #define MOUSE_LB 250
 #define MOUSE_RB 251
 
+
+typedef struct ArgsOpenVineo {
+    Vineo *v;
+    char file[256];
+} ArgsOpenVineo;
 
 int screen_w = 854;
 int screen_h = 480;
@@ -30,19 +37,23 @@ void disableOpenGL( HWND, HDC, HGLRC );
 void enableOpenGL( HWND hwnd, HDC*, HGLRC* );
 LRESULT CALLBACK WindowProc( HWND, UINT, WPARAM, LPARAM );
 void PrintMemoryInfo( DWORD processID );
-void aSyncOpen( Vineo *v );
+void *aSyncDecode( Vineo *v );
+void *aSyncOpen( ArgsOpenVineo *a );
 void disableOpenAL();
 void enableOpenAL();
 void resizeScene( int width, int height );
 void texCube();
 
 
+
+HDC hDC;
+HGLRC hRC;
+pthread_mutex_t mutex_flush = PTHREAD_MUTEX_INITIALIZER;
+
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
     WNDCLASSEX wcex;
     HWND hwnd;
-    HDC hDC;
-    HGLRC hRC;
     MSG msg;
     BOOL bQuit = FALSE;
 
@@ -140,7 +151,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/valentinesday-tlr1_h720p_fulco.mp4";
+    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4";
     //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
     //char media[] = "http://72.26.204.18:6256#.aac";
     //char media[] = "./stuff/image.png";
@@ -156,14 +167,55 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     int64_t ptime = time;
 
     //Vineo *v = NULL;
-    Vineo *v = vineoNew();
-    vineoOpen( v, media );
-    vineoPlay( v );
+    Vineo *v[2];
+    v[0] = vineoNew();
+    v[1] = vineoNew();
 
-    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+
+    //vineoOpen( v[0], media );
+    //vineoPlay( v[0] );
+    pthread_t thread1;
+    ArgsOpenVineo a1;
+    a1.v = v[0];
+    sprintf( a1.file, "%s", media );
+    pthread_create( &thread1, NULL, aSyncOpen, (void *)&a1 );
+
+
+    //vineoOpen( v[1], "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4" );
+    //vineoPlay( v[1] );
+    pthread_t thread2;
+    ArgsOpenVineo a2;
+    a2.v = v[1];
+    sprintf( a2.file, "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4" );
+    //sprintf( a2.file, "%s", media );
+    pthread_create( &thread2, NULL, aSyncOpen, (void *)&a2 );
+
+
+
+    pthread_join( thread1, NULL );
+    pthread_join( thread2, NULL );
+
+
+    glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
+    glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+
+
+    pthread_t thread[2];
+    pthread_attr_t thread_attr[2];
+    void *thread_status[2];
+
+    int i;
+
+    for( i = 0; i < 2; i++ )
+    {
+        pthread_attr_init( &thread_attr[i] );
+        pthread_attr_setdetachstate( &thread_attr[i], PTHREAD_CREATE_JOINABLE );
+    }
 
     //Vineo *v2 = NULL;
     //Vineo *v2 = vineoNew();
@@ -198,6 +250,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 bQuit = 1;
             }
 
+            /*
             if( keys['C'] )
             {
                 vineoClose( v );
@@ -226,6 +279,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 tex = v->tex_gl;
                 //tex = 0;
             }
+            */
 
 
             ptime = time;
@@ -253,16 +307,46 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
             r += (float)( time - ptime ) / 100000.0f;
 
-            vineoDecode( v );
+            wglMakeCurrent( NULL, NULL );
+
+            for( i = 0; i < 2; i++ )
+            {
+                pthread_create( &thread[i], &thread_attr[i], aSyncDecode, (void *)v[i] );
+                printf( "decoding, " );
+                pthread_attr_destroy( &thread_attr[i] );
+            }
+
+            printf( "waiting..." );
+
+            for( i = 0; i < 2; i++ )
+            {
+                pthread_join( thread[i], &thread_status[i] );
+                printf( "ok! " );
+            }
+
+            wglMakeCurrent( hDC, hRC );
+
+            //vineoDecode( v );
             //vineoDecode( v2 );
 
+            glClearColor( 1.0f, 0.0f, 0.0f, 1.0f );
             glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
             glPushMatrix();
-                glTranslatef( 0.0f, 0.0f, -6.0f );
+                glTranslatef( -1.0f, 0.0f, -4.0f );
                 glRotatef( r, 0.0f, 1.0f, 0.0f );
-                glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+                glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
                 texCube();
             glPopMatrix();
+
+            glPushMatrix();
+                glTranslatef( 1.0f, 0.0f, -4.0f );
+                glRotatef( r, 0.0f, 1.0f, 0.0f );
+                glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
+                texCube();
+            glPopMatrix();
+
+            printf( "showing!\n" );
 
 
 
@@ -355,8 +439,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
             SwapBuffers( hDC );
-
-
             PrintMemoryInfo( GetCurrentProcessId() );
         }
     }
@@ -370,7 +452,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     free( v );
     */
 
-    vineoClose( v );
+    vineoClose( v[0] );
+    vineoClose( v[1] );
     //vineoClose( v2 );
 
     disableOpenAL();
@@ -380,22 +463,61 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 }
 
 
-void aSyncOpen( Vineo *v )
+void *aSyncDecode( Vineo *v )
 {
-    //vineoOpen( v, v->custom );
-    vineoOpen( v, "/home/xxx/video.mp4" );
-    vineoPlay( v );
+    printf( "1, " );
 
-    // FIXME netjes uit de thread komen ipv oneindige loop
-    //while( 1 ) {
-    //    vineoDecode( v );
-    //}
+    vineoDecode( v );
+
+    pthread_mutex_lock( &mutex_flush );
+    wglMakeCurrent( hDC, hRC );
+    vineoFlush( v );
+    wglMakeCurrent( NULL, NULL );
+    pthread_mutex_unlock( &mutex_flush );
+
+    /*
+    int tex_w = 128;
+    int tex_h = 128;
+    char tex_data[tex_w*tex_h*4];
+    int x, y, o = 0;
+
+    for( x = 0; x < tex_w; x++ )
+    {
+        for( y = 0; y < tex_h; y++ )
+        {
+            tex_data[o++] = x % tex_w;
+            tex_data[o++] = y % tex_h;
+            tex_data[o++] = 128;
+            tex_data[o++] = 255;
+        }
+    }
+
+    wglMakeCurrent( hDC, hRC );
+    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, tex_w, tex_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex_data );
+    wglMakeCurrent( NULL, NULL );
+    */
+
+    printf( "2 (%i), ", v->tex_gl );
+    pthread_exit( NULL );
 }
+
+
+void *aSyncOpen( ArgsOpenVineo *a )
+{
+    printf( "%p, %s\n", a->v, a->file );
+
+    vineoOpen( a->v, a->file );
+    vineoPlay( a->v );
+    pthread_exit( NULL );
+}
+
 
 void disableOpenAL()
 {
 	alutExit();
 }
+
 
 void enableOpenAL()
 {

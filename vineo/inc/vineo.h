@@ -86,12 +86,15 @@ typedef struct Vineo
     int64_t start_time;         // start time offset in container file
     int idx_audio;              // index audio stream
     int idx_video;              // index video stream
-    int is_playing;             // is opened so we can decode?
+    int is_opened;              // is succesfully opened?
+    int is_playing;             // is playing?
+    int is_frame_finished;      // used for flushing
 } Vineo;
 
 
 void vineoClose( Vineo *v );
 void vineoDecode( Vineo *v );
+void vineoFlush( Vineo *v );
 Vineo *vineoNew();
 void vineoOpen( Vineo *v, char *file );
 void vineoPlay( Vineo *v );

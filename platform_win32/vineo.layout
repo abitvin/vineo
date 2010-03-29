@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Debug Windows" />
+	<ActiveTarget name="Release Windows" />
 	<File name="main.c" open="1" top="1" tabpos="1">
-		<Cursor position="10983" topLine="373" />
+		<Cursor position="14104" topLine="473" />
 	</File>
-	<File name="..\vineo\inc\vineo.h" open="0" top="0" tabpos="3">
-		<Cursor position="1654" topLine="50" />
+	<File name="..\vineo\inc\vineo.h" open="1" top="0" tabpos="3">
+		<Cursor position="2933" topLine="53" />
 	</File>
-	<File name="..\vineo\src\vineo.c" open="0" top="0" tabpos="2">
-		<Cursor position="22750" topLine="0" />
+	<File name="..\vineo\src\vineo.c" open="1" top="0" tabpos="2">
+		<Cursor position="18213" topLine="654" />
 	</File>
 </CodeBlocks_layout_file>

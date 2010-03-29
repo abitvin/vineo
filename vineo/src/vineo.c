@@ -90,7 +90,7 @@ void vineoClose( Vineo *v )
 
 void vineoDecode( Vineo *v )
 {
-    if( !v ) {
+    if( !v || !v->is_playing ) {
         return;
     }
 
@@ -104,7 +104,8 @@ void vineoDecode( Vineo *v )
 
     double pts = 0.0f;
     AVPacket pkt;
-    int frame_finished = 0;
+    //int frame_finished = 0;
+    v->is_frame_finished = 0;
 
 
     // decode new video frame
@@ -115,7 +116,7 @@ void vineoDecode( Vineo *v )
         }
 
         //v->vid_codec_ctx->reordered_opaque = packet.pts;
-        avcodec_decode_video( v->vid_codec_ctx, v->frame, &frame_finished, pkt.data, pkt.size );
+        avcodec_decode_video( v->vid_codec_ctx, v->frame, &v->is_frame_finished, pkt.data, pkt.size );
         //printf( "pFrame->opaque: %i\n", pFrame->opaque );
 
         /* NOTE FIXME moeten we hier wat mee?
@@ -148,7 +149,7 @@ void vineoDecode( Vineo *v )
         pts *= av_q2d( v->fmt_ctx->streams[v->idx_video]->time_base );
         v->cur_pts = pts * AV_TIME_BASE;
 
-        if( frame_finished && v->cur_pts >= v->time )
+        if( v->is_frame_finished && v->cur_pts >= v->time )
         {
             sws_scale(
                 v->sws,
@@ -159,6 +160,9 @@ void vineoDecode( Vineo *v )
                 v->frame_rgba->data,
                 v->frame_rgba->linesize
             );
+
+            /*
+            MOVED TO vineoFlush()
 
             int w = v->vid_codec_ctx->width;
             int h = v->vid_codec_ctx->height;
@@ -175,6 +179,7 @@ void vineoDecode( Vineo *v )
 
             glBindTexture( GL_TEXTURE_2D, v->tex_gl );
             glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
+            */
         }
 
         av_free_packet( &pkt );
@@ -404,6 +409,32 @@ static void vineoFillPacketQueue( Vineo *v )
         }
     }
 }
+
+
+
+void vineoFlush( Vineo *v )
+{
+    if( !v->is_frame_finished ) {
+        return;
+    }
+
+    int w = v->vid_codec_ctx->width;
+    int h = v->vid_codec_ctx->height;
+    unsigned char *a = v->frame_rgba->data[0];
+    unsigned char *b = a + 2;
+    unsigned char *end = &v->frame_rgba->data[0][w*h*4];
+
+    for( ; a < end; a += 4, b += 4 )
+    {
+        *a ^= *b;
+        *b ^= *a;
+        *a ^= *b;
+    }
+
+    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
+}
+
 
 
 static int vineoNextDataAudio( Vineo *v, void *data, int length )
@@ -648,6 +679,8 @@ Vineo *vineoNew()
     alSourcei( v->aud_src_al, AL_SOURCE_RELATIVE, AL_TRUE );
     alSourcei( v->aud_src_al, AL_ROLLOFF_FACTOR, 0 );
 
+    av_register_all();
+
     return v;
 }
 
@@ -659,7 +692,7 @@ void vineoOpen( Vineo *v, char *file )
 
 
     // NOTE av_register_all heeft zelf al een check of het al is registered.
-    av_register_all();
+    //av_register_all();
 
 
     // open container file
@@ -831,6 +864,8 @@ void vineoOpen( Vineo *v, char *file )
             return;
         }
     }
+
+    v->is_opened = 1;
 }
 
 
