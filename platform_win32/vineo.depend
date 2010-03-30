@@ -774,16 +774,17 @@
 	<AL/alut.h>
 	"vineo.h"
 
-1269824214 source:z:\work\vincent\development\vineo\vineo\src\vineo.c
+1269902963 source:z:\work\vincent\development\vineo\vineo\src\vineo.c
 	"vineo.h"
 
-1269822650 z:\work\vincent\development\vineo\vineo\inc\vineo.h
+1269903063 z:\work\vincent\development\vineo\vineo\inc\vineo.h
 	<AL/al.h>
 	<GL/gl.h>
 	<libavutil/avutil.h>
 	<libavcodec/avcodec.h>
 	<libavformat/avformat.h>
 	<libswscale/swscale.h>
+	<pthread.h>
 
 1165591858 z:\work\vincent\development\vineo\openal\inc\\al\al.h
 
@@ -863,7 +864,7 @@
 1235294526 z:\work\vincent\development\vineo\ffmpeg\inc\\libswscale\swscale.h
 	"libavutil/avutil.h"
 
-1269824214 source:z:\work\vincent\development\vineo\platform_win32\main.c
+1269903119 source:z:\work\vincent\development\vineo\platform_win32\main.c
 	<windows.h>
 	<GL/gl.h>
 	<GL/glu.h>

@@ -1,5 +1,5 @@
 
-
+// TODO av_lockmgr_register() voor multi threading.
 // TODO bij nieuwe Vineo moet er een GL texture en AL src, buffers aangemaakt worden
 // TODO audio moet beter syncen, op andere manier? Ook audio bufferen in een VineoAudioBuffer?
 // NOTE Misschien is alutCreateBufferWaveform() ook een manier om te syncen? Als het bijvoorbeeld voor loopt?
@@ -14,6 +14,20 @@
     printf( "\rTime: %d:%05.02f", offset/rate/60, (offset%(rate*60))/(float)rate);
 */
 
+
+/*
+    NOTE: must be thread safe
+    avcodec_register_all();
+    avdevice_register_all();
+    av_register_all();
+    avcodec_open();
+
+    avcodec_find_encoder()
+    avcodec_find_decoder()
+    av_find_stream_info()
+    avcodec_close()
+*/
+
 #ifndef VINEO_H
 #define VINEO_H
 
@@ -24,6 +38,7 @@
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
 #include <libswscale/swscale.h>
+#include <pthread.h>
 
 
 #define VINEO_MAX_VIDEOQ_SIZE (10 * 256 * 1024)
@@ -95,8 +110,8 @@ typedef struct Vineo
 void vineoClose( Vineo *v );
 void vineoDecode( Vineo *v );
 void vineoFlush( Vineo *v );
-Vineo *vineoNew();
 void vineoOpen( Vineo *v, char *file );
+Vineo *vineoNew();
 void vineoPlay( Vineo *v );
 void vineoVolume( Vineo *v, ALfloat vol );
 

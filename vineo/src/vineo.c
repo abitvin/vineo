@@ -8,6 +8,42 @@ static int vineoNextPacket( Vineo *v, int stream, AVPacket *retPkt );
 static void vineoNextPacketAudio( Vineo *v );
 
 
+static int lockmgr( void **mtx, enum AVLockOp op )
+{
+    switch( op )
+    {
+        case AV_LOCK_CREATE:
+        {
+            *mtx = malloc( sizeof(pthread_mutex_t) );
+
+            if( !*mtx ) {
+                return 1;
+            }
+
+            return !!pthread_mutex_init( *mtx, NULL );
+        }
+
+        case AV_LOCK_OBTAIN:
+        {
+            return !!pthread_mutex_lock( *mtx );
+        }
+
+        case AV_LOCK_RELEASE:
+        {
+            return !!pthread_mutex_unlock( *mtx );
+        }
+
+        case AV_LOCK_DESTROY:
+        {
+            pthread_mutex_destroy( *mtx );
+            free( *mtx );
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
 
 void vineoClose( Vineo *v )
 {
@@ -654,6 +690,14 @@ static void vineoNextPacketAudio( Vineo *v )
 
 Vineo *vineoNew()
 {
+    // NOTE av_register_all heeft zelf al een check of het al is registered.
+    av_register_all();
+
+    if( av_lockmgr_register( lockmgr ) ) {
+        // TODO Failure av_lockmgr_register
+    }
+
+
     Vineo *v = av_malloc( sizeof( Vineo ) );
 
     if( !v )
@@ -679,9 +723,44 @@ Vineo *vineoNew()
     alSourcei( v->aud_src_al, AL_SOURCE_RELATIVE, AL_TRUE );
     alSourcei( v->aud_src_al, AL_ROLLOFF_FACTOR, 0 );
 
-    av_register_all();
-
     return v;
+}
+
+
+
+void vineoPlay( Vineo *v )
+{
+    if( !v ) {
+        return;
+    }
+
+
+    vineoFillPacketQueue( v );
+
+    // pre buffer audio
+    if( v->idx_audio >= 0 )
+    {
+        int i, count = 0;
+
+        for( i = 0; i < VINEO_AUDIO_NUM_BUFFERS; i++ )
+        {
+            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
+
+            if( count <= 0 ) {
+                break;
+            }
+
+            alBufferData( v->aud_buf_al[i], v->aud_format, v->data_tmp, count, v->aud_rate );
+            alSourceQueueBuffers( v->aud_src_al, 1, &v->aud_buf_al[i] );
+            v->buffer_playing += count;
+        }
+
+        alSourcePlay( v->aud_src_al );
+    }
+
+    v->time_offset = av_gettime();
+    v->time = 0;
+    v->is_playing = 1;
 }
 
 
@@ -690,12 +769,6 @@ void vineoOpen( Vineo *v, char *file )
 {
     // NOTE FIXME als er iets mis gaat in deze functie, netjes unloaden
 
-
-    // NOTE av_register_all heeft zelf al een check of het al is registered.
-    //av_register_all();
-
-
-    // open container file
     if( av_open_input_file( &v->fmt_ctx, file, NULL, 0, NULL ) != 0 )
     {
         printf( "Error @ vineoOpen() @ av_open_input_file()\n" );
@@ -866,43 +939,6 @@ void vineoOpen( Vineo *v, char *file )
     }
 
     v->is_opened = 1;
-}
-
-
-
-void vineoPlay( Vineo *v )
-{
-    if( !v ) {
-        return;
-    }
-
-
-    vineoFillPacketQueue( v );
-
-    // pre buffer audio
-    if( v->idx_audio >= 0 )
-    {
-        int i, count = 0;
-
-        for( i = 0; i < VINEO_AUDIO_NUM_BUFFERS; i++ )
-        {
-            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
-
-            if( count <= 0 ) {
-                break;
-            }
-
-            alBufferData( v->aud_buf_al[i], v->aud_format, v->data_tmp, count, v->aud_rate );
-            alSourceQueueBuffers( v->aud_src_al, 1, &v->aud_buf_al[i] );
-            v->buffer_playing += count;
-        }
-
-        alSourcePlay( v->aud_src_al );
-    }
-
-    v->time_offset = av_gettime();
-    v->time = 0;
-    v->is_playing = 1;
 }
 
 
