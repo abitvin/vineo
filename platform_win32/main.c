@@ -49,6 +49,7 @@ void texCube();
 HDC hDC;
 HGLRC hRC;
 pthread_mutex_t mutex_flush = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t mutex_open = PTHREAD_MUTEX_INITIALIZER;
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -151,15 +152,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    //char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4";
-    //char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4";
+    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4";
+    char media2[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4";
     //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
     //char media[] = "http://72.26.204.18:6256#.aac";
-    //char media[] = "./stuff/image.png";
+    //char media[] = "../DUMP/image.png";
     //char media[] = "./stuff/video.gif";
-    //char media[] = "./stuff/image.jpg";
-    char media[] = "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png";
-    char media2[] = "http://ccms.e-billboard.eu/webcam/?id=19#.jpg";
+    //char media2[] = "../DUMP/image.jpg";
+    //char media[] = "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png";
+    //char media2[] = "http://ccms.e-billboard.eu/webcam/?id=19#.jpg";
     //char media[] = "./stuff/music.mp3";
 
 
@@ -173,8 +174,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     v[1] = vineoNew();
 
 
-    //vineoStreamOpen( v[0], media );
-    //vineoStreamInit( v[0] );
+    //vineoOpen( v[0], media );
     //vineoPlay( v[0] );
     pthread_t thread1;
     ArgsOpenVineo a1;
@@ -183,8 +183,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     pthread_create( &thread1, NULL, &aSyncOpen, (void *)&a1 );
 
 
-    //vineoStreamOpen( v[1], "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4" );
-    //vineoStreamInit( v[1] );
+    //vineoOpen( v[1], media2 );
     //vineoPlay( v[1] );
     pthread_t thread2;
     ArgsOpenVineo a2;
@@ -194,16 +193,16 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    pthread_join( thread1, NULL );
-    pthread_join( thread2, NULL );
+    //pthread_join( thread1, NULL );
+    //pthread_join( thread2, NULL );
 
-    printf( "keeeeeeeeeeeeeeeeeeeeeej...\n" );
-    Sleep( 1000000 );
-
-
+    //printf( "keeeeeeeeeeeeeeeeeeeeeej...\n" );
+    //Sleep( 1000000 );
 
 
 
+
+    /*
     glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
@@ -211,6 +210,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+    */
 
 
     pthread_t thread[2];
@@ -294,6 +294,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             time = av_gettime();
             count += ( time - ptime );
 
+            float fps = (float)AV_TIME_BASE / (float)( time - ptime );
+            char title[32];
+            printf( "fps: %f\n", fps );
+            //sprintf( title, "fps: %f", fps );
+            //SetWindowText( hwnd, title );
+
+
 /*
             if( count > AV_TIME_BASE * 5 )
             {
@@ -313,29 +320,40 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             }
 */
 
-            //r += (float)( time - ptime ) / 100000.0f;
+            r += (float)( time - ptime ) / 100000.0f;
 
+
+
+            // multi-thread deconding
             wglMakeCurrent( NULL, NULL );
 
             for( i = 0; i < 2; i++ )
             {
                 pthread_create( &thread[i], &thread_attr[i], &aSyncDecode, (void *)v[i] );
-                printf( "decoding, " );
+                //printf( "decoding, " );
                 pthread_attr_destroy( &thread_attr[i] );
             }
 
-            printf( "waiting..." );
+            //printf( "waiting..." );
 
             for( i = 0; i < 2; i++ )
             {
                 pthread_join( thread[i], &thread_status[i] );
-                printf( "ok! " );
+                //printf( "ok! " );
             }
 
             wglMakeCurrent( hDC, hRC );
 
-            //vineoDecode( v );
-            //vineoDecode( v2 );
+
+
+
+            // single-thread decoding
+            //vineoDecode( v[0] );
+            //vineoDecode( v[1] );
+            //vineoFlush( v[0] );
+            //vineoFlush( v[1] );
+
+
 
             //glClearColor( 1.0f, 0.0f, 0.0f, 1.0f );
             glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
@@ -344,6 +362,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 glTranslatef( -1.0f, 0.0f, -4.0f );
                 glRotatef( r, 0.0f, 1.0f, 0.0f );
                 glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
                 texCube();
             glPopMatrix();
 
@@ -351,10 +371,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 glTranslatef( 1.0f, 0.0f, -4.0f );
                 glRotatef( r, 0.0f, 1.0f, 0.0f );
                 glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
                 texCube();
             glPopMatrix();
 
-            printf( "showing!\n" );
+            //printf( "showing!\n" );
 
 
 
@@ -447,7 +469,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
             SwapBuffers( hDC );
-            PrintMemoryInfo( GetCurrentProcessId() );
+            //PrintMemoryInfo( GetCurrentProcessId() );
         }
     }
 
@@ -473,7 +495,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 void *aSyncDecode( Vineo *v )
 {
-    printf( "1, " );
+    //printf( "1, " );
 
     vineoDecode( v );
 
@@ -506,7 +528,7 @@ void *aSyncDecode( Vineo *v )
     wglMakeCurrent( NULL, NULL );
     */
 
-    printf( "2 (%i), ", v->tex_gl );
+    //printf( "2 (%i), ", v->tex_gl );
     pthread_exit( NULL );
 }
 
@@ -525,6 +547,12 @@ void *aSyncOpen( ArgsOpenVineo *a )
 
     vineoOpen( a->v, a->file );
     vineoPlay( a->v );
+
+    /*pthread_mutex_lock( &mutex_open );
+    glBindTexture( GL_TEXTURE_2D, a->v->tex_gl );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+    pthread_mutex_unlock( &mutex_open );*/
 
     pthread_exit( NULL );
 }

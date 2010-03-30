@@ -185,7 +185,9 @@ void vineoDecode( Vineo *v )
         pts *= av_q2d( v->fmt_ctx->streams[v->idx_video]->time_base );
         v->cur_pts = pts * AV_TIME_BASE;
 
-        if( v->is_frame_finished && v->cur_pts >= v->time )
+        //printf( "v->is_frame_finished: %i, v->cur_pts: %lli, v->time: %lli\n", v->is_frame_finished, v->cur_pts, v->time );
+
+        if( v->is_frame_finished && ( v->cur_pts >= v->time || v->cur_pts == 0 ) )
         {
             sws_scale(
                 v->sws,
@@ -196,6 +198,8 @@ void vineoDecode( Vineo *v )
                 v->frame_rgba->data,
                 v->frame_rgba->linesize
             );
+
+            //printf( "- keey\n" );
 
             /*
             MOVED TO vineoFlush()
@@ -460,6 +464,16 @@ void vineoFlush( Vineo *v )
     unsigned char *b = a + 2;
     unsigned char *end = &v->frame_rgba->data[0][w*h*4];
 
+    /*
+    FILE *f = fopen( "dump.raw", "wb" );
+
+    if( f )
+    {
+        fwrite( v->frame_rgba->data[0], 1, w*h*4, f );
+        fclose( f );
+    }
+    */
+
     for( ; a < end; a += 4, b += 4 )
     {
         *a ^= *b;
@@ -710,7 +724,6 @@ Vineo *vineoNew()
 
     v->aud_pkt_queue.max_size = VINEO_MAX_AUDIOQ_SIZE;
     v->vid_pkt_queue.max_size = VINEO_MAX_VIDEOQ_SIZE;
-
     v->idx_audio = -1;
     v->idx_video = -1;
 
