@@ -458,13 +458,17 @@ void vineoFlush( Vineo *v )
         return;
     }
 
+    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
+    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, v->vid_codec_ctx->width, v->vid_codec_ctx->height, 0, GL_BGRA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
+
+    /*
     int w = v->vid_codec_ctx->width;
     int h = v->vid_codec_ctx->height;
     unsigned char *a = v->frame_rgba->data[0];
     unsigned char *b = a + 2;
     unsigned char *end = &v->frame_rgba->data[0][w*h*4];
 
-    /*
+    / *
     FILE *f = fopen( "dump.raw", "wb" );
 
     if( f )
@@ -472,7 +476,7 @@ void vineoFlush( Vineo *v )
         fwrite( v->frame_rgba->data[0], 1, w*h*4, f );
         fclose( f );
     }
-    */
+    * /
 
     for( ; a < end; a += 4, b += 4 )
     {
@@ -483,6 +487,7 @@ void vineoFlush( Vineo *v )
 
     glBindTexture( GL_TEXTURE_2D, v->tex_gl );
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
+    */
 }
 
 
@@ -707,6 +712,7 @@ Vineo *vineoNew()
     // NOTE av_register_all heeft zelf al een check of het al is registered.
     av_register_all();
 
+    // TODO ... is dat ook zo voor av_lockmgr_register?
     if( av_lockmgr_register( lockmgr ) ) {
         // TODO Failure av_lockmgr_register
     }

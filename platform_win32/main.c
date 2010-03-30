@@ -7,7 +7,6 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
-#include <pthread.h>
 #include "vineo.h"
 
 
@@ -37,19 +36,11 @@ void disableOpenGL( HWND, HDC, HGLRC );
 void enableOpenGL( HWND hwnd, HDC*, HGLRC* );
 LRESULT CALLBACK WindowProc( HWND, UINT, WPARAM, LPARAM );
 void PrintMemoryInfo( DWORD processID );
-void *aSyncDecode( Vineo *v );
-void *aSyncOpen( ArgsOpenVineo *a );
 void disableOpenAL();
 void enableOpenAL();
 void resizeScene( int width, int height );
 void texCube();
 
-
-
-HDC hDC;
-HGLRC hRC;
-pthread_mutex_t mutex_flush = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mutex_open = PTHREAD_MUTEX_INITIALIZER;
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
@@ -57,6 +48,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     HWND hwnd;
     MSG msg;
     BOOL bQuit = FALSE;
+    HDC hDC;
+    HGLRC hRC;
+
 
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_OWNDC;
@@ -72,7 +66,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     wcex.hIconSm = LoadIcon(NULL, IDI_APPLICATION);;
 
 
-    if( !RegisterClassEx( &wcex )) {
+    if( !RegisterClassEx( &wcex ) ) {
         return 0;
     }
 
@@ -102,140 +96,37 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
 
-    // FIXME NOPE...audio en video out of sync, packet queue is wel goed
-    //char *file = "C:/Users/vin777/Documents/Dump/Films/Monsters.Vs.Aliens.DVDRiP.XviD-JUMANJi/jmj-mona.avi";
-
-    // FIXME NOPE...geen audio codec gevonden
-    //char *file = "C:/Users/vin777/Documents/Dump/Films/Monsters.Vs.Aliens.2009.1080p.BluRay.x264-CiNEFiLE.mkv";
-
-    // FIXME OK...foutje in begin van de file maar voor de rest gaat het uitstekend
-    //char *file = "C:/Users/vin777/Documents/Dump/Films/Transformers Revenge of the Fallen[2009]DvDrip[Eng]-FXG/Transformers Revenge of the Fallen[2009]DvDrip[Eng]-FXG.avi";
-
-    // De avi file is ook niet helemaal perfect, loopt goed.
-    // FIXME NOPE...foutje in begin file en video packet queue buffer altijd leeg?
-    //char *file = "../stuff/video.avi";
-
-    // FIXME UPDATE...OK! Stream had een pFormatCtx->start_time, werkt nu! Maar waarom is de audio packet queue nog vol aan het einde?
-    // NOPE...audio en beeld out of sync, packet queue is wel goed
-    //char *file = "../stuff/video.wmv";
-
-
-    /*
     int i;
-    int numVid = 1;
-    int tex[numVid];
+    int num_vid = 3;
 
     char *media[] = {
-        "C:/Users/vin777/Documents/Dump/Encode/fulco/avatar-tlrf_h720p_fulco.mov",
-        "C:/Users/vin777/Documents/Dump/Films/Monsters.Vs.Aliens.DVDRiP.XviD-JUMANJi/jmj-mona.avi",
-        "C:/Users/vin777/Documents/Dump/Films/Terminator.Salvation.DVDSCR.XViD-ANALSHiT.[www.FilmsBT.com]/Terminator.Salvation.DVDSCR.XViD-ANALSHiT.avi",
+        "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4",
+        "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4",
+        "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png",
     };
 
-    Vineo **v = malloc( numVid * sizeof(Vineo*) );
+    Vineo *v[num_vid];
 
-    for( i = 0; i < numVid; i++ )
+    for( i = 0; i < num_vid; i++ )
     {
         v[i] = vineoNew();
+
         vineoOpen( v[i], media[i] );
         vineoPlay( v[i] );
-        tex[i] = v[i]->texGL;
+
+        glBindTexture( GL_TEXTURE_2D, v[i]->tex_gl );
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+
     }
 
     float r = 0.0f;
     float x = 0.0f;
-    float xSpace = 3.0f;
-    int numBox = 15;
+    float x_space = 3.0f;
+    int num_box = 15;
 
     int64_t time = av_gettime();
     int64_t ptime = time;
-    */
-
-
-
-    char media[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4";
-    char media2[] = "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4";
-    //char media[] = "http://scfire-mtc-aa03.stream.aol.com:80/stream/1025";
-    //char media[] = "http://72.26.204.18:6256#.aac";
-    //char media[] = "../DUMP/image.png";
-    //char media[] = "./stuff/video.gif";
-    //char media2[] = "../DUMP/image.jpg";
-    //char media[] = "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png";
-    //char media2[] = "http://ccms.e-billboard.eu/webcam/?id=19#.jpg";
-    //char media[] = "./stuff/music.mp3";
-
-
-    float r = 0.0f;
-    int64_t time = av_gettime();
-    int64_t ptime = time;
-
-    //Vineo *v = NULL;
-    Vineo *v[2];
-    v[0] = vineoNew();
-    v[1] = vineoNew();
-
-
-    //vineoOpen( v[0], media );
-    //vineoPlay( v[0] );
-    pthread_t thread1;
-    ArgsOpenVineo a1;
-    a1.v = v[0];
-    sprintf( a1.file, "%s", media );
-    pthread_create( &thread1, NULL, &aSyncOpen, (void *)&a1 );
-
-
-    //vineoOpen( v[1], media2 );
-    //vineoPlay( v[1] );
-    pthread_t thread2;
-    ArgsOpenVineo a2;
-    a2.v = v[1];
-    sprintf( a2.file, "%s", media2 );
-    pthread_create( &thread2, NULL, &aSyncOpen, (void *)&a2 );
-
-
-
-    //pthread_join( thread1, NULL );
-    //pthread_join( thread2, NULL );
-
-    //printf( "keeeeeeeeeeeeeeeeeeeeeej...\n" );
-    //Sleep( 1000000 );
-
-
-
-
-    /*
-    glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-
-    glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-    */
-
-
-    pthread_t thread[2];
-    pthread_attr_t thread_attr[2];
-    void *thread_status[2];
-
-    int i;
-
-    for( i = 0; i < 2; i++ )
-    {
-        pthread_attr_init( &thread_attr[i] );
-        pthread_attr_setdetachstate( &thread_attr[i], PTHREAD_CREATE_JOINABLE );
-    }
-
-    //Vineo *v2 = NULL;
-    //Vineo *v2 = vineoNew();
-    //vineoOpen( v2, media );
-    //vineoPlay( v2 );
-
-    //int tex = v->texGL;
-    //int tex = 0;
-    //int mediaLoaded = 0;
-
-
-    int64_t count = 0;
 
 
     while( !bQuit )
@@ -258,130 +149,13 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 bQuit = 1;
             }
 
-            /*
-            if( keys['C'] )
-            {
-                vineoClose( v );
-                tex = 0;
-                v = NULL;
-            }
-
-            if( keys['O'] )
-            {
-                if( !v )
-                {
-                    v = vineoNew();
-                    vineoOpen( v, media );
-                    vineoPlay( v );
-                    tex = v->tex_gl;
-                    //tex = 0;
-                }
-            }
-
-            if( keys['R'] )
-            {
-                vineoClose( v );
-                v = vineoNew();
-                vineoOpen( v, media );
-                vineoPlay( v );
-                tex = v->tex_gl;
-                //tex = 0;
-            }
-            */
-
-
-            ptime = time;
-            time = av_gettime();
-            count += ( time - ptime );
-
             float fps = (float)AV_TIME_BASE / (float)( time - ptime );
             char title[32];
             printf( "fps: %f\n", fps );
-            //sprintf( title, "fps: %f", fps );
-            //SetWindowText( hwnd, title );
+            sprintf( title, "fps: %f", fps );
+            SetWindowText( hwnd, title );
 
 
-/*
-            if( count > AV_TIME_BASE * 5 )
-            {
-                count -= AV_TIME_BASE * 5;
-
-                vineoClose( v );
-                vineoClose( v2 );
-                PrintMemoryInfo( GetCurrentProcessId() );
-                printf( "%i ###########################################\n", ++mediaLoaded );
-                v = vineoNew();
-                v2 = vineoNew();
-                vineoOpen( v, media );
-                vineoOpen( v2, media );
-                vineoPlay( v );
-                vineoPlay( v2 );
-                tex = v->texGL;
-            }
-*/
-
-            r += (float)( time - ptime ) / 100000.0f;
-
-
-
-            // multi-thread deconding
-            wglMakeCurrent( NULL, NULL );
-
-            for( i = 0; i < 2; i++ )
-            {
-                pthread_create( &thread[i], &thread_attr[i], &aSyncDecode, (void *)v[i] );
-                //printf( "decoding, " );
-                pthread_attr_destroy( &thread_attr[i] );
-            }
-
-            //printf( "waiting..." );
-
-            for( i = 0; i < 2; i++ )
-            {
-                pthread_join( thread[i], &thread_status[i] );
-                //printf( "ok! " );
-            }
-
-            wglMakeCurrent( hDC, hRC );
-
-
-
-
-            // single-thread decoding
-            //vineoDecode( v[0] );
-            //vineoDecode( v[1] );
-            //vineoFlush( v[0] );
-            //vineoFlush( v[1] );
-
-
-
-            //glClearColor( 1.0f, 0.0f, 0.0f, 1.0f );
-            glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-            glPushMatrix();
-                glTranslatef( -1.0f, 0.0f, -4.0f );
-                glRotatef( r, 0.0f, 1.0f, 0.0f );
-                glBindTexture( GL_TEXTURE_2D, v[0]->tex_gl );
-                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-                texCube();
-            glPopMatrix();
-
-            glPushMatrix();
-                glTranslatef( 1.0f, 0.0f, -4.0f );
-                glRotatef( r, 0.0f, 1.0f, 0.0f );
-                glBindTexture( GL_TEXTURE_2D, v[1]->tex_gl );
-                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-                glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-                texCube();
-            glPopMatrix();
-
-            //printf( "showing!\n" );
-
-
-
-
-            /*
             ptime = time;
             time = av_gettime();
 
@@ -392,26 +166,27 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
             if( keys['R'] )
             {
-                for( i = 0; i < numVid; i++ )
+                for( i = 0; i < num_vid; i++ )
                 {
                     vineoClose( v[i] );
                     v[i] = vineoNew();
                     vineoOpen( v[i], media[i] );
                     vineoPlay( v[i] );
-                    tex[i] = v[i]->texGL;
                 }
             }
 
 
-            for( i = 0; i < numVid; i++ ) {
+            for( i = 0; i < num_vid; i++ )
+            {
                 vineoDecode( v[i] );
+                vineoFlush( v[i] );
             };
 
 
             x += (float)( time - ptime ) / 1000000.0f;
 
-            if( x > numVid * xSpace ) {
-                x -= numVid * xSpace;
+            if( x > num_vid * x_space ) {
+                x -= num_vid * x_space;
             }
 
             r += (float)( time - ptime ) / 100000.0f;
@@ -428,12 +203,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
             // spiegel reflectie
-            for( i = 0; i < numBox; i++ )
+            for( i = 0; i < num_box; i++ )
             {
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, tex[i%numVid] );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
-                    glTranslatef( i * xSpace, -1.2f, 0.0f );
+                    glTranslatef( i * x_space, -1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
                     glScalef( 1.0f, -1.0f, 1.0f );
                     texCube();
@@ -455,17 +230,16 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
             // top
-            for( i = 0; i < numBox; i++ )
+            for( i = 0; i < num_box; i++ )
             {
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, tex[i%numVid] );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
-                    glTranslatef( i * xSpace, 1.2f, 0.0f );
+                    glTranslatef( i * x_space, 1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
                     texCube();
                 glPopMatrix();
             }
-            */
 
 
             SwapBuffers( hDC );
@@ -474,87 +248,15 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     }
 
 
-    /*
-    for( i = 0; i < numVid; i++ ) {
+    for( i = 0; i < num_vid; i++ ) {
         vineoClose( v[i] );
     };
 
-    free( v );
-    */
-
-    vineoClose( v[0] );
-    vineoClose( v[1] );
-    //vineoClose( v2 );
 
     disableOpenAL();
     disableOpenGL( hwnd, hDC, hRC );
     DestroyWindow( hwnd );
     return msg.wParam;
-}
-
-
-void *aSyncDecode( Vineo *v )
-{
-    //printf( "1, " );
-
-    vineoDecode( v );
-
-    pthread_mutex_lock( &mutex_flush );
-    wglMakeCurrent( hDC, hRC );
-    vineoFlush( v );
-    wglMakeCurrent( NULL, NULL );
-    pthread_mutex_unlock( &mutex_flush );
-
-    /*
-    int tex_w = 128;
-    int tex_h = 128;
-    char tex_data[tex_w*tex_h*4];
-    int x, y, o = 0;
-
-    for( x = 0; x < tex_w; x++ )
-    {
-        for( y = 0; y < tex_h; y++ )
-        {
-            tex_data[o++] = x % tex_w;
-            tex_data[o++] = y % tex_h;
-            tex_data[o++] = 128;
-            tex_data[o++] = 255;
-        }
-    }
-
-    wglMakeCurrent( hDC, hRC );
-    glBindTexture( GL_TEXTURE_2D, v->tex_gl );
-    glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, tex_w, tex_h, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex_data );
-    wglMakeCurrent( NULL, NULL );
-    */
-
-    //printf( "2 (%i), ", v->tex_gl );
-    pthread_exit( NULL );
-}
-
-
-void *aSyncOpen( ArgsOpenVineo *a )
-{
-    printf( "%p, %s\n", a->v, a->file );
-
-    /*
-    vineoOpenTEST( a->v, a->file );
-
-    pthread_mutex_lock( &mutex_open );
-    vineoOpenTEST2( a->v, a->file );
-    pthread_mutex_unlock( &mutex_open );
-    */
-
-    vineoOpen( a->v, a->file );
-    vineoPlay( a->v );
-
-    /*pthread_mutex_lock( &mutex_open );
-    glBindTexture( GL_TEXTURE_2D, a->v->tex_gl );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-    pthread_mutex_unlock( &mutex_open );*/
-
-    pthread_exit( NULL );
 }
 
 
@@ -586,13 +288,14 @@ void enableOpenAL()
 
 }
 
-#ifdef PLATFORM_WINDOWS
+
 void disableOpenGL( HWND hwnd, HDC hDC, HGLRC hRC )
 {
     wglMakeCurrent( NULL, NULL );
     wglDeleteContext( hRC );
     ReleaseDC( hwnd, hDC );
 }
+
 
 void enableOpenGL( HWND hwnd, HDC* hDC, HGLRC* hRC )
 {
@@ -611,22 +314,7 @@ void enableOpenGL( HWND hwnd, HDC* hDC, HGLRC* hRC )
     *hRC = wglCreateContext(*hDC);
     wglMakeCurrent( *hDC, *hRC );
 }
-#else
-void disableOpenGL()
-{
-    //
-}
 
-void enableOpenGL()
-{
-    //
-}
-#endif
-
-void draw()
-{
-
-}
 
 void resizeScene( int width, int height )
 {
@@ -676,7 +364,6 @@ void texCube()
 }
 
 
-#ifdef PLATFORM_WINDOWS
 LRESULT CALLBACK WindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 {
     switch( uMsg )
@@ -732,23 +419,8 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam 
 
     return 0;
 }
-#endif
 
 
-#ifdef PLATFORM_LINUX
-void GLAPIENTRY gluPerspective( GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar )
-{
-    GLdouble ymax = zNear * tan( fovy * M_PI / 360.0f );
-    GLdouble ymin = -ymax;
-    GLdouble xmin = ymin * aspect;
-    GLdouble xmax = ymax * aspect;
-
-    glFrustum( xmin, xmax, ymin, ymax, zNear, zFar );
-}
-#endif
-
-
-#ifdef PLATFORM_WINDOWS
 void PrintMemoryInfo( DWORD processID )
 {
     HANDLE hProcess;
@@ -776,4 +448,4 @@ void PrintMemoryInfo( DWORD processID )
 
     CloseHandle( hProcess );
 }
-#endif
+
