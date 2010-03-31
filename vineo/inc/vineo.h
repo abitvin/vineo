@@ -81,10 +81,12 @@ typedef struct Vineo
     size_t dec_data_size;       // length decoded data
 
     // Video decoding
-    struct SwsContext *sws;         // sws context
-    unsigned char *frame_buffer;    // data buffer for frame_rgba
-    AVFrame *frame;                 // decoded frame
-    AVFrame *frame_rgba;            // converted frame to RGBA
+    struct SwsContext *sws;     // sws context
+    unsigned char *frame_buffer;// data buffer for frame_rgba
+    AVFrame *frame;             // decoded frame
+    AVFrame *frame_rgba;        // converted frame to RGBA
+    unsigned int frame_data;    // frame data count
+    unsigned int frame_flush;   // frame flush count
 
     // Other
     int64_t cur_pts;            // current pts time
@@ -95,7 +97,7 @@ typedef struct Vineo
     int idx_video;              // index video stream
     int is_opened;              // is succesfully opened?
     int is_playing;             // is playing?
-    int is_frame_finished;      // used for flushing
+    int is_frame_flushed;       // is a frame flushed?
 } Vineo;
 
 

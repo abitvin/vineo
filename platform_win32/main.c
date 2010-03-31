@@ -127,6 +127,9 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
     int64_t time = av_gettime();
     int64_t ptime = time;
+    int64_t ctime = 0;
+    int count = 0;
+    int max_count = 200;
 
 
     while( !bQuit )
@@ -145,19 +148,23 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         }
         else
         {
-            if( keys[VK_ESCAPE] ) {
-                bQuit = 1;
-            }
-
-            float fps = (float)AV_TIME_BASE / (float)( time - ptime );
-            char title[32];
-            printf( "fps: %f\n", fps );
-            sprintf( title, "fps: %f", fps );
-            SetWindowText( hwnd, title );
-
-
             ptime = time;
             time = av_gettime();
+            ctime += time - ptime;
+
+            if( ++count == max_count )
+            {
+                float fps = (float)AV_TIME_BASE / (float)ctime * (float)max_count;
+                char title[64];
+
+                printf( "fps: %f\n", fps );
+                sprintf( title, "fps: %f", fps );
+
+                SetWindowText( hwnd, title );
+
+                ctime = 0;
+                count = 0;
+            }
 
 
             if( keys[VK_ESCAPE] ) {
