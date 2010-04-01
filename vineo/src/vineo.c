@@ -2,11 +2,12 @@
 
 
 
+static int ffmpegLockManager( void **mtx, enum AVLockOp op );
 static void fillPacketQueue( Vineo *v );
-static int lockmgr( void **mtx, enum AVLockOp op );
 static int nextDataAudio( Vineo *v, void *data, int length );
 static int nextPacket( Vineo *v, int stream, AVPacket *retPkt );
 static void nextPacketAudio( Vineo *v );
+static void *openAndDecode( Vineo *v );
 
 
 
@@ -116,7 +117,7 @@ static void fillPacketQueue( Vineo *v )
 
 
 
-static int lockmgr( void **mtx, enum AVLockOp op )
+static int ffmpegLockManager( void **mtx, enum AVLockOp op )
 {
     switch( op )
     {
@@ -369,12 +370,28 @@ static void nextPacketAudio( Vineo *v )
 
 
 
+static void *openAndDecode( Vineo *v )
+{
+    vineoOpen( v, v->file );
+    vineoPlay( v );
+
+    while( !v->quit ) {
+        vineoDecode( v );
+    }
+
+    pthread_exit( NULL );
+}
+
+
+
 void vineoClose( Vineo *v )
 {
     if( !v ) {
         return;
     }
 
+    v->quit = 1;
+    pthread_join( v->thread_decode, NULL );
 
     // clear video packets
     AVPacketList *tmp, *pktList = v->aud_pkt_queue.first;
@@ -437,8 +454,9 @@ void vineoClose( Vineo *v )
     }
 
 
+    // NOTE remove me, not needed anymore
     // free the Vineo structure
-    av_free( v );
+    //av_free( v );
 
 
     // NOTE liefs zou ik een av_unregister_all willen hebben, maar deze bestaat niet
@@ -692,13 +710,47 @@ void vineoFlush( Vineo *v )
 
 
 
+void vineoInit( Vineo *v )
+{
+    if( !v ) {
+        return;
+    }
+
+    // NOTE av_register_all heeft zelf al een check of het al is registered.
+    av_register_all();
+
+    // TODO ... is dat ook zo voor av_lockmgr_register?
+    if( av_lockmgr_register( ffmpegLockManager ) ) {
+        // TODO Failure av_lockmgr_register
+    }
+
+    memset( v, 0, sizeof( Vineo ) );
+
+    v->aud_pkt_queue.max_size = VINEO_MAX_AUDIOQ_SIZE;
+    v->vid_pkt_queue.max_size = VINEO_MAX_VIDEOQ_SIZE;
+    v->idx_audio = -1;
+    v->idx_video = -1;
+
+    // generate OpenGL texture
+    glGenTextures( 1, &v->tex_gl );
+
+    // generate OpenAL source and buffers and set parameters so mono sources won't distance attenuate
+    alGenSources( 1, &v->aud_src_al );
+    alGenBuffers( VINEO_AUDIO_NUM_BUFFERS, v->aud_buf_al );
+    alSourcei( v->aud_src_al, AL_SOURCE_RELATIVE, AL_TRUE );
+    alSourcei( v->aud_src_al, AL_ROLLOFF_FACTOR, 0 );
+}
+
+
+
+/* NOTE remove me, moved to vineoInit()
 Vineo *vineoNew()
 {
     // NOTE av_register_all heeft zelf al een check of het al is registered.
     av_register_all();
 
     // TODO ... is dat ook zo voor av_lockmgr_register?
-    if( av_lockmgr_register( lockmgr ) ) {
+    if( av_lockmgr_register( ffmpegLockManager ) ) {
         // TODO Failure av_lockmgr_register
     }
 
@@ -732,7 +784,7 @@ Vineo *vineoNew()
 
     return v;
 }
-
+*/
 
 
 void vineoPlay( Vineo *v )
@@ -946,6 +998,14 @@ void vineoOpen( Vineo *v, char *file )
     }
 
     v->is_opened = 1;
+}
+
+
+
+void vineoOpenAndDecodeThread( Vineo *v, char *file )
+{
+    sprintf( v->file, "%s", file );
+    pthread_create( &v->thread_decode, NULL, &openAndDecode, (void *)v );
 }
 
 

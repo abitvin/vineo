@@ -97,27 +97,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
     int i;
-    int num_vid = 3;
+    int num_vid = 2;
 
     char *media[] = {
         "C:/Users/vin777/Documents/Dump/Encode/fulco/howtotrainyourdragon-tlr2_h720p_fulco.mp4",
         "C:/Users/vin777/Documents/Dump/Encode/fulco/julieandjulia-tlr1_h720p_fulco.mp4",
-        "http://tweakimg.net/g/if/v2/breadcrumb/award_2009_transparent.png",
+        "C:/Users/vin777/Documents/Dump/Encode/fulco/aliceinwonderland-tsr1_h720p_fulco.mp4",
+        "E:/vincent/data/snapshot_0/vincent/films/wake_up/Vincent_van_Ingen-Wake_Up-H264-AAC-720p.mov",
+        "http://ccms.e-billboard.eu/webcam/?id=19#.jpg",
     };
 
-    Vineo *v[num_vid];
+    Vineo v[num_vid];
 
     for( i = 0; i < num_vid; i++ )
     {
-        v[i] = vineoNew();
+        vineoInit( &v[i] );
 
-        vineoOpen( v[i], media[i] );
-        vineoPlay( v[i] );
-
-        glBindTexture( GL_TEXTURE_2D, v[i]->tex_gl );
+        glBindTexture( GL_TEXTURE_2D, v[i].tex_gl );
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
 
+        vineoOpen( &v[i], media[i] );
+        vineoPlay( &v[i] );
     }
 
     float r = 0.0f;
@@ -175,18 +176,23 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             {
                 for( i = 0; i < num_vid; i++ )
                 {
-                    vineoClose( v[i] );
-                    v[i] = vineoNew();
-                    vineoOpen( v[i], media[i] );
-                    vineoPlay( v[i] );
+                    vineoClose( &v[i] );
+                    vineoInit( &v[i] );
+
+                    glBindTexture( GL_TEXTURE_2D, v[i].tex_gl );
+                    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST );
+                    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+
+                    vineoOpen( &v[i], media[i] );
+                    vineoPlay( &v[i] );
                 }
             }
 
 
             for( i = 0; i < num_vid; i++ )
             {
-                vineoDecode( v[i] );
-                vineoFlush( v[i] );
+                vineoDecode( &v[i] );
+                vineoFlush( &v[i] );
             };
 
 
@@ -213,7 +219,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             for( i = 0; i < num_box; i++ )
             {
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid].tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
                     glTranslatef( i * x_space, -1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
@@ -240,7 +246,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             for( i = 0; i < num_box; i++ )
             {
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid].tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
                     glTranslatef( i * x_space, 1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
@@ -256,7 +262,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
 
     for( i = 0; i < num_vid; i++ ) {
-        vineoClose( v[i] );
+        vineoClose( &v[i] );
     };
 
 

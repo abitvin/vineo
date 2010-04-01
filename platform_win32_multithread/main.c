@@ -12,7 +12,7 @@
 #include <AL/al.h>
 #include <AL/alc.h>
 #include <AL/alut.h>
-#include <pthread.h>
+//#include <pthread.h>
 #include "vineo.h"
 
 
@@ -21,15 +21,18 @@
 #define MOUSE_LB 250
 #define MOUSE_RB 251
 
-
+/*
 typedef struct ArgsOpenVineo {
     Vineo *v;
     char file[256];
     int quit;
 } ArgsOpenVineo;
+*/
 
-int screen_w = 854;
-int screen_h = 480;
+//int screen_w = 854;
+//int screen_h = 480;
+int screen_w = 1280;
+int screen_h = 720;
 char keys[256];
 int mouse_x = 0;
 int mouse_y = 0;
@@ -45,7 +48,7 @@ LRESULT CALLBACK WindowProc( HWND, UINT, WPARAM, LPARAM );
 void PrintMemoryInfo( DWORD processID );
 //void *aSyncDecode( Vineo *v );
 //void *aSyncOpen( ArgsOpenVineo *a );
-void *aSyncOpenAndDecode( ArgsOpenVineo *a );
+//void *aSyncOpenAndDecode( ArgsOpenVineo *a );
 void disableOpenAL();
 void enableOpenAL();
 void resizeScene( int width, int height );
@@ -53,15 +56,12 @@ void texCube();
 
 
 
-HDC hDC;
-HGLRC hRC;
-//pthread_mutex_t mutex_flush = PTHREAD_MUTEX_INITIALIZER;
-//pthread_mutex_t mutex_gl = PTHREAD_MUTEX_INITIALIZER;
-
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow )
 {
     WNDCLASSEX wcex;
     HWND hwnd;
+    HDC hDC;
+    HGLRC hRC;
     MSG msg;
     BOOL bQuit = FALSE;
 
@@ -152,23 +152,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         "http://ccms.e-billboard.eu/webcam/?id=19#.jpg",
     };
 
-    Vineo *v[num_vid];
-    ArgsOpenVineo args[num_vid];
-    pthread_t threads_open[num_vid];
+    Vineo v[num_vid];
 
     for( i = 0; i < num_vid; i++ )
     {
-        v[i] = vineoNew();
+        vineoInit( &v[i] );
 
-        glBindTexture( GL_TEXTURE_2D, v[i]->tex_gl );
+        glBindTexture( GL_TEXTURE_2D, v[i].tex_gl );
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
         glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 
-        args[i].v = v[i];
-        args[i].quit = 0;
-        sprintf( args[i].file, "%s", media[i] );
-        //pthread_create( &threads_open[i], NULL, &aSyncOpen, (void *)&args[i] );
-        pthread_create( &threads_open[i], NULL, &aSyncOpenAndDecode, (void *)&args[i] );
+        vineoOpenAndDecodeThread( &v[i], media[i] );
     }
 
     float r = 0.0f;
@@ -182,7 +176,6 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     int count = 0;
     int max_count = 200;
 
-    //pthread_t thread_decode[num_vid];
 
 
     while( !bQuit )
@@ -191,7 +184,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
         {
             if( msg.message == WM_QUIT )
             {
-                bQuit = TRUE;
+                bQuit = 1;
             }
             else
             {
@@ -225,37 +218,28 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             }
 
 
-            /*
-            wglMakeCurrent( NULL, NULL );
-
-            for( i = 0; i < num_vid; i++ ) {
-                pthread_create( &thread_decode[i], NULL, aSyncDecode, (void *)v[i] );
-            }
-
-            for( i = 0; i < num_vid; i++ ) {
-                pthread_join( thread_decode[i], NULL );
-            }
-
-            wglMakeCurrent( hDC, hRC );
-            */
-
-
             if( keys[VK_ESCAPE] ) {
-                bQuit = 1;
+                PostQuitMessage( 0 );
             }
 
-            /*
+
             if( keys['R'] )
             {
                 for( i = 0; i < num_vid; i++ )
                 {
-                    vineoClose( v[i] );
-                    v[i] = vineoNew();
-                    vineoOpen( v[i], media[i] );
-                    vineoPlay( v[i] );
+                    vineoClose( &v[i] );
+                    //v[i] = vineoNew();
+                    vineoInit( &v[i] );
+
+                    glBindTexture( GL_TEXTURE_2D, v[i].tex_gl );
+                    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+                    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+
+                    //vineoOpen( v[i], media[i] );
+                    //vineoPlay( v[i] );
+                    vineoOpenAndDecodeThread( &v[i], media[i] );
                 }
             }
-            */
 
 
             x += (float)( time - ptime ) / 1000000.0f;
@@ -266,11 +250,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
             r += (float)( time - ptime ) / 100000.0f;
 
-            //pthread_mutex_lock( &mutex_gl );
-            //wglMakeCurrent( hDC, hRC );
-
             for( i = 0; i < num_vid; i++ ) {
-                vineoFlush( v[i] );
+                vineoFlush( &v[i] );
             }
 
 
@@ -288,12 +269,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             // spiegel reflectie
             for( i = 0; i < num_box; i++ )
             {
-                if( !v[i%num_vid]->is_frame_flushed ) {
+                if( !v[i%num_vid].is_frame_flushed ) {
                     continue;
                 }
 
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid].tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
                     glTranslatef( i * x_space, -1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
@@ -319,12 +300,12 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             // top
             for( i = 0; i < num_box; i++ )
             {
-                if( !v[i%num_vid]->is_frame_flushed ) {
+                if( !v[i%num_vid].is_frame_flushed ) {
                     continue;
                 }
 
                 glPushMatrix();
-                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid]->tex_gl );
+                    glBindTexture( GL_TEXTURE_2D, v[i%num_vid].tex_gl );
                     glColor3f( 1.0f, 1.0f, 1.0f );
                     glTranslatef( i * x_space, 1.2f, 0.0f );
                     glRotatef( r, 0.0f, 1.0f, 0.0f );
@@ -333,19 +314,14 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
             }
 
             SwapBuffers( hDC );
-            //wglMakeCurrent( NULL, NULL );
-            //pthread_mutex_unlock( &mutex_gl );
 
-            //PrintMemoryInfo( GetCurrentProcessId() );
+            PrintMemoryInfo( GetCurrentProcessId() );
         }
     }
 
 
-    for( i = 0; i < num_vid; i++ )
-    {
-        args[i].quit = 1;
-        pthread_join( threads_open[i], NULL );
-        vineoClose( v[i] );
+    for( i = 0; i < num_vid; i++ ) {
+        vineoClose( &v[i] );
     };
 
     disableOpenAL();
@@ -378,7 +354,7 @@ void *aSyncOpen( ArgsOpenVineo *a )
 
     pthread_exit( NULL );
 }
-*/
+
 
 void *aSyncOpenAndDecode( ArgsOpenVineo *a )
 {
@@ -391,7 +367,7 @@ void *aSyncOpenAndDecode( ArgsOpenVineo *a )
 
     pthread_exit( NULL );
 }
-
+*/
 
 void disableOpenAL()
 {
@@ -517,7 +493,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam 
     switch( uMsg )
     {
         case WM_CLOSE: {
-            PostQuitMessage(0); break;
+            PostQuitMessage( 0 ); break;
         }
 
         case WM_DESTROY: {
@@ -555,8 +531,7 @@ LRESULT CALLBACK WindowProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam 
             keys[MOUSE_RB] = 0; break;
         }
 
-        case WM_SIZE:
-		{
+        case WM_SIZE: {
 			resizeScene( screen_w = LOWORD(lParam), screen_h = HIWORD(lParam) ); break;
 		}
 

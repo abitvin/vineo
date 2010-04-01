@@ -98,14 +98,21 @@ typedef struct Vineo
     int is_opened;              // is succesfully opened?
     int is_playing;             // is playing?
     int is_frame_flushed;       // is a frame flushed?
+
+    // Threading
+    pthread_t thread_decode;    // openAndDecode()
+    int quit;                   // ..
+    char file[256];             // ..
 } Vineo;
 
 
 void vineoClose( Vineo *v );
 void vineoDecode( Vineo *v );
 void vineoFlush( Vineo *v );
+void vineoInit( Vineo *v );
 void vineoOpen( Vineo *v, char *file );
-Vineo *vineoNew();
+void vineoOpenAndDecodeThread( Vineo *v, char *file );
+//Vineo *vineoNew();
 void vineoPlay( Vineo *v );
 void vineoVolume( Vineo *v, ALfloat vol );
 
