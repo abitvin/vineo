@@ -2,10 +2,117 @@
 
 
 
-static void vineoFillPacketQueue( Vineo *v );
-static int vineoNextDataAudio( Vineo *v, void *data, int length );
-static int vineoNextPacket( Vineo *v, int stream, AVPacket *retPkt );
-static void vineoNextPacketAudio( Vineo *v );
+static void fillPacketQueue( Vineo *v );
+static int lockmgr( void **mtx, enum AVLockOp op );
+static int nextDataAudio( Vineo *v, void *data, int length );
+static int nextPacket( Vineo *v, int stream, AVPacket *retPkt );
+static void nextPacketAudio( Vineo *v );
+
+
+
+static void fillPacketQueue( Vineo *v )
+{
+    // NOTE FIXME lelijk code! kan vast anders
+    if( v->idx_audio > -1 && v->idx_video > -1 &&
+        v->aud_pkt_queue.size > v->aud_pkt_queue.max_size &&
+        v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
+            return;
+    }
+    else if( v->idx_audio > -1 && v->idx_video < 0 &&
+             v->aud_pkt_queue.size > v->aud_pkt_queue.max_size ) {
+                return;
+    }
+    else if( v->idx_video > -1 && v->idx_audio < 0 &&
+             v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
+                return;
+    }
+    else if( v->idx_video < 0 && v->idx_audio < 0 ) {
+        return;
+    }
+
+    AVPacket pkt;
+    AVPacketList *pktList;
+
+    while( av_read_frame( v->fmt_ctx, &pkt ) >= 0 )
+    {
+        if( pkt.stream_index == v->idx_audio )
+        {
+            if( av_dup_packet( &pkt ) == 0 )
+            {
+                pktList = av_malloc( sizeof(AVPacketList) );
+
+                if( !pktList )
+                {
+                    printf( "Error @ vimeoFillPacketQueue @ av_malloc()\n" );
+                    return;
+                }
+
+                pktList->pkt = pkt;
+                pktList->next = NULL;
+
+                if( !v->aud_pkt_queue.last ) {
+                    v->aud_pkt_queue.first = pktList;
+                }
+                else {
+                    v->aud_pkt_queue.last->next = pktList;
+                }
+
+                v->aud_pkt_queue.last = pktList;
+                v->aud_pkt_queue.size += pkt.size + sizeof(*pktList);
+                v->aud_pkt_queue.packets++;
+            }
+        }
+        else if( pkt.stream_index == v->idx_video )
+        {
+            if( av_dup_packet( &pkt ) == 0 )
+            {
+                pktList = av_malloc( sizeof(AVPacketList) );
+
+                if( !pktList )
+                {
+                    printf( "Error @ vimeoFillPacketQueue @ av_malloc()\n" );
+                    return;
+                }
+
+                pktList->pkt = pkt;
+                pktList->next = NULL;
+
+                if( !v->vid_pkt_queue.last ) {
+                    v->vid_pkt_queue.first = pktList;
+                }
+                else {
+                    v->vid_pkt_queue.last->next = pktList;
+                }
+
+                v->vid_pkt_queue.last = pktList;
+                v->vid_pkt_queue.size += pkt.size + sizeof(*pktList);
+                v->vid_pkt_queue.packets++;
+            }
+        }
+        else
+        {
+            av_free_packet( &pkt );
+        }
+
+        // NOTE zie FIXME boven
+        if( v->idx_audio > -1 && v->idx_video > -1 &&
+            v->aud_pkt_queue.size > v->aud_pkt_queue.max_size &&
+            v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
+                return;
+        }
+        else if( v->idx_audio > -1 && v->idx_video < 0 &&
+                 v->aud_pkt_queue.size > v->aud_pkt_queue.max_size ) {
+                    return;
+        }
+        else if( v->idx_video > -1 && v->idx_audio < 0 &&
+                 v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
+                    return;
+        }
+        else if( v->idx_video < 0 && v->idx_audio < 0 ) {
+            return;
+        }
+    }
+}
 
 
 
@@ -44,6 +151,222 @@ static int lockmgr( void **mtx, enum AVLockOp op )
 
     return 1;
 }
+
+
+
+static int nextDataAudio( Vineo *v, void *data, int length )
+{
+    int dec = 0;
+
+    while( dec < length )
+    {
+        // If there's any pending decoded data, deal with it first
+        if( v->dec_data_size > 0 )
+        {
+            // Get the amount of bytes remaining to be written, and clamp to
+            // the amount of decoded data we have
+            size_t rem = length - dec;
+
+            if( rem > v->dec_data_size ) {
+                rem = v->dec_data_size;
+            }
+
+            // Copy the data to the app's buffer and increment
+            memcpy( data, v->dec_data, rem );
+            data = (char*)data + rem;
+            dec += rem;
+
+            // If there's any decoded data left, move it to the front of the
+            // buffer for next time
+            if( rem < v->dec_data_size ) {
+                memmove( v->dec_data, &v->dec_data[rem], v->dec_data_size - rem );
+            }
+
+            v->dec_data_size -= rem;
+        }
+
+        // Check if we need to get more decoded data
+        if( v->dec_data_size == 0 )
+        {
+            size_t insize = v->data_size;
+            int size, len;
+
+            if( insize == 0 )
+            {
+                nextPacketAudio( v );
+
+                // If there's no more input data, break and return what we have
+                if( v->data_size == 0 ) {
+                    break;
+                }
+
+                insize = v->data_size;
+                memset( &v->data[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE );
+            }
+
+            // Clear the input padding bits
+            // Decode some data, and check for errors
+            size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
+
+            while( ( len = avcodec_decode_audio2( v->aud_codec_ctx, (int16_t*)v->dec_data, &size, (unsigned char*)v->data, insize ) ) == 0 )
+            {
+                if( size > 0 ) {
+                    break;
+                }
+
+                nextPacketAudio( v );
+
+                if( insize == v->data_size ) {
+                    break;
+                }
+
+                insize = v->data_size;
+                memset( &v->data[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE );
+            }
+
+            // we got an error! return what we got.
+            if( len < 0 ) {
+                break;
+            }
+
+            if( len > 0 )
+            {
+                // If any input data is left, move it to the start of the
+                // buffer, and decrease the buffer size
+
+                size_t rem = insize - len;
+
+                if( rem ) {
+                    memmove( v->data, &v->data[len], rem );
+                }
+
+                v->data_size = rem;
+            }
+
+            // Set the output buffer size
+            v->dec_data_size = size;
+        }
+    }
+
+    // Return the number of bytes we were able to get
+    return dec;
+}
+
+
+
+static int nextPacket( Vineo *v, int stream, AVPacket *retPkt )
+{
+    AVPacketList *pktList;
+
+    if( stream == v->idx_audio )
+    {
+        pktList = v->aud_pkt_queue.first;
+
+        if( pktList )
+        {
+            v->aud_pkt_queue.first = pktList->next;
+
+            if( !v->aud_pkt_queue.first ) {
+                v->aud_pkt_queue.last = NULL;
+            }
+
+            v->aud_pkt_queue.size -= ( pktList->pkt.size + sizeof(*pktList) );
+            v->aud_pkt_queue.packets--;
+            *retPkt = pktList->pkt;
+            av_free( pktList );
+            return 1;
+        }
+    }
+    else if( stream == v->idx_video )
+    {
+        pktList = v->vid_pkt_queue.first;
+
+        if( pktList )
+        {
+            v->vid_pkt_queue.first = pktList->next;
+
+            if( !v->vid_pkt_queue.first ) {
+                v->vid_pkt_queue.last = NULL;
+            }
+
+            v->vid_pkt_queue.size -= ( pktList->pkt.size + sizeof(*pktList) );
+            v->vid_pkt_queue.packets--;
+            *retPkt = pktList->pkt;
+            av_free( pktList );
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+
+
+static void nextPacketAudio( Vineo *v )
+{
+    AVPacket pkt;
+    //double pts = 0.0f;
+
+    //while( getNextPacket( stream->fmt_ctx, stream->index, &pkt ) )
+    while( nextPacket( v, v->idx_audio, &pkt ) )
+    {
+        //if( stream->index != pkt.stream_index )
+        //{
+        //    av_av_free_packet( &pkt );
+        //    continue;
+        //}
+
+        /*
+        if( pkt.pts != AV_NOPTS_VALUE )
+        {
+            //printf( "FROM PACKET DTS,   " );
+            pts = pkt.pts;
+        }
+        else
+        {
+            //printf( "NO PTS,            " );
+            pts = 0.0f;
+        }
+
+        pts *= av_q2d( stream->fmt_ctx->streams[stream->index]->time_base );
+        pts -= g_start_timeOffset;
+
+        if( pts >= g_timeCur )
+        {
+            printf( "getNextAudioPacket pts: %f, gpts: %f\n", pts, g_timeCur );
+        */
+
+            size_t idx = v->data_size;
+
+            // Found the stream. Grow the input data buffer as needed to
+            // hold the new packet's data. Additionally, some ffmpeg codecs
+            // need some padding so they don't overread the allocated buffer
+            if( idx + pkt.size > v->data_size_max )
+            {
+                void *tmp = av_realloc( v->data, idx + pkt.size + FF_INPUT_BUFFER_PADDING_SIZE );
+
+                if( !tmp ) {
+                    break;
+                }
+
+                v->data = tmp;
+                v->data_size_max = idx + pkt.size;
+            }
+
+            // Copy the packet and av_free it
+            memcpy( &v->data[idx], pkt.data, pkt.size );
+            v->data_size += pkt.size;
+
+            av_free_packet( &pkt );
+            break;
+        /*
+        }
+
+        av_free_packet( &pkt );
+        */
+    }
+}
+
 
 
 void vineoClose( Vineo *v )
@@ -133,7 +456,7 @@ void vineoDecode( Vineo *v )
 
 
     // fill the packet queue
-    vineoFillPacketQueue( v );
+    fillPacketQueue( v );
 
     // update player time
     v->time = av_gettime() - v->time_offset + v->start_time;
@@ -147,7 +470,7 @@ void vineoDecode( Vineo *v )
     // decode new video frame
     while( v->time > v->cur_pts )
     {
-        if( !vineoNextPacket( v, v->idx_video, &pkt ) ) {
+        if( !nextPacket( v, v->idx_video, &pkt ) ) {
             break;
         }
 
@@ -280,7 +603,7 @@ void vineoDecode( Vineo *v )
                 printf( "Dropping audio frame\n" );
             }
 
-            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
+            count = nextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
 
             v->buffer_playing += count;
             clock = (float)v->buffer_playing / (float)( ( v->aud_bits / 8 ) * v->aud_channels * v->aud_rate ) * AV_TIME_BASE;
@@ -326,112 +649,6 @@ void vineoDecode( Vineo *v )
 
 
 
-static void vineoFillPacketQueue( Vineo *v )
-{
-    // NOTE FIXME lelijk code! kan vast anders
-    if( v->idx_audio > -1 && v->idx_video > -1 &&
-        v->aud_pkt_queue.size > v->aud_pkt_queue.max_size &&
-        v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
-            return;
-    }
-    else if( v->idx_audio > -1 && v->idx_video < 0 &&
-             v->aud_pkt_queue.size > v->aud_pkt_queue.max_size ) {
-                return;
-    }
-    else if( v->idx_video > -1 && v->idx_audio < 0 &&
-             v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
-                return;
-    }
-    else if( v->idx_video < 0 && v->idx_audio < 0 ) {
-        return;
-    }
-
-    AVPacket pkt;
-    AVPacketList *pktList;
-
-    while( av_read_frame( v->fmt_ctx, &pkt ) >= 0 )
-    {
-        if( pkt.stream_index == v->idx_audio )
-        {
-            if( av_dup_packet( &pkt ) == 0 )
-            {
-                pktList = av_malloc( sizeof(AVPacketList) );
-
-                if( !pktList )
-                {
-                    printf( "Error @ vimeoFillPacketQueue @ av_malloc()\n" );
-                    return;
-                }
-
-                pktList->pkt = pkt;
-                pktList->next = NULL;
-
-                if( !v->aud_pkt_queue.last ) {
-                    v->aud_pkt_queue.first = pktList;
-                }
-                else {
-                    v->aud_pkt_queue.last->next = pktList;
-                }
-
-                v->aud_pkt_queue.last = pktList;
-                v->aud_pkt_queue.size += pkt.size + sizeof(*pktList);
-                v->aud_pkt_queue.packets++;
-            }
-        }
-        else if( pkt.stream_index == v->idx_video )
-        {
-            if( av_dup_packet( &pkt ) == 0 )
-            {
-                pktList = av_malloc( sizeof(AVPacketList) );
-
-                if( !pktList )
-                {
-                    printf( "Error @ vimeoFillPacketQueue @ av_malloc()\n" );
-                    return;
-                }
-
-                pktList->pkt = pkt;
-                pktList->next = NULL;
-
-                if( !v->vid_pkt_queue.last ) {
-                    v->vid_pkt_queue.first = pktList;
-                }
-                else {
-                    v->vid_pkt_queue.last->next = pktList;
-                }
-
-                v->vid_pkt_queue.last = pktList;
-                v->vid_pkt_queue.size += pkt.size + sizeof(*pktList);
-                v->vid_pkt_queue.packets++;
-            }
-        }
-        else
-        {
-            av_free_packet( &pkt );
-        }
-
-        // NOTE zie FIXME boven
-        if( v->idx_audio > -1 && v->idx_video > -1 &&
-            v->aud_pkt_queue.size > v->aud_pkt_queue.max_size &&
-            v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
-                return;
-        }
-        else if( v->idx_audio > -1 && v->idx_video < 0 &&
-                 v->aud_pkt_queue.size > v->aud_pkt_queue.max_size ) {
-                    return;
-        }
-        else if( v->idx_video > -1 && v->idx_audio < 0 &&
-                 v->vid_pkt_queue.size > v->vid_pkt_queue.max_size ) {
-                    return;
-        }
-        else if( v->idx_video < 0 && v->idx_audio < 0 ) {
-            return;
-        }
-    }
-}
-
-
-
 void vineoFlush( Vineo *v )
 {
     if( v->frame_data == v->frame_flush ) {
@@ -471,221 +688,6 @@ void vineoFlush( Vineo *v )
     glBindTexture( GL_TEXTURE_2D, v->tex_gl );
     glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, v->frame_rgba->data[0] );
     */
-}
-
-
-
-static int vineoNextDataAudio( Vineo *v, void *data, int length )
-{
-    int dec = 0;
-
-    while( dec < length )
-    {
-        // If there's any pending decoded data, deal with it first
-        if( v->dec_data_size > 0 )
-        {
-            // Get the amount of bytes remaining to be written, and clamp to
-            // the amount of decoded data we have
-            size_t rem = length - dec;
-
-            if( rem > v->dec_data_size ) {
-                rem = v->dec_data_size;
-            }
-
-            // Copy the data to the app's buffer and increment
-            memcpy( data, v->dec_data, rem );
-            data = (char*)data + rem;
-            dec += rem;
-
-            // If there's any decoded data left, move it to the front of the
-            // buffer for next time
-            if( rem < v->dec_data_size ) {
-                memmove( v->dec_data, &v->dec_data[rem], v->dec_data_size - rem );
-            }
-
-            v->dec_data_size -= rem;
-        }
-
-        // Check if we need to get more decoded data
-        if( v->dec_data_size == 0 )
-        {
-            size_t insize = v->data_size;
-            int size, len;
-
-            if( insize == 0 )
-            {
-                vineoNextPacketAudio( v );
-
-                // If there's no more input data, break and return what we have
-                if( v->data_size == 0 ) {
-                    break;
-                }
-
-                insize = v->data_size;
-                memset( &v->data[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE );
-            }
-
-            // Clear the input padding bits
-            // Decode some data, and check for errors
-            size = AVCODEC_MAX_AUDIO_FRAME_SIZE;
-
-            while( ( len = avcodec_decode_audio2( v->aud_codec_ctx, (int16_t*)v->dec_data, &size, (unsigned char*)v->data, insize ) ) == 0 )
-            {
-                if( size > 0 ) {
-                    break;
-                }
-
-                vineoNextPacketAudio( v );
-
-                if( insize == v->data_size ) {
-                    break;
-                }
-
-                insize = v->data_size;
-                memset( &v->data[insize], 0, FF_INPUT_BUFFER_PADDING_SIZE );
-            }
-
-            // we got an error! return what we got.
-            if( len < 0 ) {
-                break;
-            }
-
-            if( len > 0 )
-            {
-                // If any input data is left, move it to the start of the
-                // buffer, and decrease the buffer size
-
-                size_t rem = insize - len;
-
-                if( rem ) {
-                    memmove( v->data, &v->data[len], rem );
-                }
-
-                v->data_size = rem;
-            }
-
-            // Set the output buffer size
-            v->dec_data_size = size;
-        }
-    }
-
-    // Return the number of bytes we were able to get
-    return dec;
-}
-
-
-
-static int vineoNextPacket( Vineo *v, int stream, AVPacket *retPkt )
-{
-    AVPacketList *pktList;
-
-    if( stream == v->idx_audio )
-    {
-        pktList = v->aud_pkt_queue.first;
-
-        if( pktList )
-        {
-            v->aud_pkt_queue.first = pktList->next;
-
-            if( !v->aud_pkt_queue.first ) {
-                v->aud_pkt_queue.last = NULL;
-            }
-
-            v->aud_pkt_queue.size -= ( pktList->pkt.size + sizeof(*pktList) );
-            v->aud_pkt_queue.packets--;
-            *retPkt = pktList->pkt;
-            av_free( pktList );
-            return 1;
-        }
-    }
-    else if( stream == v->idx_video )
-    {
-        pktList = v->vid_pkt_queue.first;
-
-        if( pktList )
-        {
-            v->vid_pkt_queue.first = pktList->next;
-
-            if( !v->vid_pkt_queue.first ) {
-                v->vid_pkt_queue.last = NULL;
-            }
-
-            v->vid_pkt_queue.size -= ( pktList->pkt.size + sizeof(*pktList) );
-            v->vid_pkt_queue.packets--;
-            *retPkt = pktList->pkt;
-            av_free( pktList );
-            return 1;
-        }
-    }
-
-    return 0;
-}
-
-
-
-static void vineoNextPacketAudio( Vineo *v )
-{
-    AVPacket pkt;
-    //double pts = 0.0f;
-
-    //while( getNextPacket( stream->fmt_ctx, stream->index, &pkt ) )
-    while( vineoNextPacket( v, v->idx_audio, &pkt ) )
-    {
-        //if( stream->index != pkt.stream_index )
-        //{
-        //    av_av_free_packet( &pkt );
-        //    continue;
-        //}
-
-        /*
-        if( pkt.pts != AV_NOPTS_VALUE )
-        {
-            //printf( "FROM PACKET DTS,   " );
-            pts = pkt.pts;
-        }
-        else
-        {
-            //printf( "NO PTS,            " );
-            pts = 0.0f;
-        }
-
-        pts *= av_q2d( stream->fmt_ctx->streams[stream->index]->time_base );
-        pts -= g_start_timeOffset;
-
-        if( pts >= g_timeCur )
-        {
-            printf( "getNextAudioPacket pts: %f, gpts: %f\n", pts, g_timeCur );
-        */
-
-            size_t idx = v->data_size;
-
-            // Found the stream. Grow the input data buffer as needed to
-            // hold the new packet's data. Additionally, some ffmpeg codecs
-            // need some padding so they don't overread the allocated buffer
-            if( idx + pkt.size > v->data_size_max )
-            {
-                void *tmp = av_realloc( v->data, idx + pkt.size + FF_INPUT_BUFFER_PADDING_SIZE );
-
-                if( !tmp ) {
-                    break;
-                }
-
-                v->data = tmp;
-                v->data_size_max = idx + pkt.size;
-            }
-
-            // Copy the packet and av_free it
-            memcpy( &v->data[idx], pkt.data, pkt.size );
-            v->data_size += pkt.size;
-
-            av_free_packet( &pkt );
-            break;
-        /*
-        }
-
-        av_free_packet( &pkt );
-        */
-    }
 }
 
 
@@ -740,7 +742,7 @@ void vineoPlay( Vineo *v )
     }
 
 
-    vineoFillPacketQueue( v );
+    fillPacketQueue( v );
 
     // pre buffer audio
     if( v->idx_audio >= 0 )
@@ -749,7 +751,7 @@ void vineoPlay( Vineo *v )
 
         for( i = 0; i < VINEO_AUDIO_NUM_BUFFERS; i++ )
         {
-            count = vineoNextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
+            count = nextDataAudio( v, v->data_tmp, VINEO_AUDIO_BUFFER_SIZE );
 
             if( count <= 0 ) {
                 break;
