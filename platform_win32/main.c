@@ -16,11 +16,6 @@
 #define MOUSE_RB 251
 
 
-typedef struct ArgsOpenVineo {
-    Vineo *v;
-    char file[256];
-} ArgsOpenVineo;
-
 int screen_w = 854;
 int screen_h = 480;
 char keys[256];

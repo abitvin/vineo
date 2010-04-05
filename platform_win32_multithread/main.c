@@ -17,7 +17,7 @@
 
 
 #define WINDOW_CLASS "Vineo"
-#define WINDOW_TITLE "Vineo example"
+#define WINDOW_TITLE "Vineo = OpenGL / OpenAL / FFmpeg"
 #define MOUSE_LB 250
 #define MOUSE_RB 251
 
@@ -31,8 +31,10 @@ typedef struct ArgsOpenVineo {
 
 //int screen_w = 854;
 //int screen_h = 480;
-int screen_w = 1280;
-int screen_h = 720;
+int screen_w = 1200;
+int screen_h = 640;
+//int screen_w = 1280;
+//int screen_h = 720;
 char keys[256];
 int mouse_x = 0;
 int mouse_y = 0;
@@ -85,7 +87,8 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
     hwnd = CreateWindowEx(
         0, WINDOW_CLASS, WINDOW_TITLE,
-        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+        //WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+        WS_OVERLAPPEDWINDOW, 30, 20,
         screen_w + GetSystemMetrics( SM_CYFRAME ) * 2,
         screen_h + GetSystemMetrics( SM_CYFRAME ) * 2 + GetSystemMetrics( SM_CYCAPTION ),
         NULL, NULL, hInstance, NULL
@@ -204,7 +207,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
                 char title[64];
 
                 //printf( "fps: %f\n", fps );
-                sprintf( title, "OpenGL / OpenAL / FFmpeg, fps: %f", fps );
+                sprintf( title, "Vineo = OpenGL / OpenAL / FFmpeg, fps: %f", fps );
 
                 SetWindowText( hwnd, title );
 

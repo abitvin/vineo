@@ -1,0 +1,55 @@
+WORK-IN-PROGRESS!!!
+===================
+I'm still working on this library. I don't have a roadmap for it eather. I use
+it in my own programs and add features in the library where I see fit. That
+doesn't mean you can't use the library! Or if you don't use it, you can learn
+from it and maybe make a SDL port or something ;) Hey! When you encounter a
+bug let me know ok? Happy coding!
+
+
+
+
+
+VINEO C LIBRARY
+
+
+
+About
+-----
+Vineo is a C library. It uses OpenGL, OpenAL and FFmpeg to play audio and video
+that you can use in your C/C++ application.
+
+
+
+Features
+--------
+
+	- play audio/video using OpenGL, OpenAL and FFmpeg.
+
+
+
+Documentation
+-------------
+***NONE YET***
+See the examples.
+
+
+
+License
+-------
+Don't be scared, I use the WTFPL license.
+It means you can do ANYTHING with this code!
+
+For more info about this license:
+http://sam.zoy.org/wtfpl/
+http://en.wikipedia.org/wiki/WTFPL
+
+
+
+Contact
+-------
+You liked my code? Great! Leave me a message, I like messages :)
+
+Twitter: http://twitter.com/VinIngine
+Github: http://github.com/VinIngine
+Blog: http://vin.ingine.nl
