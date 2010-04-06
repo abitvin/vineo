@@ -486,7 +486,7 @@ void vineoDecode( Vineo *v )
 
 
     // decode new video frame
-    while( v->time > v->cur_pts )
+    while( v->time > v->cur_pts || v->cur_pts == 0 )
     {
         if( !nextPacket( v, v->idx_video, &pkt ) ) {
             break;
