@@ -971,29 +971,32 @@ void vineoOpen( Vineo *v, char *file )
         if( v->aud_format == 0 )
         {
             printf( "Error @ vineoOpen() @ Unhandled format (%d channels, %d bits)\n", v->aud_channels, v->aud_bits );
+            avcodec_close( v->aud_codec_ctx );
+            v->idx_audio = -1;
             return;
         }
-
-
-        v->buffer_playing = 0;
-        v->data = NULL;
-        v->data_size = 0;
-        v->data_size_max = 0;
-        v->dec_data = av_malloc( AVCODEC_MAX_AUDIO_FRAME_SIZE );
-        v->dec_data_size = 0;
-
-        if( !v->dec_data )
+        else
         {
-            printf( "Error @ vineoOpen() @ av_malloc()\n" );
-            return;
-        }
+            v->buffer_playing = 0;
+            v->data = NULL;
+            v->data_size = 0;
+            v->data_size_max = 0;
+            v->dec_data = av_malloc( AVCODEC_MAX_AUDIO_FRAME_SIZE );
+            v->dec_data_size = 0;
 
-        v->data_tmp = av_malloc( VINEO_AUDIO_BUFFER_SIZE );
+            if( !v->dec_data )
+            {
+                printf( "Error @ vineoOpen() @ av_malloc()\n" );
+                return;
+            }
 
-        if( !v->data_tmp )
-        {
-            printf( "Error @ vineoOpen() @ av_malloc()\n" );
-            return;
+            v->data_tmp = av_malloc( VINEO_AUDIO_BUFFER_SIZE );
+
+            if( !v->data_tmp )
+            {
+                printf( "Error @ vineoOpen() @ av_malloc()\n" );
+                return;
+            }
         }
     }
 
